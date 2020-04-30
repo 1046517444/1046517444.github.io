@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="记录生活点滴" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    去哪儿数据爬取 |  我的博客
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-去哪儿数据爬取" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  去哪儿数据爬取
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/29/%E5%8E%BB%E5%93%AA%E5%84%BF%E6%95%B0%E6%8D%AE%E7%88%AC%E5%8F%96/" class="article-date">
+  <time datetime="2020-04-29T09:52:35.297Z" itemprop="datePublished">2020-04-29</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">9 分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h1 id="去哪儿酒店数据爬取"><a href="#去哪儿酒店数据爬取" class="headerlink" title="去哪儿酒店数据爬取"></a>去哪儿酒店数据爬取</h1><p><strong>获取省份城市</strong></p>
+<blockquote>
+<p>从页面上获取到了50个热门城市的字典<br>这里的直辖市都是带_city的，其他城市就是城市的拼音，有少部分城市是(城市+省份)组成</p>
+</blockquote>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">dat<span class="built_in">a_l</span>=&#123;</span><br><span class="line"><span class="string">"北京"</span>: <span class="string">"beijing_city"</span>,</span><br><span class="line"><span class="string">"成都"</span>: <span class="string">"chengdu"</span>,</span><br><span class="line"><span class="string">"广州"</span>: <span class="string">"guangzhou"</span>,</span><br><span class="line"><span class="string">"杭州"</span>: <span class="string">"hangzhou"</span>,</span><br><span class="line"><span class="string">"昆明"</span>: <span class="string">"kunming"</span>,</span><br><span class="line"><span class="string">"青岛"</span>: <span class="string">"qingdao"</span>,</span><br><span class="line"><span class="string">"上海"</span>: <span class="string">"shanghai_city"</span>,</span><br><span class="line"><span class="string">"深圳"</span>: <span class="string">"shenzhen"</span>,</span><br><span class="line"><span class="string">"西安"</span>: <span class="string">"xian"</span>,</span><br><span class="line"><span class="string">"重庆"</span>: <span class="string">"chongqing_city"</span>,</span><br><span class="line"><span class="string">"北海"</span>: <span class="string">"beihai"</span>,</span><br><span class="line"><span class="string">"大理"</span>: <span class="string">"dali"</span>,</span><br><span class="line"><span class="string">"大连"</span>: <span class="string">"dalian"</span>,</span><br><span class="line"><span class="string">"东莞"</span>: <span class="string">"dongguan"</span>,</span><br><span class="line"><span class="string">"佛山"</span>: <span class="string">"foshan"</span>,</span><br><span class="line"><span class="string">"福州"</span>: <span class="string">"fuzhou_fujian"</span>,</span><br><span class="line"><span class="string">"贵阳"</span>: <span class="string">"guiyang"</span>,</span><br><span class="line"><span class="string">"桂林"</span>: <span class="string">"guilin"</span>,</span><br><span class="line"><span class="string">"哈尔滨"</span>: <span class="string">"haerbin"</span>,</span><br><span class="line"><span class="string">"海口"</span>: <span class="string">"haikou"</span>,</span><br><span class="line"><span class="string">"合肥"</span>: <span class="string">"hefei"</span>,</span><br><span class="line"><span class="string">"惠州"</span>: <span class="string">"huizhou_guangdong"</span>,</span><br><span class="line"><span class="string">"济南"</span>: <span class="string">"jinan"</span>,</span><br><span class="line"><span class="string">"嘉兴"</span>: <span class="string">"jiaxing"</span>,</span><br><span class="line"><span class="string">"兰州"</span>: <span class="string">"lanzhou"</span>,</span><br><span class="line"><span class="string">"丽江"</span>: <span class="string">"lijiang"</span>,</span><br><span class="line"><span class="string">"南昌"</span>: <span class="string">"nanchang"</span>,</span><br><span class="line"><span class="string">"南京"</span>: <span class="string">"nanjing"</span>,</span><br><span class="line"><span class="string">"南宁"</span>: <span class="string">"nanning"</span>,</span><br><span class="line"><span class="string">"宁波"</span>: <span class="string">"ningbo"</span>,</span><br><span class="line"><span class="string">"黔东南"</span>: <span class="string">"qiandongnan"</span>,</span><br><span class="line"><span class="string">"秦皇岛"</span>: <span class="string">"qinhuangdao"</span>,</span><br><span class="line"><span class="string">"泉州"</span>: <span class="string">"quanzhou"</span>,</span><br><span class="line"><span class="string">"三亚"</span>: <span class="string">"sanya"</span>,</span><br><span class="line"><span class="string">"厦门"</span>: <span class="string">"xiamen"</span>,</span><br><span class="line"><span class="string">"沈阳"</span>: <span class="string">"shenyang"</span>,</span><br><span class="line"><span class="string">"石家庄"</span>: <span class="string">"shijiazhuang"</span>,</span><br><span class="line"><span class="string">"苏州"</span>: <span class="string">"suzhou_jiangsu"</span>,</span><br><span class="line"><span class="string">"太原"</span>: <span class="string">"taiyuan"</span>,</span><br><span class="line"><span class="string">"天津"</span>: <span class="string">"tianjin_city"</span>,</span><br><span class="line"><span class="string">"威海"</span>: <span class="string">"weihai"</span>,</span><br><span class="line"><span class="string">"温州"</span>: <span class="string">"wenzhou"</span>,</span><br><span class="line"><span class="string">"乌鲁木齐"</span>: <span class="string">"wulumuqi"</span>,</span><br><span class="line"><span class="string">"无锡"</span>: <span class="string">"wuxi"</span>,</span><br><span class="line"><span class="string">"武汉"</span>: <span class="string">"wuhan"</span>,</span><br><span class="line"><span class="string">"西宁"</span>: <span class="string">"xining"</span>,</span><br><span class="line"><span class="string">"烟台"</span>: <span class="string">"yantai"</span>,</span><br><span class="line"><span class="string">"长沙"</span>: <span class="string">"changsha"</span>,</span><br><span class="line"><span class="string">"郑州"</span>: <span class="string">"zhengzhou"</span>,</span><br><span class="line"><span class="string">"珠海"</span>: <span class="string">"zhuhai"</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>从房天下中获取更多的城市</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import json   </span><br><span class="line">import random</span><br><span class="line"><span class="keyword">from</span> pypinyin import lazy_pinyin</span><br><span class="line"><span class="keyword">from</span> useragents import ua_list</span><br><span class="line"><span class="keyword">from</span> lxml import etree</span><br><span class="line"></span><br><span class="line">result=[]</span><br><span class="line"><span class="attribute">url</span>=<span class="string">'https://esf.fang.com/newsecond/esfcities.aspx'</span></span><br><span class="line">headers=&#123;<span class="string">'user-agent'</span>: random.choice(ua_list)&#125; </span><br><span class="line">res = requests.<span class="builtin-name">get</span>(<span class="attribute">url</span>=url, <span class="attribute">headers</span>=headers)</span><br><span class="line"><span class="attribute">response</span>=etree.HTML(res.text)</span><br><span class="line">lis = response.xpath(<span class="string">'//div[@id="c02"]//li'</span>)</span><br><span class="line"><span class="comment"># 遍历省</span></span><br><span class="line"><span class="keyword">for</span> li <span class="keyword">in</span> lis[1:-1]:        </span><br><span class="line">    provinces_text = li.xpath(<span class="string">'.//strong/text()'</span>)[0]</span><br><span class="line">    city_texts = li.xpath(<span class="string">'.//a'</span>)</span><br><span class="line">    # 遍历市</span><br><span class="line">    <span class="keyword">for</span> city_text <span class="keyword">in</span> city_texts:</span><br><span class="line">        city = city_text.xpath(<span class="string">'./text()'</span>)[0]</span><br><span class="line">        <span class="attribute">short</span>=<span class="string">''</span>.join(lazy_pinyin(city))</span><br><span class="line"><span class="comment">#        print(provinces_text,city,short)</span></span><br><span class="line">        <span class="keyword">if</span> city <span class="keyword">not</span> <span class="keyword">in</span> list(data_l.keys()):</span><br><span class="line">            with open(<span class="string">'city'</span>+<span class="string">'.json'</span>,<span class="string">'a'</span>,<span class="attribute">encoding</span>=<span class="string">'utf8'</span>) as f:</span><br><span class="line">                json.dump([provinces_text,city,short],f,<span class="attribute">ensure_ascii</span>=<span class="literal">False</span>)</span><br><span class="line">                f.write(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong><strong>从去哪儿中获取所有的城市</strong></strong></p>
+<blockquote>
+<p>从<a href="https://hotel.qunar.com/render/hoteldiv.jsp?__jscallback=jQuery17203458234071611954_1588143947973&amp;_=1588143951772这个链接只能获取到城市和起对应的url，其中还有一些区域需要清理（通过请求这个城市的url，获取到seqNo，看url的前半段和seqNo的前半段是否一致），如果想关联到省份，需要通过高德API进行转化，关联不到的个别城市需要手工处理一下" target="_blank" rel="noopener">https://hotel.qunar.com/render/hoteldiv.jsp?__jscallback=jQuery17203458234071611954_1588143947973&amp;_=1588143951772这个链接只能获取到城市和起对应的url，其中还有一些区域需要清理（通过请求这个城市的url，获取到seqNo，看url的前半段和seqNo的前半段是否一致），如果想关联到省份，需要通过高德API进行转化，关联不到的个别城市需要手工处理一下</a></p>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import json</span><br><span class="line"><span class="keyword">from</span><span class="built_in"> queue </span>import Queue</span><br><span class="line"><span class="keyword">from</span> threading import Thread</span><br><span class="line"><span class="keyword">from</span> useragents import ua_list</span><br><span class="line">import random</span><br><span class="line">import time</span><br><span class="line">import urllib</span><br><span class="line">import math</span><br><span class="line"></span><br><span class="line">def address(address):</span><br><span class="line">    ak = <span class="string">"高德api的key"</span></span><br><span class="line">    <span class="attribute">url</span>=<span class="string">"http://restapi.amap.com/v3/geocode/geo?key=%s&amp;address=%s"</span>%(ak,address)</span><br><span class="line">    <span class="attribute">data</span>=requests.get(url,timeout=10)</span><br><span class="line">    <span class="attribute">contest</span>=data.json()</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">contest</span>=contest[<span class="string">'geocodes'</span>][0]</span><br><span class="line">    <span class="attribute">province</span>=contest[<span class="string">'province'</span>]</span><br><span class="line">    <span class="attribute">city</span>=contest[<span class="string">'city'</span>]</span><br><span class="line">    return province,city</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">list_d=[]</span><br><span class="line"><span class="attribute">url</span>=<span class="string">'https://hotel.qunar.com/render/hoteldiv.jsp?__jscallback=jQuery17203458234071611954_1588143947973&amp;_=1588143951772'</span></span><br><span class="line"><span class="attribute">res</span>=requests.get(url)</span><br><span class="line"><span class="attribute">text_json</span>=json.loads(res.text[41:-1])</span><br><span class="line"><span class="attribute">city_dict</span>=text_json[<span class="string">'hotCityConfig'</span>][<span class="string">'data'</span>][<span class="string">'domestic'</span>]</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> city_dict:</span><br><span class="line">    <span class="keyword">if</span> key!=<span class="string">'热门城市'</span>:</span><br><span class="line">        <span class="attribute">city_list</span>=city_dict[key][<span class="string">'cityList'</span>]</span><br><span class="line">        <span class="keyword">for</span> dict_char <span class="keyword">in</span> city_list:</span><br><span class="line">            <span class="attribute">list_char</span>=dict_char[<span class="string">'list'</span>]</span><br><span class="line">            <span class="keyword">for</span> city_data <span class="keyword">in</span> list_char:</span><br><span class="line">                <span class="attribute">city_name</span>=city_data[<span class="string">'name'</span>]</span><br><span class="line">                <span class="attribute">city_url</span>=city_data[<span class="string">'cityurl'</span>]</span><br><span class="line">                try:</span><br><span class="line">                    province,<span class="attribute">city</span>=address(city_name)</span><br><span class="line">                    list_d.append([province,city,city_name,city_url])</span><br><span class="line"><span class="comment">#                    print(province,city,city_name,city_url)</span></span><br><span class="line">                except:</span><br><span class="line">                    list_d.append([city_name,city_url])</span><br><span class="line"><span class="comment">#                    print('出错了，'+city_name,city_url)</span></span><br><span class="line">                    </span><br><span class="line"></span><br><span class="line">false_list=[]</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">def obtain_ip():</span><br><span class="line">    response = requests.<span class="builtin-name">get</span>(<span class="string">'http://kps.kdlapi.com/api/getkps/?orderid=988527641306446&amp;num=14&amp;pt=1&amp;sep=1'</span>)</span><br><span class="line">    ip_list = response.text.split(<span class="string">'\r\n'</span>)</span><br><span class="line">   <span class="built_in"> ip </span>= random.choice(ip_list)</span><br><span class="line">    return ip</span><br><span class="line"></span><br><span class="line">def get_html(city,city_eng,<span class="attribute">flag</span>=0,times=1,proxies=None):</span><br><span class="line">    <span class="attribute">url</span>=<span class="string">'http://hotel.qunar.com/napi/list'</span></span><br><span class="line">    headers=&#123;</span><br><span class="line">    <span class="string">'Accept'</span>: <span class="string">'application/json, text/plain, */*'</span></span><br><span class="line">    ,<span class="string">'Connection'</span>: <span class="string">'keep-alive'</span></span><br><span class="line">    ,<span class="string">'Content-Type'</span>: <span class="string">'application/json;charset=UTF-8'</span></span><br><span class="line"><span class="comment">#    ,'Cookie': 'QN99=7541; QN1=dXrggV0xJ4lyDT9iGhUHAg==; QN601=f7ba627efbd8530c686ae3f86e0ce28a; _i=VInJOyh7DbxqoQM1ZxtqW3KoLucq; QN48=d3e7a904-b949-4278-bbc5-aa586655d30e; quinn=8394a728a3c288802dc3c77659d39f9736e4fed0346cb1e24251bb839fa705f093318a0b6ae3ab82d83e8022ea5ecbea; fid=a8db260e-97aa-4f08-984c-dd9d6bca96e0; SC1=013fec8fc3ce5a77f1fb6e10e886089e; SC18=; _RF1=58.248.166.44; _RSG=LMqzk98VsJE_JUEW5rv6xA; _RDG=288bb6c9579a322fb03eba07e679de2ad8; _RGUID=e4f67c82-6ef7-4595-aec6-e7516039e4ff; QunarGlobal=10.95.17.64_e5e2812_16c049d8ccc_-3b72%7C1563502482482; QN300=auto_4e0d874a; QN205=auto_4e0d874a; QN277=auto_4e0d874a; csrfToken=DAIUIY7Y44VzUu8qNHVFBzd7I68NwMpX; QN163=0; QN66=qunar; QN6=auto_4e0d874a; QN621=fr%3Dflight_dom_search%261490067914133%3DDEFAULT; QN667=B; QN668=51%2C55%2C58%2C57%2C56%2C52%2C54%2C50%2C50%2C53%2C53%2C57%2C55; HN1=v1ed136d75a3f2d14ab1c589a5a00afb10; HN2=qnukqqklqqszg; QN269=F3F8F012600D11E9AA1EFA163E642F8B; _vi=6QNxqD3guWnAt9p1wKWCRqNzeVuusHrajO3yEON1Kzgb0Hn6sg7mn4J7uZQbbR1IIKG6hEhJHl-Ps0FS3rSnZiycabzB6mBSYAje0bO49mrKTzkBCv1QrErrmuXqw2w-gKqtu8tB6n_acmMJKmV4iPBwVDgvBEk7RDIeaUlZGTCH; QN271=c32b7b57-91f9-423d-be20-171061d0ab71; __qt=v1%7CVTJGc2RHVmtYMS9FY1A2QmxtM054Nmx4Ym02cGdOQkIzZnBPT0s0dllReVowQ0YwVXpSQUFKSVg2cnlrQTdEbE9sRGx0RzdFdUlWVUFGWlBBNUxaYTE2Ti9vaDF4cVp6MWxvemowbkRMQ29TTVRQdy9ROG91YlBmenJ5TVF4bDFaMktGK0dCRDE4R250ckY4a21vVitBPT0%3D%7C1587957005346%7CVTJGc2RHVmtYMThzd3BzcGFzSmJqVnNzclJJTnczUnJuSVFibkpMS05WRlZhOWl5SmJWa0ZLRmdIZVJUSjYwVmJiNnFaVnBTbWg3eG1jVTR3NVdZeVE9PQ%3D%3D%7CVTJGc2RHVmtYMThzb2x5NldZK2dFUEh6QzU2ZU11bndHaCtmS0NTL2lEMEVGcXNBVWtNb2RCbEVvOUpIMnBCc3ptbHlydk4zdDMwV3B6WC9BamxQeGw4WGFHNXRLM1lzdW5SSnJMS3AzL0NtQjBmS0N2cGV6SnRlUHUybXEzZTRUemc0RmxzWEJYSlJYbXgrRDdmYVZUV1VoZHRXVS9EOFM4QUVadkp6c3hsUnExeVVIVFlqd25Qc0dWbnRHWURwcVR3OHBpSGUzQU8reWlBaEl1c25nYVpQMFdMT1BVWFNEYWV3Ylo0SFBuL0xiY29tcFNaZ0JROEEzb0NpcCtzaVVJMHlzMk1RUUFobUZ2ODI5NjB0N3hTU0EyUzJFeHhtT2cycHVrR01FK09QalFHdnRHUmg1dXpJRlYrcXRIRFQ1Uy8rVlRaaURBRjhTOSs2TVduaEdlTXBWUlQ0K0hLZVJDQmdtY2hKV0NZcFBrQmZrZDBrZ0tTYUJ0dHozZ3ZTNDRoMk56OXRNUDJ1WXJURGZ5emJjMS9NcUhGeFgrSFIxWm1uV2djS3NybmRGVXkySHZKamlYVGxiVEZ4Q0dKaUFQMlVaM0gvc3diQjVJeHNlaHo2YUQrNjVzdTk3cDFjNHNBUDBuTHlkSlRsY3BhaXdZekhrbG4wVkNvK0FFakNzRDJZZUhNbFl0WUxkZk9MNTVCRXQzS1VXdXUzOHZnVnhzdk41R3EvcFRRdkpXWEUzQm5VSWsrSGJDMWp6QWM1UnIxa1lXeTR6UGxXQ1dWOU9vVUdjL3UwTnduUVQ1ZitUL3BkZHpvaG1CK1NEeWV5cTNZUVlpVzZxSzNxNFFnVWJCa0lnVkV6UW1rZWw0QTgrNkhkeHc9PQ%3D%3D; QN267=1444099537d28bc7bf'</span></span><br><span class="line">    ,<span class="string">'Host'</span>: <span class="string">'hotel.qunar.com'</span></span><br><span class="line">    ,<span class="string">'Origin'</span>: <span class="string">'http://hotel.qunar.com'</span></span><br><span class="line">    ,<span class="string">'Referer'</span>: <span class="string">'http://hotel.qunar.com/cn/'</span>+city_eng+<span class="string">'/?fromDate=2020-04-29&amp;toDate=2020-04-30&amp;cityName='</span>+urllib.parse.quote(city)</span><br><span class="line">    ,<span class="string">'User-Agent'</span>:  random.choice(ua_list)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    data=&#123;<span class="string">"b"</span>:&#123;<span class="string">"bizVersion"</span>:<span class="string">"17"</span>,</span><br><span class="line">               <span class="string">"cityUrl"</span>:city_eng,</span><br><span class="line">               <span class="string">"fromDate"</span>:<span class="string">"2020-04-29"</span>,</span><br><span class="line">               <span class="string">"toDate"</span>:<span class="string">"2020-04-30"</span>,</span><br><span class="line">               <span class="string">"q"</span>:<span class="string">""</span>,</span><br><span class="line">               <span class="string">"qFrom"</span>:1,</span><br><span class="line">               <span class="string">"start"</span>:0,</span><br><span class="line">               <span class="string">"num"</span>:20,</span><br><span class="line">               <span class="string">"minPrice"</span>:0,</span><br><span class="line">               <span class="string">"maxPrice"</span>:-1,</span><br><span class="line">               <span class="string">"level"</span>:<span class="string">""</span>,</span><br><span class="line">               <span class="string">"sort"</span>:0,</span><br><span class="line">               <span class="string">"cityType"</span>:1,</span><br><span class="line">               <span class="string">"fromForLog"</span>:1,</span><br><span class="line">               <span class="string">"uuid"</span>:<span class="string">""</span>,</span><br><span class="line">               <span class="string">"userName"</span>:<span class="string">""</span>,</span><br><span class="line">               <span class="string">"userId"</span>:<span class="string">""</span>,</span><br><span class="line">               <span class="string">"fromAction"</span>:<span class="string">""</span>,</span><br><span class="line">               <span class="string">"searchType"</span>:0,</span><br><span class="line">               <span class="string">"hourlyRoom"</span>:<span class="string">"false"</span>,</span><br><span class="line">               <span class="string">"locationAreaFilter"</span>:[],</span><br><span class="line">               <span class="string">"comprehensiveFilter"</span>:[],</span><br><span class="line">               <span class="string">"channelId"</span>:1&#125;,</span><br><span class="line">        <span class="string">"qrt"</span>:<span class="string">"h_hlist"</span>,</span><br><span class="line">        <span class="string">"source"</span>:<span class="string">"website"</span>&#125;</span><br><span class="line">    <span class="attribute">data</span>=json.dumps(data)</span><br><span class="line">    time.sleep(0.5)</span><br><span class="line">    try:</span><br><span class="line">        <span class="attribute">res</span>=requests.post(url,headers=headers,data=data)</span><br><span class="line">        <span class="attribute">data_json</span>=res.json()</span><br><span class="line">        <span class="keyword">if</span> <span class="attribute">flag</span>==1:</span><br><span class="line">            <span class="attribute">result</span>=data_json[<span class="string">"data"</span>][<span class="string">"tcount"</span>]    </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="attribute">result</span>=data_json[<span class="string">"data"</span>][<span class="string">"hotels"</span>]</span><br><span class="line">        <span class="keyword">if</span> <span class="attribute">result</span>==None:</span><br><span class="line">            raise Exception(<span class="string">"Return None!"</span>)</span><br><span class="line">        return result</span><br><span class="line">    except:</span><br><span class="line">        <span class="attribute">ip</span>=obtain_ip()</span><br><span class="line">        proxies=&#123;</span><br><span class="line">            <span class="string">'http'</span>:ip,</span><br><span class="line">            <span class="string">'https'</span>:ip</span><br><span class="line">        &#125;        </span><br><span class="line">        time.sleep(2)</span><br><span class="line">        <span class="builtin-name">print</span>(f<span class="string">'+++++++++++++++++&#123;proxies&#125;+++++++++++++++'</span>)</span><br><span class="line">        trytimes = 3</span><br><span class="line">        <span class="keyword">if</span> times &lt; trytimes:</span><br><span class="line">            times += 1</span><br><span class="line">            return get_html(city,city_eng,<span class="attribute">flag</span>=0,times=times,proxies=proxies)</span><br><span class="line"><span class="comment">#        result1=get_html(url,page,city,city_eng,flag=0,blog=blog,proxies=proxies)</span></span><br><span class="line"><span class="comment">#        if result1!=None:</span></span><br><span class="line"><span class="comment">#            return result1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            false_list.append([city,city_eng])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> data_value <span class="keyword">in</span> list_d:  </span><br><span class="line">    <span class="attribute">city_eng</span>=data_value[-1]</span><br><span class="line">    <span class="attribute">city</span>=data_value[-2]  </span><br><span class="line">    <span class="attribute">result</span>=get_html(city,city_eng,flag=0,times=1,proxies=None)</span><br><span class="line">    <span class="keyword">if</span> data_value[-1].split(<span class="string">'_'</span>)[0]==result[1][<span class="string">'seqNo'</span>].split(<span class="string">'_'</span>)[0]:</span><br><span class="line">        <span class="builtin-name">print</span>(data_value)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>多线程爬取酒店</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import json</span><br><span class="line"><span class="keyword">from</span><span class="built_in"> queue </span>import Queue</span><br><span class="line"><span class="keyword">from</span> threading import Thread</span><br><span class="line"><span class="keyword">from</span> useragents import ua_list</span><br><span class="line">import random</span><br><span class="line">import time</span><br><span class="line">import urllib</span><br><span class="line">import math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attribute">url</span>=<span class="string">'http://hotel.qunar.com/napi/list'</span></span><br><span class="line">false_list=[]</span><br><span class="line">item_list=[]</span><br><span class="line"></span><br><span class="line">def obtain_ip():</span><br><span class="line">    response = requests.<span class="builtin-name">get</span>(<span class="string">'http://kps.kdlapi.com/api/getkps/?orderid=988527641306446&amp;num=14&amp;pt=1&amp;sep=1'</span>)</span><br><span class="line">    ip_list = response.text.split(<span class="string">'\r\n'</span>)</span><br><span class="line">   <span class="built_in"> ip </span>= random.choice(ip_list)</span><br><span class="line">    return ip</span><br><span class="line"></span><br><span class="line">def write_json(item_list,name):</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> item_list:</span><br><span class="line">        with open(name+<span class="string">'.json'</span>,<span class="string">'a'</span>,<span class="attribute">encoding</span>=<span class="string">'utf8'</span>) as f:</span><br><span class="line">            json.dump(item,f,<span class="attribute">ensure_ascii</span>=<span class="literal">False</span>)</span><br><span class="line">            f.write(<span class="string">'\n'</span>)</span><br><span class="line">    item_list=[]     </span><br><span class="line">    </span><br><span class="line">def get_html(url,page,city,city_eng,<span class="attribute">flag</span>=0,times=1,proxies=None):</span><br><span class="line">    <span class="attribute">url</span>=<span class="string">'http://hotel.qunar.com/napi/list'</span></span><br><span class="line">    headers=&#123;</span><br><span class="line">    <span class="string">'Accept'</span>: <span class="string">'application/json, text/plain, */*'</span></span><br><span class="line">    ,<span class="string">'Connection'</span>: <span class="string">'keep-alive'</span></span><br><span class="line">    ,<span class="string">'Content-Type'</span>: <span class="string">'application/json;charset=UTF-8'</span></span><br><span class="line"><span class="comment">#    ,'Cookie': 'QN99=7541; QN1=dXrggV0xJ4lyDT9iGhUHAg==; QN601=f7ba627efbd8530c686ae3f86e0ce28a; _i=VInJOyh7DbxqoQM1ZxtqW3KoLucq; QN48=d3e7a904-b949-4278-bbc5-aa586655d30e; quinn=8394a728a3c288802dc3c77659d39f9736e4fed0346cb1e24251bb839fa705f093318a0b6ae3ab82d83e8022ea5ecbea; fid=a8db260e-97aa-4f08-984c-dd9d6bca96e0; SC1=013fec8fc3ce5a77f1fb6e10e886089e; SC18=; _RF1=58.248.166.44; _RSG=LMqzk98VsJE_JUEW5rv6xA; _RDG=288bb6c9579a322fb03eba07e679de2ad8; _RGUID=e4f67c82-6ef7-4595-aec6-e7516039e4ff; QunarGlobal=10.95.17.64_e5e2812_16c049d8ccc_-3b72%7C1563502482482; QN300=auto_4e0d874a; QN205=auto_4e0d874a; QN277=auto_4e0d874a; csrfToken=DAIUIY7Y44VzUu8qNHVFBzd7I68NwMpX; QN163=0; QN66=qunar; QN6=auto_4e0d874a; QN621=fr%3Dflight_dom_search%261490067914133%3DDEFAULT; QN667=B; QN668=51%2C55%2C58%2C57%2C56%2C52%2C54%2C50%2C50%2C53%2C53%2C57%2C55; HN1=v1ed136d75a3f2d14ab1c589a5a00afb10; HN2=qnukqqklqqszg; QN269=F3F8F012600D11E9AA1EFA163E642F8B; _vi=6QNxqD3guWnAt9p1wKWCRqNzeVuusHrajO3yEON1Kzgb0Hn6sg7mn4J7uZQbbR1IIKG6hEhJHl-Ps0FS3rSnZiycabzB6mBSYAje0bO49mrKTzkBCv1QrErrmuXqw2w-gKqtu8tB6n_acmMJKmV4iPBwVDgvBEk7RDIeaUlZGTCH; QN271=c32b7b57-91f9-423d-be20-171061d0ab71; __qt=v1%7CVTJGc2RHVmtYMS9FY1A2QmxtM054Nmx4Ym02cGdOQkIzZnBPT0s0dllReVowQ0YwVXpSQUFKSVg2cnlrQTdEbE9sRGx0RzdFdUlWVUFGWlBBNUxaYTE2Ti9vaDF4cVp6MWxvemowbkRMQ29TTVRQdy9ROG91YlBmenJ5TVF4bDFaMktGK0dCRDE4R250ckY4a21vVitBPT0%3D%7C1587957005346%7CVTJGc2RHVmtYMThzd3BzcGFzSmJqVnNzclJJTnczUnJuSVFibkpMS05WRlZhOWl5SmJWa0ZLRmdIZVJUSjYwVmJiNnFaVnBTbWg3eG1jVTR3NVdZeVE9PQ%3D%3D%7CVTJGc2RHVmtYMThzb2x5NldZK2dFUEh6QzU2ZU11bndHaCtmS0NTL2lEMEVGcXNBVWtNb2RCbEVvOUpIMnBCc3ptbHlydk4zdDMwV3B6WC9BamxQeGw4WGFHNXRLM1lzdW5SSnJMS3AzL0NtQjBmS0N2cGV6SnRlUHUybXEzZTRUemc0RmxzWEJYSlJYbXgrRDdmYVZUV1VoZHRXVS9EOFM4QUVadkp6c3hsUnExeVVIVFlqd25Qc0dWbnRHWURwcVR3OHBpSGUzQU8reWlBaEl1c25nYVpQMFdMT1BVWFNEYWV3Ylo0SFBuL0xiY29tcFNaZ0JROEEzb0NpcCtzaVVJMHlzMk1RUUFobUZ2ODI5NjB0N3hTU0EyUzJFeHhtT2cycHVrR01FK09QalFHdnRHUmg1dXpJRlYrcXRIRFQ1Uy8rVlRaaURBRjhTOSs2TVduaEdlTXBWUlQ0K0hLZVJDQmdtY2hKV0NZcFBrQmZrZDBrZ0tTYUJ0dHozZ3ZTNDRoMk56OXRNUDJ1WXJURGZ5emJjMS9NcUhGeFgrSFIxWm1uV2djS3NybmRGVXkySHZKamlYVGxiVEZ4Q0dKaUFQMlVaM0gvc3diQjVJeHNlaHo2YUQrNjVzdTk3cDFjNHNBUDBuTHlkSlRsY3BhaXdZekhrbG4wVkNvK0FFakNzRDJZZUhNbFl0WUxkZk9MNTVCRXQzS1VXdXUzOHZnVnhzdk41R3EvcFRRdkpXWEUzQm5VSWsrSGJDMWp6QWM1UnIxa1lXeTR6UGxXQ1dWOU9vVUdjL3UwTnduUVQ1ZitUL3BkZHpvaG1CK1NEeWV5cTNZUVlpVzZxSzNxNFFnVWJCa0lnVkV6UW1rZWw0QTgrNkhkeHc9PQ%3D%3D; QN267=1444099537d28bc7bf'</span></span><br><span class="line">    ,<span class="string">'Host'</span>: <span class="string">'hotel.qunar.com'</span></span><br><span class="line">    ,<span class="string">'Origin'</span>: <span class="string">'http://hotel.qunar.com'</span></span><br><span class="line">    ,<span class="string">'Referer'</span>: <span class="string">'http://hotel.qunar.com/cn/'</span>+city_eng+<span class="string">'/?fromDate=2020-04-29&amp;toDate=2020-04-30&amp;cityName='</span>+urllib.parse.quote(city)</span><br><span class="line">    ,<span class="string">'User-Agent'</span>:  random.choice(ua_list)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    data=&#123;<span class="string">"b"</span>:&#123;<span class="string">"bizVersion"</span>:<span class="string">"17"</span>,</span><br><span class="line">               <span class="string">"cityUrl"</span>:city_eng,</span><br><span class="line">               <span class="string">"fromDate"</span>:<span class="string">"2020-04-29"</span>,</span><br><span class="line">               <span class="string">"toDate"</span>:<span class="string">"2020-04-30"</span>,</span><br><span class="line">               <span class="string">"q"</span>:<span class="string">""</span>,</span><br><span class="line">               <span class="string">"qFrom"</span>:page,</span><br><span class="line">               <span class="string">"start"</span>:(page-1)<span class="number">*20</span>,</span><br><span class="line">               <span class="string">"num"</span>:20,</span><br><span class="line">               <span class="string">"minPrice"</span>:0,</span><br><span class="line">               <span class="string">"maxPrice"</span>:-1,</span><br><span class="line">               <span class="string">"level"</span>:<span class="string">""</span>,</span><br><span class="line">               <span class="string">"sort"</span>:0,</span><br><span class="line">               <span class="string">"cityType"</span>:1,</span><br><span class="line">               <span class="string">"fromForLog"</span>:1,</span><br><span class="line">               <span class="string">"uuid"</span>:<span class="string">""</span>,</span><br><span class="line">               <span class="string">"userName"</span>:<span class="string">""</span>,</span><br><span class="line">               <span class="string">"userId"</span>:<span class="string">""</span>,</span><br><span class="line">               <span class="string">"fromAction"</span>:<span class="string">""</span>,</span><br><span class="line">               <span class="string">"searchType"</span>:0,</span><br><span class="line">               <span class="string">"hourlyRoom"</span>:<span class="string">"false"</span>,</span><br><span class="line">               <span class="string">"locationAreaFilter"</span>:[],</span><br><span class="line">               <span class="string">"comprehensiveFilter"</span>:[],</span><br><span class="line">               <span class="string">"channelId"</span>:1&#125;,</span><br><span class="line">        <span class="string">"qrt"</span>:<span class="string">"h_hlist"</span>,</span><br><span class="line">        <span class="string">"source"</span>:<span class="string">"website"</span>&#125;</span><br><span class="line">    <span class="attribute">data</span>=json.dumps(data)</span><br><span class="line">    time.sleep(0.5)</span><br><span class="line">    try:</span><br><span class="line">        <span class="attribute">res</span>=requests.post(url,headers=headers,data=data)</span><br><span class="line">        <span class="attribute">data_json</span>=res.json()</span><br><span class="line">        <span class="keyword">if</span> <span class="attribute">flag</span>==1:</span><br><span class="line">            <span class="attribute">result</span>=data_json[<span class="string">"data"</span>][<span class="string">"tcount"</span>]    </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="attribute">result</span>=data_json[<span class="string">"data"</span>][<span class="string">"hotels"</span>]</span><br><span class="line">        <span class="keyword">if</span> <span class="attribute">result</span>==None:</span><br><span class="line">            raise Exception(<span class="string">"Return None!"</span>)</span><br><span class="line">        return result</span><br><span class="line">    except:</span><br><span class="line">        <span class="attribute">ip</span>=obtain_ip()</span><br><span class="line">        proxies=&#123;</span><br><span class="line">            <span class="string">'http'</span>:ip,</span><br><span class="line">            <span class="string">'https'</span>:ip</span><br><span class="line">        &#125;        </span><br><span class="line">        time.sleep(2)</span><br><span class="line">        <span class="builtin-name">print</span>(f<span class="string">'+++++++++++++++++&#123;proxies&#125;+++++++++++++++'</span>)</span><br><span class="line">        trytimes = 3</span><br><span class="line">        <span class="keyword">if</span> times &lt; trytimes:</span><br><span class="line">            times += 1</span><br><span class="line">            return get_html(url,page,city,city_eng,<span class="attribute">flag</span>=0,times=times,proxies=proxies)</span><br><span class="line"><span class="comment">#        result1=get_html(url,page,city,city_eng,flag=0,blog=blog,proxies=proxies)</span></span><br><span class="line"><span class="comment">#        if result1!=None:</span></span><br><span class="line"><span class="comment">#            return result1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            false_list.append([page,city,city_eng])</span><br><span class="line">                  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def parse_page(q):</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> q.empty():</span><br><span class="line">            <span class="attribute">result</span>=q.get()</span><br><span class="line">            <span class="attribute">url</span>=result[0]</span><br><span class="line">            <span class="attribute">page</span>=result[1]</span><br><span class="line">            <span class="attribute">province</span>=result[2]</span><br><span class="line">            <span class="attribute">city</span>=result[3]</span><br><span class="line">            <span class="attribute">city_eng</span>=result[4]</span><br><span class="line">            <span class="attribute">hotels</span>=get_html(url,page,city,city_eng)</span><br><span class="line">            <span class="keyword">if</span> <span class="attribute">hotels</span>==None:</span><br><span class="line">                continue</span><br><span class="line">            <span class="keyword">for</span> hotel <span class="keyword">in</span> hotels:</span><br><span class="line">                item=&#123;&#125;</span><br><span class="line">                item[<span class="string">'province'</span>]=province</span><br><span class="line">                item[<span class="string">'city'</span>]=city</span><br><span class="line">                item[<span class="string">'name'</span>]=hotel[<span class="string">'name'</span>]</span><br><span class="line">                item[<span class="string">'seqNo'</span>]=hotel[<span class="string">'seqNo'</span>]</span><br><span class="line">                item[<span class="string">'price'</span>]=hotel[<span class="string">'price'</span>]</span><br><span class="line">                item[<span class="string">'gpoint'</span>]=hotel[<span class="string">'gpoint'</span>]</span><br><span class="line">                item[<span class="string">'dangciText'</span>]=hotel[<span class="string">'dangciText'</span>]</span><br><span class="line">                item[<span class="string">'dangci'</span>]=hotel[<span class="string">'dangci'</span>]</span><br><span class="line">                item[<span class="string">'commentCount'</span>]=hotel[<span class="string">'commentCount'</span>]</span><br><span class="line">                item[<span class="string">'commentDesc'</span>]=hotel.<span class="builtin-name">get</span>(<span class="string">'commentDesc'</span>,<span class="string">'暂无数据'</span>)</span><br><span class="line">                item[<span class="string">'etag'</span>]=hotel.<span class="builtin-name">get</span>(<span class="string">'etag'</span>,<span class="string">'暂无数据'</span>)</span><br><span class="line">                item[<span class="string">'locationInfo'</span>]=hotel[<span class="string">'locationInfo'</span>]</span><br><span class="line">                item[<span class="string">'label'</span>]=[lab[<span class="string">'label'</span>]  <span class="keyword">for</span> lab <span class="keyword">in</span> hotel[<span class="string">'activity'</span>] <span class="keyword">if</span> hotel.<span class="builtin-name">get</span>(<span class="string">'activity'</span>)!=[]  ]</span><br><span class="line">                item_list.append(item)</span><br><span class="line">                <span class="builtin-name">print</span>(item) </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            break</span><br><span class="line"></span><br><span class="line">def <span class="builtin-name">run</span>(q):</span><br><span class="line">    t_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(8):</span><br><span class="line">        t = Thread(<span class="attribute">target</span>=parse_page(q))</span><br><span class="line">        t_list.append(t)</span><br><span class="line">        t.start()</span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> t_list:</span><br><span class="line">        t.join()</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="attribute">__name__</span>=='__main__':</span><br><span class="line">    <span class="attribute">url</span>=<span class="string">'http://hotel.qunar.com/napi/list'</span></span><br><span class="line">    q = Queue()</span><br><span class="line">    <span class="attribute">province</span>=<span class="string">'广东'</span></span><br><span class="line">    <span class="attribute">city</span>=<span class="string">'惠州'</span></span><br><span class="line">    <span class="attribute">city_eng</span>=<span class="string">'huizhou'</span></span><br><span class="line">    start = time.time()</span><br><span class="line">    <span class="attribute">totals</span>=get_html(url,1,city,city_eng,flag=1)</span><br><span class="line">    <span class="attribute">pages</span>=math.ceil(totals/20)</span><br><span class="line">    <span class="keyword">for</span> pg <span class="keyword">in</span> range(1,pages+1):</span><br><span class="line">        q.put([url,pg,province,city,city_eng])</span><br><span class="line">    <span class="builtin-name">run</span>(q)</span><br><span class="line">    write_json(item_list,city+<span class="string">'1'</span>)</span><br><span class="line">    end = time.time()</span><br><span class="line">    <span class="builtin-name">print</span>(<span class="string">"执行时间:%.2fs"</span> % (end - start))</span><br></pre></td></tr></table></figure>
+<p>```</p>
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版权声明： </strong>
+              本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/1046517444/2020/04/29/%E5%8E%BB%E5%93%AA%E5%84%BF%E6%95%B0%E6%8D%AE%E7%88%AC%E5%8F%96/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/04/25/python_%E5%9F%BA%E7%A1%80/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">python_基础</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2020
+        <i class="ri-heart-fill heart_icon"></i> Joke chen
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="我的博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Subtitle -->
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+    console.log(err)
+  }
+</script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+
+<script src="/js/clickLove.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+    
+  </div>
+</body>
+
+</html>

@@ -82,6 +82,61 @@
     
     
     
+    <article id="post-去哪儿数据爬取" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/04/29/%E5%8E%BB%E5%93%AA%E5%84%BF%E6%95%B0%E6%8D%AE%E7%88%AC%E5%8F%96/"
+    >去哪儿数据爬取</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/29/%E5%8E%BB%E5%93%AA%E5%84%BF%E6%95%B0%E6%8D%AE%E7%88%AC%E5%8F%96/" class="article-date">
+  <time datetime="2020-04-29T09:52:35.297Z" itemprop="datePublished">2020-04-29</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+    
     <article id="post-python_基础" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -113,164 +168,6 @@
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>#python基础<br><strong>列表推导式</strong></p>
-<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d = &#123; <span class="meta">x</span>: <span class="meta">x</span> % 2 == 0 for <span class="meta">x</span> <span class="meta">in</span><span class="meta"> range(</span>1, 11) &#125;</span><br><span class="line">p<span class="meta">rint(</span>d)</span><br></pre></td></tr></table></figure>
-<p><strong>计数时使用Counter计数对象</strong></p>
-<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">from</span> <span class="variable">collections</span> <span class="variable">import</span> <span class="variable">Counter</span></span><br><span class="line"><span class="variable">c</span> = <span class="function"><span class="title">Counter</span>(<span class="string">'hello world'</span>)</span></span><br><span class="line"><span class="function"><span class="title">print</span>(<span class="variable">c</span>)</span></span><br><span class="line"><span class="function"><span class="title">print</span>(<span class="variable">c.most_common</span>(<span class="number">2</span>))</span></span><br></pre></td></tr></table></figure>
-<p><strong>写一个程序，打印数字1到100，3的倍数打印“Fizz”来替换这个数，5的倍数打印“Buzz”，对于既是3的倍数又是5的倍数的数字打印“FizzBuzz</strong></p>
-<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="symbol">x</span> in range(<span class="number">1</span>,<span class="number">101</span>):</span><br><span class="line">    print(<span class="string">"fizz"</span>[<span class="symbol">x</span>%<span class="number">3</span>*len(<span class="string">'fizz'</span>)::]+<span class="string">"buzz"</span>[<span class="symbol">x</span>%<span class="number">5</span>*len(<span class="string">'buzz'</span>)::] <span class="keyword">or</span> <span class="symbol">x</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>if 语句在行内</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">print</span>(<span class="string">"Hello"</span> <span class="keyword">if</span> <span class="literal">True</span> <span class="keyword">else</span> <span class="string">"World"</span>)</span><br><span class="line"></span><br><span class="line"><span class="attribute">x</span>=2</span><br><span class="line"><span class="keyword">if</span> 1&lt;x&lt;3:</span><br><span class="line">    <span class="builtin-name">print</span>(x)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> 1&lt;x&gt;0:</span><br><span class="line">    <span class="builtin-name">print</span>(x)</span><br></pre></td></tr></table></figure>
-
-<p><strong>zip的用法   两个list一一对应</strong></p>
-<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nfc</span> = [<span class="string">"Packers"</span>, <span class="string">"49ers"</span>]</span><br><span class="line">afc = [<span class="string">"Ravens"</span>, <span class="string">"Patriots"</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> teama, teamb in zip(<span class="built_in">nfc</span>, afc):</span><br><span class="line">    <span class="built_in">print</span>(teama + <span class="string">" vs. "</span> + teamb)</span><br></pre></td></tr></table></figure>
-<p><strong>迭代器，带索引的输出</strong></p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">teams = [<span class="string">"Packers"</span>, <span class="string">"49ers"</span>, <span class="string">"Ravens"</span>, <span class="string">"Patriots"</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="keyword">index</span>, team in enumerate(teams):</span><br><span class="line">    <span class="keyword">print</span>(<span class="keyword">index</span>, team)</span><br></pre></td></tr></table></figure>
-<p><strong>列表表达式</strong></p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">even = [number <span class="keyword">for</span> number <span class="keyword">in</span> numbers <span class="keyword">if</span> number%<span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line">print(even)</span><br></pre></td></tr></table></figure>
-<p><strong>列表转字符串 join</strong></p>
-<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">teams</span> = [<span class="string">"Packers"</span>, <span class="string">"49ers"</span>, <span class="string">"Ravens"</span>, <span class="string">"Patriots"</span>]</span><br><span class="line">print (<span class="string">", "</span>.<span class="built_in">join</span>(<span class="built_in">teams</span>))</span><br></pre></td></tr></table></figure>
-
-
-<p><strong>字典key不存在的情况</strong></p>
-<blockquote>
-<p>方法一</p>
-</blockquote>
-<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;<span class="string">'user'</span>: <span class="number">1</span>, <span class="string">'name'</span>: <span class="string">'Max'</span>, <span class="string">'three'</span>: <span class="number">4</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">is</span><span class="number">_</span>admin = data[<span class="string">'admin'</span>]</span><br><span class="line">except KeyError:</span><br><span class="line">    <span class="keyword">is</span><span class="number">_</span>admin = False</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>方法二</p>
-</blockquote>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">data</span> = &#123;<span class="string">'user'</span>: <span class="number">1</span>, <span class="string">'name'</span>: <span class="string">'Max'</span>, <span class="string">'three'</span>: <span class="number">4</span>&#125;</span><br><span class="line"><span class="attr">is_admin</span> = data.get(<span class="string">'admin'</span>, <span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>列表子集</strong></p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]   #前<span class="number">3</span>个</span><br><span class="line">print(x[:<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">print(x[<span class="number">1</span>:<span class="number">5</span>])  #中间<span class="number">4</span>个</span><br><span class="line"></span><br><span class="line">print(x[<span class="number">3</span>:]) #最后<span class="number">3</span>个</span><br><span class="line"></span><br><span class="line">print(x[::<span class="number">2</span>]) #奇数项</span><br><span class="line"></span><br><span class="line">print(x[<span class="number">1</span>::<span class="number">2</span>]) #偶数项</span><br></pre></td></tr></table></figure>
-<p><strong>排列组合</strong></p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> combinations</span><br><span class="line"></span><br><span class="line">teams = [<span class="string">"Packers"</span>, <span class="string">"49ers"</span>, <span class="string">"Ravens"</span>, <span class="string">"Patriots"</span>]</span><br><span class="line"><span class="keyword">for</span> game <span class="keyword">in</span> combinations(teams, <span class="number">2</span>):</span><br><span class="line">    <span class="built_in">print</span>(game)</span><br></pre></td></tr></table></figure>
-<p><strong>在python中，True和False是全局变量</strong></p>
-<blockquote>
-<p>False == True</p>
-</blockquote>
-<p><strong>编程经验</strong></p>
-<blockquote>
-<p>函数只做一件事<br>若耗费时间过长，你的做法很可能就是错的<br>第一次就要用最佳的方法完成<br>遵循惯例</p>
-</blockquote>
-<p><strong>全局变量</strong><br>global name</p>
-<p><strong>函数：</strong></p>
-<blockquote>
-<p>函数可以赋值给变量</p>
-</blockquote>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def pow<span class="string">q(x,y)</span>:</span><br><span class="line">    <span class="keyword">print</span>(<span class="keyword">x</span>,<span class="keyword">y</span>)</span><br><span class="line">    </span><br><span class="line">my_fun=powq</span><br><span class="line"><span class="keyword">print</span>(my_fun(<span class="number">1</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
-<p><strong>函数可以作为函数形参传入</strong></p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mapp</span></span>(data,<span class="keyword">fn</span>)<span class="symbol">:</span></span><br><span class="line">    result=[]</span><br><span class="line">    <span class="keyword">for</span> e <span class="keyword">in</span> <span class="symbol">data:</span></span><br><span class="line">        result.append(<span class="keyword">fn</span>(e))</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
-<p><strong>lambda表达式</strong></p>
-<blockquote>
-<p>lambda [parameter_list]: 表达式</p>
-</blockquote>
-<blockquote>
-<p>必须使用lambda关键字定义<br>冒号左边的是参数列表，可以没有参数，也可以有多个参数（用逗号隔开）<br>冒号右边的是返回值</p>
-</blockquote>
-<p><strong>函数</strong></p>
-<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def add(<span class="symbol">x</span>, <span class="symbol">y</span>):</span><br><span class="line">      <span class="keyword">return</span> <span class="symbol">x</span> + <span class="symbol">y</span></span><br><span class="line"># lambda</span><br><span class="line">lambda <span class="symbol">x</span>, <span class="symbol">y</span> : <span class="symbol">x</span> + <span class="symbol">y</span></span><br></pre></td></tr></table></figure>
-<p><strong>字符串</strong></p>
-<blockquote>
-<p>可以用单引号’’ ，也可以用双引号””括起来，还可以用三引号””” “””括起来<br>如果字符串中有引号，需要特殊处理，使用不同的引号括起来或使用转义字符。<br>str()函数，可以将数值转换为字符串<br>input()函数，可以获取用户输入<br>原始字符串，以r开头，就不会对字符串进行转义了</p>
-</blockquote>
-<p><strong>占位符</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.format,使用&#123;&#125;占位   </span><br><span class="line">2.使用%s   %()站位</span><br><span class="line">math,<span class="attribute">chinese</span>=98,100</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'math i s &#123;&#125;,china is &#123;&#125;'</span>.format(math,chinese))</span><br><span class="line">3.使用f<span class="string">''</span></span><br><span class="line"><span class="attribute">a</span>=123</span><br><span class="line"><span class="builtin-name">print</span>(f<span class="string">'&#123;a&#125;'</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>3序列相关方法</strong></p>
-<blockquote>
-<p>1.索引<br>2. in运算符，可以判断字符串是否包含某个子串<br>或者可以用not in<br>3. len() 函数，获取字符串的长度<br>4. max()和min()函数，获取字符串中的最大和最小字符串。<br>5. title()函数，将字符串首字母改为大写<br>6. lower()函数，将整个字符串改为小写<br>7. upper()函数，将整个字符串改为大写<br>8. strip()函数，删除字符串前后的空白<br>9. lstrip()函数，删除字符串前面（左边）的空白<br>10. rstrip()函数，删除字符串后面（右边）的空白<br>11. startswith()函数，判断字符串是否以指定子串开头<br>12. endswith()，判断字符串是否以指定子串结尾<br>13. find()，查找指定子串在字符串中出现的位置，没有找到返回-1<br>14. index()，查找指定子串在字符串中出现的位置，没有找到引发 ValueError错误<br>15. replace(), 使用指定子串替换字符串中的子串</p>
-</blockquote>
-<p><strong>4. 分割，连接方法</strong></p>
-<blockquote>
-<p>join(),连接成字符串<br>split(),切割字符串</p>
-</blockquote>
-<p><strong>list</strong></p>
-<blockquote>
-<p>增<br>append() 结合（只是将元组、列表当成单个元素）<br>extend() 尾部追加</p>
-</blockquote>
-<blockquote>
-<p>删<br>del<br>del l[1]</p>
-</blockquote>
-<blockquote>
-<p>改<br>a=[1,2,3]<br>a[0]=0<br>a[1:2]=[4,5]   #2号位置替换成两个元素<br>print(a)</p>
-</blockquote>
-<p>count(),如a.count(30)，统计30出现的次数<br>index(),如a.index(30),定位30出现的位置,不在会报错ValueError<br>pop()，出栈，移出列表中的最后一个元素<br>reverse()，如a.reverse()，顺序翻转<br>sort()，a.sort(),排序（默认排序）<br>sort还支持key和reverse两个参数，key参数用于为每个元素生成一个比较‘大小’的键，reverse参数用于执行是否需要反转，默认是从小到大的。</p>
-<p><strong>dict</strong></p>
-<blockquote>
-<p>增<br>a={‘语文’:98}<br>a[‘数学’]=97</p>
-</blockquote>
-<blockquote>
-<p>删<br>del a[‘数学’]</p>
-</blockquote>
-<blockquote>
-<p>查<br>‘语文’ in a</p>
-</blockquote>
-<blockquote>
-<p>改<br>a[‘语文’]=100</p>
-</blockquote>
-<p><strong>if条件的类型</strong></p>
-<blockquote>
-<p>1.False, None, 0, “”, {}, [], ()<br>bool表达式时，会被解释器当做False处理</p>
-</blockquote>
-<blockquote>
-<p>2.pass语句<br>占位符，空语句，不执行任何操作</p>
-</blockquote>
-<blockquote>
-<p>3.列表推导式<br>[表达式 for 循环器 in 可迭代对象 if 条件]<br>x=[i for i in range(20) if i%2==0]</p>
-</blockquote>
-<blockquote>
-<p>4.zip(),将多个列表压缩成一个zip对象<br>a=[1,2,3]<br>b=[‘a’,’b’,’c’]<br>[x for x in zip(a,b)]</p>
-</blockquote>
-<blockquote>
-<p>5.断言<br>assest<br>对一个bool表达式进行断言，为True继续执行，为False引发AsseertionError错误</p>
-</blockquote>
-<p><strong>all变量</strong></p>
-<blockquote>
-<p>有的模块中虽然包含很多成员，但不希望每个成员都暴露出来供外界使用，可以借助all变量，将变量的值设置成一个列表，只有该列表中的程序单元才会被暴露出来。</p>
-</blockquote>
-<p><strong>all_module.py</strong></p>
-<blockquote>
-<p>‘测试<strong>all</strong>变量的模块’</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"Hello, Python"</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">world</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"Pyhton World is funny"</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'--test--'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义__all__变量，指定默认只导入hello和world两个程序单元</span></span><br><span class="line">__all__ = [<span class="string">'hello'</span>, <span class="string">'world'</span>]</span><br></pre></td></tr></table></figure>
-<p><strong>导入all_module模块内所有成员</strong></p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">from</span> <span class="selector-tag">all_module</span> <span class="selector-tag">import</span> *</span><br><span class="line"><span class="selector-tag">hello</span>()</span><br><span class="line"><span class="selector-tag">world</span>()</span><br><span class="line"><span class="selector-tag">test</span>() # 会提示找不到<span class="selector-tag">test</span>()函数</span><br></pre></td></tr></table></figure>
-
-<p><strong>包    （一定有个init.py文件）</strong><br>从物理上看，包就是一个文件夹，在该文件夹下包含了一个init.py文件，该文件夹可用于包含多个模块源文件。<br>从逻辑上看，包的本质依然是模块。</p>
-<blockquote>
-<p>1.创建文件夹，包名就是文件夹的名字。<br>2.在该文件夹内添加一个init.py文件即可。</p>
-</blockquote>
-<p><strong>socket编程</strong><br>服务器端：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import <span class="built_in">socket</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建socket对象</span></span><br><span class="line">s = <span class="built_in">socket</span>.<span class="built_in">socket</span>(<span class="built_in">socket</span>.AF_INET, <span class="built_in">socket</span>.SOCK_STREAM)</span><br><span class="line"><span class="comment"># 绑定IP和端口</span></span><br><span class="line">s.bind((<span class="string">'127.0.0.1'</span>, <span class="number">20001</span>))</span><br><span class="line"><span class="comment"># 设置最大连接数，超过后排队</span></span><br><span class="line">s.listen(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> True:</span><br><span class="line">    <span class="comment"># 建立客户端连接</span></span><br><span class="line">    c, addr = s.accept()</span><br><span class="line">    print(c, addr)</span><br><span class="line">    msg = <span class="string">'连接成功'</span></span><br><span class="line">    c.<span class="built_in">send</span>(msg.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">    print(<span class="string">'发送成功'</span>)</span><br><span class="line">    c.<span class="built_in">close</span>()</span><br></pre></td></tr></table></figure>
-
-<p>客户端</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import socket</span><br><span class="line"></span><br><span class="line"><span class="meta"># 创建socket对象</span></span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line"><span class="meta"># 连接服务</span></span><br><span class="line">s.connect((<span class="string">'127.0.0.1'</span>, <span class="number">20001</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta"># 接收数据</span></span><br><span class="line">msg = s.recv(<span class="number">1024</span>)</span><br><span class="line"><span class="meta"># 关闭连接</span></span><br><span class="line">s.close()</span><br><span class="line">print(msg.decode(<span class="string">'utf-8'</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta">#s=Socket.socket()</span></span><br><span class="line"><span class="meta">#s.bind()</span></span><br><span class="line"><span class="meta">#s.listen()</span></span><br><span class="line"><span class="meta">#while True:</span></span><br><span class="line"><span class="meta">#    c,addr=a.accept()</span></span><br><span class="line"><span class="meta">#    msg='连接成功'</span></span><br><span class="line"><span class="meta">#    c.send(msg.encode('utf-8'))</span></span><br><span class="line"><span class="meta">#    print('发送成功')</span></span><br><span class="line"><span class="meta">#    c.close()</span></span><br><span class="line"><span class="meta">#    </span></span><br><span class="line"><span class="meta">#s=Socket.socket()</span></span><br><span class="line"><span class="meta">#s.connect()</span></span><br><span class="line"><span class="meta">#s.recv(1024)</span></span><br><span class="line"><span class="meta">#s.close()</span></span><br></pre></td></tr></table></figure>
-<p><strong>json的方法</strong><br>json.dumps()和json.loads()是json格式处理函数（可以这么理解，json是字符串）<br>(1)json.dumps()函数是将一个Python数据类型列表进行json格式的编码（可以这么理解，json.dumps()函数是将字典转化为字符串）<br>(2)json.loads()函数是将json格式数据转换为字典（可以这么理解，json.loads()函数是将字符串转化为字典）<br><strong>字符串替换</strong><br>1.replace(‘被替换的字符串’,’取而代之的字符串’)<br>2.strip() 去做有空格     rstrip(),lstrip()<br>3.re.sub()<br>4.映射</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line">str=<span class="string">"aksj2343ngr4545g黄金叶子fg"</span></span><br><span class="line">temp = re.sub('[a-zA-Z1-9]','',str)</span><br><span class="line">print(temp)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 必须调用str的 maketrans 函数。</span></span><br><span class="line">intab = <span class="string">"aeiou"</span></span><br><span class="line">outtab = <span class="string">"12345"</span></span><br><span class="line">trantab = str.maketrans(intab, outtab)</span><br><span class="line"><span class="comment">#这里建立了一个映射</span></span><br><span class="line">s = 'abc123def456ghi789zero0'</span><br><span class="line">res = s.translate(trantab )</span><br><span class="line"><span class="comment">#这里使用映射把串中的aeiou转换为12345</span></span><br></pre></td></tr></table></figure>
-<p><strong>拼音模块</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pypinyin import pinyin</span><br><span class="line"><span class="builtin-name">print</span>(pinyin(<span class="string">'中心'</span>))</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">print</span>(pinyin(<span class="string">'朝阳'</span>, <span class="attribute">heteronym</span>=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pypinyin import lazy_pinyin</span><br><span class="line"><span class="builtin-name">print</span>(lazy_pinyin(<span class="string">'聪明的小兔子'</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#pinyin</span></span><br><span class="line">def pinyin(hans, <span class="attribute">style</span>=Style.TONE, <span class="attribute">heteronym</span>=<span class="literal">False</span>, <span class="attribute">errors</span>=<span class="string">'default'</span>, <span class="attribute">strict</span>=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#lazy_pinyin</span></span><br><span class="line">def lazy_pinyin(hans, <span class="attribute">style</span>=Style.NORMAL, <span class="attribute">errors</span>=<span class="string">'default'</span>, <span class="attribute">strict</span>=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#errors</span></span><br><span class="line">default：默认行为，不处理，原木原样返回</span><br><span class="line">ignore：忽略字符，直接抛掉</span><br><span class="line">replace：直接替换为去掉 u 的 unicode 编码</span><br><span class="line">callable 对象：当传入一个可调用的对象的时候，则可以自定义处理方式。</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">print</span>(lazy_pinyin(<span class="string">'你好☆☆，我是xxx'</span>))</span><br><span class="line"><span class="builtin-name">print</span>(lazy_pinyin(<span class="string">'你好☆☆，我是xxx'</span>, <span class="attribute">errors</span>=<span class="string">'ignore'</span>))</span><br><span class="line"><span class="builtin-name">print</span>(lazy_pinyin(<span class="string">'你好☆☆，我是xxx'</span>, <span class="attribute">errors</span>=lambda item: <span class="string">''</span>.join([<span class="string">'※'</span> <span class="keyword">if</span> c == <span class="string">'☆'</span> <span class="keyword">else</span> c <span class="keyword">for</span> c <span class="keyword">in</span> item])))</span><br></pre></td></tr></table></figure>
-<p>style</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#: 普通风格，不带声调。如： 中国 -&gt; ``zhong guo``</span></span><br><span class="line"><span class="attr">NORMAL</span> = <span class="number">0</span></span><br><span class="line"><span class="comment">#: 标准声调风格，拼音声调在韵母第一个字母上（默认风格）。如： 中国 -&gt; ``zhōng guó``</span></span><br><span class="line"><span class="attr">TONE</span> = <span class="number">1</span></span><br><span class="line"><span class="comment">#: 声调风格2，即拼音声调在各个韵母之后，用数字 [1-4] 进行表示。如： 中国 -&gt; ``zho1ng guo2``</span></span><br><span class="line"><span class="attr">TONE2</span> = <span class="number">2</span></span><br><span class="line"><span class="comment">#: 声调风格3，即拼音声调在各个拼音之后，用数字 [1-4] 进行表示。如： 中国 -&gt; ``zhong1 guo2``</span></span><br><span class="line"><span class="attr">TONE3</span> = <span class="number">8</span></span><br><span class="line"><span class="comment">#: 声母风格，只返回各个拼音的声母部分（注：有的拼音没有声母，详见 `#27`_）。如： 中国 -&gt; ``zh g``</span></span><br><span class="line"><span class="attr">INITIALS</span> = <span class="number">3</span></span><br><span class="line"><span class="comment">#: 首字母风格，只返回拼音的首字母部分。如： 中国 -&gt; ``z g``</span></span><br><span class="line"><span class="attr">FIRST_LETTER</span> = <span class="number">4</span></span><br><span class="line"><span class="comment">#: 韵母风格，只返回各个拼音的韵母部分，不带声调。如： 中国 -&gt; ``ong uo``</span></span><br><span class="line"><span class="attr">FINALS</span> = <span class="number">5</span></span><br><span class="line"><span class="comment">#: 标准韵母风格，带声调，声调在韵母第一个字母上。如：中国 -&gt; ``ōng uó``</span></span><br><span class="line"><span class="attr">FINALS_TONE</span> = <span class="number">6</span></span><br><span class="line"><span class="comment">#: 韵母风格2，带声调，声调在各个韵母之后，用数字 [1-4] 进行表示。如： 中国 -&gt; ``o1ng uo2``</span></span><br><span class="line"><span class="attr">FINALS_TONE2</span> = <span class="number">7</span></span><br><span class="line"><span class="comment">#: 韵母风格3，带声调，声调在各个拼音之后，用数字 [1-4] 进行表示。如： 中国 -&gt; ``ong1 uo2``</span></span><br><span class="line"><span class="attr">FINALS_TONE3</span> = <span class="number">9</span></span><br><span class="line"><span class="comment">#: 注音风格，带声调，阴平（第一声）不标。如： 中国 -&gt; ``ㄓㄨㄥ ㄍㄨㄛˊ``</span></span><br><span class="line"><span class="attr">BOPOMOFO</span> = <span class="number">10</span></span><br><span class="line"><span class="comment">#: 注音风格，仅首字母。如： 中国 -&gt; ``ㄓ ㄍ``</span></span><br><span class="line"><span class="attr">BOPOMOFO_FIRST</span> = <span class="number">11</span></span><br><span class="line"><span class="comment">#: 汉语拼音与俄语字母对照风格，声调在各个拼音之后，用数字 [1-4] 进行表示。如： 中国 -&gt; ``чжун1 го2``</span></span><br><span class="line"><span class="attr">CYRILLIC</span> = <span class="number">12</span></span><br><span class="line"><span class="comment">#: 汉语拼音与俄语字母对照风格，仅首字母。如： 中国 -&gt; ``ч г``</span></span><br><span class="line"><span class="attr">CYRILLIC_FIRST</span> = <span class="number">13</span></span><br><span class="line"><span class="comment">#: 普通风格，不带声调。如： 中国 -&gt; ``zhong guo``</span></span><br><span class="line"><span class="attr">NORMAL</span> = <span class="number">0</span></span><br><span class="line"><span class="comment">#: 标准声调风格，拼音声调在韵母第一个字母上（默认风格）。如： 中国 -&gt; ``zhōng guó``</span></span><br><span class="line"><span class="attr">TONE</span> = <span class="number">1</span></span><br><span class="line"><span class="comment">#: 声调风格2，即拼音声调在各个韵母之后，用数字 [1-4] 进行表示。如： 中国 -&gt; ``zho1ng guo2``</span></span><br><span class="line"><span class="attr">TONE2</span> = <span class="number">2</span></span><br><span class="line"><span class="comment">#: 声调风格3，即拼音声调在各个拼音之后，用数字 [1-4] 进行表示。如： 中国 -&gt; ``zhong1 guo2``</span></span><br><span class="line"><span class="attr">TONE3</span> = <span class="number">8</span></span><br><span class="line"><span class="comment">#: 声母风格，只返回各个拼音的声母部分（注：有的拼音没有声母，详见 `#27`_）。如： 中国 -&gt; ``zh g``</span></span><br><span class="line"><span class="attr">INITIALS</span> = <span class="number">3</span></span><br><span class="line"><span class="comment">#: 首字母风格，只返回拼音的首字母部分。如： 中国 -&gt; ``z g``</span></span><br><span class="line"><span class="attr">FIRST_LETTER</span> = <span class="number">4</span></span><br><span class="line"><span class="comment">#: 韵母风格，只返回各个拼音的韵母部分，不带声调。如： 中国 -&gt; ``ong uo``</span></span><br><span class="line"><span class="attr">FINALS</span> = <span class="number">5</span></span><br><span class="line"><span class="comment">#: 标准韵母风格，带声调，声调在韵母第一个字母上。如：中国 -&gt; ``ōng uó``</span></span><br><span class="line"><span class="attr">FINALS_TONE</span> = <span class="number">6</span></span><br><span class="line"><span class="comment">#: 韵母风格2，带声调，声调在各个韵母之后，用数字 [1-4] 进行表示。如： 中国 -&gt; ``o1ng uo2``</span></span><br><span class="line"><span class="attr">FINALS_TONE2</span> = <span class="number">7</span></span><br><span class="line"><span class="comment">#: 韵母风格3，带声调，声调在各个拼音之后，用数字 [1-4] 进行表示。如： 中国 -&gt; ``ong1 uo2``</span></span><br><span class="line"><span class="attr">FINALS_TONE3</span> = <span class="number">9</span></span><br><span class="line"><span class="comment">#: 注音风格，带声调，阴平（第一声）不标。如： 中国 -&gt; ``ㄓㄨㄥ ㄍㄨㄛˊ``</span></span><br><span class="line"><span class="attr">BOPOMOFO</span> = <span class="number">10</span></span><br><span class="line"><span class="comment">#: 注音风格，仅首字母。如： 中国 -&gt; ``ㄓ ㄍ``</span></span><br><span class="line"><span class="attr">BOPOMOFO_FIRST</span> = <span class="number">11</span></span><br><span class="line"><span class="comment">#: 汉语拼音与俄语字母对照风格，声调在各个拼音之后，用数字 [1-4] 进行表示。如： 中国 -&gt; ``чжун1 го2``</span></span><br><span class="line"><span class="attr">CYRILLIC</span> = <span class="number">12</span></span><br><span class="line"><span class="comment">#: 汉语拼音与俄语字母对照风格，仅首字母。如： 中国 -&gt; ``ч г``</span></span><br><span class="line"><span class="attr">CYRILLIC_FIRST</span> = <span class="number">13</span></span><br></pre></td></tr></table></figure>
-<p>*<em>自定义拼音，多音字纠正  *</em></p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from pypinyin import lazy_pinyin, load_phrases_dict</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(lazy_pinyin(<span class="string">'朝阳'</span>)</span></span>)</span><br><span class="line">personalized_dict = &#123;</span><br><span class="line">    <span class="string">'朝阳'</span>: [[<span class="string">'cháo'</span>], [<span class="string">'yáng'</span>]]</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">load_phrases_dict</span><span class="params">(personalized_dict)</span></span></span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(lazy_pinyin(<span class="string">'朝阳'</span>)</span></span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> cufflinks <span class="keyword">as</span> cf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">cf.set_config_file(offline=True)</span><br><span class="line">cf.help()</span><br><span class="line">cf.datagen.lines(<span class="number">1</span>,<span class="number">500</span>).ta_plot(study=<span class="string">'sma'</span>,periods=[<span class="number">13</span>,<span class="number">21</span>,<span class="number">55</span>])</span><br></pre></td></tr></table></figure>
-<p><strong>进度条</strong></p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">time</span></span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tqdm(range(<span class="number">100</span>)):</span><br><span class="line">    <span class="type">time</span>.sleep(<span class="number">0.1</span>)</span><br><span class="line">    </span><br><span class="line"><span class="meta">#trange(i) 是 tqdm(range(i)) 的简单写法。</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> trange(<span class="number">100</span>):</span><br><span class="line">    <span class="type">time</span>.sleep(<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>hello world</p>
-</blockquote>
-
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -326,180 +223,6 @@
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h1 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h1><p><strong>浏览器默认用get方式访问网页</strong></p>
-<p><strong>1.requests模块传参：</strong></p>
-<blockquote>
-<p>get  请求用  params传参<br>post  请求用  data传参<br>注:有时候参数是json序列的时候，需要通过json.dumps(dict),将参数字典序列化后在传入<br>例子:</p>
-</blockquote>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#python Request如何构造post中的request payload：</span></span><br><span class="line"><span class="comment">#把字典对象转为字符串即可</span></span><br><span class="line"><span class="keyword">data</span>=&#123;</span><br><span class="line"><span class="string">'cityName'</span>: <span class="string">""</span></span><br><span class="line">,<span class="string">'cityid'</span>: <span class="string">"445100"</span></span><br><span class="line">,<span class="string">'dealerName'</span>: <span class="string">""</span></span><br><span class="line">,<span class="string">'provinceName'</span>: <span class="string">""</span></span><br><span class="line">,<span class="string">'provinceid'</span>: <span class="string">"440000"</span>    </span><br><span class="line">&#125;</span><br><span class="line">url_dealer=<span class="string">'https://www.ftms.com.cn/website/Dealer/getDealer'</span></span><br><span class="line">dumpJson = json.dumps(<span class="keyword">data</span>)</span><br><span class="line">res=requests.post(url_dealer,<span class="keyword">data</span>=dumpJson,headers=headers)</span><br></pre></td></tr></table></figure>
-
-<p><strong>2.正则表达式的写法</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">pattern = re.compile(<span class="string">r'District\[\d+\]=(.*)'</span>)</span><br><span class="line">dealer_dict=pattern.findall(li)</span><br><span class="line">注意：里面的特殊字符需要转义如【   】</span><br></pre></td></tr></table></figure>
-<p><strong>3.忽略证书验证</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">关于python爬虫SSL验证：HTTPSConnectionPool(<span class="attribute">host</span>=<span class="string">'***'</span>, <span class="attribute">port</span>=443)</span><br><span class="line">response = requests.<span class="builtin-name">get</span>(url,<span class="attribute">verify</span>=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>注意点</strong></p>
-<blockquote>
-<p>省份城市的信息一般放在common.js的文件中<br>python中的空是：None<br>正则中’ 和” 必须保持与原字符串一致</p>
-</blockquote>
-<p><strong>4.fake-useragent模块获取ua</strong></p>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pip install fake-useragent </span><br><span class="line">from fake_useragent import UserAgent  <span class="meta"># fake_useragent模块 user-agent的获取 </span></span><br><span class="line">ua = <span class="built_in">UserAgent</span>() <span class="meta"># 实例化，实例化时需要联网但是网站不太稳定</span></span><br><span class="line"><span class="keyword">print</span>(ua.ie) <span class="meta"># 随机打印一个 ie 浏览器的头</span></span><br><span class="line"><span class="keyword">print</span>(ua.opera)</span><br><span class="line"><span class="keyword">print</span>(ua.chrome)</span><br><span class="line"><span class="keyword">print</span>(ua.google)</span><br><span class="line"><span class="keyword">print</span>(ua.firefox)</span><br><span class="line"><span class="keyword">print</span>(ua.safari)</span><br><span class="line"><span class="keyword">print</span>(ua.random) <span class="meta"># 随机打印 User-Agent</span></span><br></pre></td></tr></table></figure>
-<p><strong>5.TensorFlow安装流程</strong></p>
-<blockquote>
-<p>pip install -U –ignore-installed wrapt enum34 simplejson netaddr<br>pip install -i <a href="https://pypi.douban.com/simple" target="_blank" rel="noopener">https://pypi.douban.com/simple</a> tensorflow </p>
-</blockquote>
-<p><strong>6.错误的把Python的内置方法当变量使用</strong></p>
-<blockquote>
-<p>报错：’list’ object is not callable<br>出现这种错误是因为把函数当成变量在使用</p>
-</blockquote>
-<blockquote>
-<p>解决方法：<br>del list<br>变量名不使用保留字<br>这里只是在交互模式下删除len变量，实际应用中不应该使用保留字作为变量名</p>
-</blockquote>
-<p><strong>7.python中switch-case调用函数</strong></p>
-<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">switch</span> = &#123;<span class="string">"valueA"</span>:functionA,<span class="string">"valueB"</span>:functionB,<span class="string">"valueC"</span>:functionC&#125;</span><br><span class="line"># try:</span><br><span class="line">#　　<span class="keyword">switch</span>[<span class="string">"value"</span>]() #执行相应的方法。</span><br><span class="line"># except KeyError as e:</span><br><span class="line">#       pass 或 functionX #执行<span class="keyword">default</span>部分</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> = &#123;</span><br><span class="line">    <span class="string">"a"</span>:lambda <span class="symbol">x</span>:<span class="symbol">x</span>*<span class="number">2</span>,</span><br><span class="line">    <span class="string">"b"</span>:lambda <span class="symbol">x</span>:<span class="symbol">x</span>*<span class="number">3</span>,</span><br><span class="line">    <span class="string">"c"</span>:lambda <span class="symbol">x</span>:<span class="symbol">x</span>**<span class="symbol">x</span></span><br><span class="line">&#125;</span><br><span class="line">try:</span><br><span class="line">    swtich[<span class="string">"c"</span>](<span class="number">6</span>)</span><br><span class="line">except KeyError as e:</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
-<p><strong>8.定义post，get请求，json，text返回数据</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">request</span><span class="params">(request_type, url, headers, data=None, retry_times=<span class="number">5</span>, return_type=<span class="string">"text"</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    :param request_type:</span></span><br><span class="line"><span class="string">    :param url:</span></span><br><span class="line"><span class="string">    :param headers:</span></span><br><span class="line"><span class="string">    :param data:</span></span><br><span class="line"><span class="string">    :param retry_times:</span></span><br><span class="line"><span class="string">    :param return_type:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">if</span> request_type == <span class="string">'get'</span>:</span><br><span class="line">        resp = request_get(url, headers, retry_times)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> request_type == <span class="string">'post'</span>:</span><br><span class="line">        resp = request_post(url, data, headers, retry_times)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> resp:</span><br><span class="line">        <span class="keyword">return</span> resp</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> return_type == <span class="string">'text'</span>:</span><br><span class="line">        <span class="keyword">return</span> resp.text</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> return_type == <span class="string">'json'</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            resp = resp.json()</span><br><span class="line">            <span class="keyword">return</span> resp</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            logging.warning(<span class="string">'parse json error %s'</span> % str(e))</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>9.将两个list合并成一个（字典或者list）</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">list1 = [<span class="string">'k1'</span>,<span class="string">'k2'</span>,<span class="string">'k3'</span>]</span><br><span class="line">list2 = [<span class="string">'v1'</span>,<span class="string">'v2'</span>,<span class="string">'v3'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#方法一</span></span><br><span class="line">dic = dict(map(lambda x,y:[x,y],list1,list2)) #lambda是一个匿名函数</span><br><span class="line"><span class="builtin-name">print</span>(dic)</span><br><span class="line"></span><br><span class="line"><span class="comment">#方法二：</span></span><br><span class="line"><span class="builtin-name">print</span>(dict(zip(list1,list2)))</span><br><span class="line"></span><br><span class="line"><span class="comment">#方法三</span></span><br><span class="line"><span class="builtin-name">print</span>(&#123;k:v <span class="keyword">for</span> k,v <span class="keyword">in</span> zip(list1,list2)&#125;)</span><br><span class="line"><span class="comment">#反过来 将字典中的v和k调换</span></span><br><span class="line"><span class="builtin-name">print</span>(&#123;v:k <span class="keyword">for</span> k,v <span class="keyword">in</span> zip(list1,list2)&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>10.将list转为dataframe</strong></p>
-<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = [[<span class="string">'a'</span>, <span class="string">'1.2'</span>, <span class="string">'4.2'</span>], [<span class="string">'b'</span>, <span class="string">'70'</span>, <span class="string">'0.03'</span>], [<span class="string">'x'</span>, <span class="string">'5'</span>, <span class="string">'0'</span>]]  </span><br><span class="line">df = pd.<span class="symbol">DataFrame</span>(a, columns=[<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>])</span><br></pre></td></tr></table></figure>
-
-<p><strong>11.读取csv文件存成json</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">import json</span><br><span class="line"></span><br><span class="line">headers=[<span class="string">'url'</span>,<span class="string">'title'</span> ,<span class="string">'date'</span>]</span><br><span class="line">df =pd.read_csv(<span class="string">'11.csv'</span>,<span class="attribute">engine</span>=<span class="string">'python'</span>)</span><br><span class="line">df.<span class="attribute">columns</span>=headers</span><br><span class="line"></span><br><span class="line">data_list = df.to_dict(<span class="string">'record'</span>)</span><br><span class="line"><span class="builtin-name">print</span>(data_list)</span><br><span class="line">def save(item_list):</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> item_list:</span><br><span class="line">        with open(<span class="string">'11.json'</span>,<span class="string">'a'</span>,<span class="attribute">encoding</span>=<span class="string">'utf8'</span>) as f:</span><br><span class="line">            json.dump(item,f,<span class="attribute">ensure_ascii</span>=<span class="literal">False</span>)</span><br><span class="line">            f.write(<span class="string">'\n'</span>)</span><br><span class="line">save(data_list)</span><br></pre></td></tr></table></figure>
-
-<p><strong>12.读取csv文件，里面有特殊字符</strong><br>最近在网络上爬取下来的一个CSV文件，在用pandas读取的时候，返回的是一一堆乱码，我们知道这个是编码的问题，</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.read<span class="constructor">_csv(<span class="params">file</span>,<span class="params">engine</span> = '<span class="params">python</span>',<span class="params">enconding</span> = '<span class="params">utf8</span>')</span></span><br></pre></td></tr></table></figure>
-<p>但是就会出现这种问题：读成了一列！</p>
-<blockquote>
-<p>方法一:打开csv文件更改编码方式，将utf-8编码改成ANSI编码</p>
-</blockquote>
-<blockquote>
-<p>方法二:放弃使用pandas，利用Python的CSV模块进行读取，这个也可以解决</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="keyword">open</span>(<span class="keyword">file</span>,<span class="keyword">mode</span>=<span class="string">'rt'</span>,<span class="keyword">encoding</span>=<span class="string">'utf8'</span> ) <span class="keyword">as</span> f:</span><br><span class="line">    reader = csv.reader(f)</span><br><span class="line">    head_row = <span class="keyword">next</span>(reader)</span><br><span class="line">    <span class="comment"># print(tuple(head_row))</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> reader:</span><br><span class="line">        print(item)</span><br></pre></td></tr></table></figure>
-
-<p><strong>13.python requests的content和text方法的区别</strong></p>
-<blockquote>
-<p>requests对象的get和post方法都会返回一个Response对象，这个对象里面存的是服务器返回的所有信息，包括响应头，响应状态码等。其中返回的网页部分会存在.content和.text两个对象中。</p>
-</blockquote>
-<blockquote>
-<p>两者区别在于，content中间存的是字节码，而text中存的是Beautifulsoup根据猜测的编码方式将content内容编码成字符串。</p>
-</blockquote>
-<blockquote>
-<p>直接输出content，会发现前面存在b’这样的标志，这是字节字符串的标志，而text是，没有前面的b,对于纯ascii码，这两个可以说一模一样，对于其他的文字，需要正确编码才能正常显示。大部分情况建议使用.text，因为显示的是汉字，但有时会显示乱码，这时需要用.content.decode(‘utf-8’)，中文常用utf-8和GBK，GB2312等。这样可以手工选择文字编码方式。</p>
-</blockquote>
-<blockquote>
-<p>所以简而言之，.text是现成的字符串，.content还要编码，但是.text不是所有时候显示都正常，这是就需要用.content进行手动编码。</p>
-</blockquote>
-<p>使用r.encoding 来改变编码方式，然后r.text后就使用新的编码方式了。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; r.encoding</span><br><span class="line"><span class="string">'utf-8'</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; r.encoding = <span class="string">'ISO-8859-1'</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>14.字体反扒的思路</strong></p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">字体反扒：<span class="number">1.</span>&amp;#<span class="number">61251</span>;&amp;#<span class="number">62402</span>;按;切分,去除&amp;#，</span><br><span class="line">	  <span class="number">2.</span>requests请求对应字体连接，得到context（字节码文件）</span><br><span class="line">	  <span class="number">3.</span>TTFont(io.BytesIO(font_response))    转为字体对象</span><br><span class="line">	  <span class="number">4.f</span>ont.getBestCmap()      调用getBestCmap() 获取到字典</span><br><span class="line">	  &#123;<span class="number">100184</span>: <span class="string">'four'</span>,<span class="number">100186</span>: <span class="string">'two'</span>&#125;</span><br><span class="line">	  <span class="number">5.</span>按键取值就好了</span><br></pre></td></tr></table></figure>
-
-<p>#注意点</p>
-<blockquote>
-<p>py文件名，不能用包名，不然调用这个包时会报错</p>
-</blockquote>
-<p><strong>15.正则小记</strong></p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">用正则findall匹配出来 姓名，年龄等结果，</span><br><span class="line">然后用zip组合，</span><br><span class="line">最后赋值</span><br><span class="line"></span><br><span class="line">names=re.findall(r(<span class="string">''</span>),<span class="type">text</span>字符串,re.模式)</span><br><span class="line">ages=re.findall(r(<span class="string">''</span>),<span class="type">text</span>字符串,re.模式)</span><br><span class="line"><span class="keyword">for</span> <span class="keyword">value</span> <span class="keyword">in</span> zip(names,ages):</span><br><span class="line">	<span class="type">name</span>,age=<span class="keyword">value</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>16.解析ul  li</strong></p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ul = html.xpath(<span class="string">"//ul[@class='lists']"</span>)[<span class="number">0</span>]</span><br><span class="line">lis = ul.xpath(<span class="string">"./li"</span>)</span><br><span class="line"><span class="keyword">for</span> li in lis:</span><br><span class="line">    actors = li.xpath(<span class="string">"@data-actors"</span>)[<span class="number">0</span>] <span class="comment"># 演员</span></span><br><span class="line">    poster = li.xpath(<span class="string">".//li[@class='poster']//img/@src"</span>)[<span class="number">0</span>] <span class="comment"># 海报</span></span><br><span class="line">    movie=&#123;<span class="string">'title'</span>:title,<span class="string">'score'</span>:score&#125;</span><br><span class="line">    movie_list.append(movie)</span><br></pre></td></tr></table></figure>
-
-<p><strong>17.深浅复制：前序</strong></p>
-<blockquote>
-<p>通过标签获取属性值</p>
-</blockquote>
-<blockquote>
-<p>通过movie={‘title’:title,’score’:score}构造字典<br>然后movie_list.append(movie)时没有发生赋值，不会出现重复</p>
-</blockquote>
-<blockquote>
-<p>如果通过movie[‘title’]=title<br>    movie[‘score’]=score<br>然后movie_list.append(movie)时没有发生赋值，不会出现重复</p>
-</blockquote>
-<blockquote>
-<p>movie[‘title’]=li.xpath(“@data-actors”)[0] # 演员<br>movie[‘score’]=li.xpath(“.//li[@class=’poster’]//img/@src”)[0] # 海报<br>然后movie_list.append(movie)时，会出现重复，因为movie指向的那块地址空间没有变<br>这种情况需要在循环lis时，把movie设为空movie={}</p>
-</blockquote>
-<p><strong>18.浅拷贝和深拷贝</strong></p>
-<blockquote>
-<p>直接赋值：其实就是对象的引用（别名）。</p>
-</blockquote>
-<blockquote>
-<p>浅拷贝(copy)：拷贝父对象，不会拷贝对象的内部的子对象。</p>
-</blockquote>
-<blockquote>
-<p>深拷贝(deepcopy)： copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。</p>
-</blockquote>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line">dict1 =  &#123;<span class="string">'user'</span>:<span class="string">'runoob'</span>,<span class="string">'num'</span>:[1,2,3]&#125;</span><br><span class="line"></span><br><span class="line">dict2 = dict1          # 浅拷贝: 引用对象</span><br><span class="line">dict3 = dict1.copy()   # 浅拷贝：深拷贝父对象（一级目录），子对象（二级目录）不拷贝，还是引用</span><br><span class="line">dict4 = copy.deepcopy(dict1)   # 深拷贝(deepcopy)： copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 data 数据</span></span><br><span class="line">dict1[<span class="string">'user'</span>]=<span class="string">'root'</span></span><br><span class="line">dict1[<span class="string">'num'</span>].<span class="builtin-name">remove</span>(1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出结果</span></span><br><span class="line"><span class="builtin-name">print</span>(dict1)</span><br><span class="line"><span class="builtin-name">print</span>(dict2)</span><br><span class="line"><span class="builtin-name">print</span>(dict3)</span><br><span class="line"><span class="builtin-name">print</span>(dict4)</span><br></pre></td></tr></table></figure>
-<p><strong>19.xpath定位元素:</strong></p>
-<blockquote>
-<p>./当前节点下的子节点<br>.//当前节点下的子孙节点<br>//全文匹配</p>
-</blockquote>
-<p><strong>20.编码转换</strong></p>
-<blockquote>
-<p>当网页的http header中有charset时，可以通过response.encoding来获取编码<br>当网页的http header中没有charset时，则认为默认编码为ISO-8859-1,但是这个编码不能解析中文<br>所以要加上下面这段，自适应编码<br>response.encoding = response.apparent_encoding</p>
-</blockquote>
-<p><strong>存csv时 打开乱码一般可以加上encoding=’utf-8-sig’</strong><br><strong>文件读取报错是加上errors=”ignore”即可</strong></p>
-<p><strong>21.Python中json.loads()无法解析单引号字符串问题的两种解决方法：</strong></p>
-<blockquote>
-<p>1使用s.replace()将字符串中的单引号替换为双引号。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="comment"># 创建字典</span></span><br><span class="line">dict = &#123;&#125;</span><br><span class="line">dict[<span class="string">'id'</span>] = <span class="string">'cc695906217'</span></span><br><span class="line">dict[<span class="string">'name'</span>] = <span class="string">'种冲'</span></span><br><span class="line"><span class="comment"># 打印字典</span></span><br><span class="line">print(dict)</span><br><span class="line"><span class="comment"># 保存为json文件</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dict.json'</span>,<span class="string">'w'</span>,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write((str)(dict))</span><br><span class="line"><span class="comment"># 加载json文件</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dict.json'</span>,<span class="string">'r'</span>,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    s = f.read()</span><br><span class="line">    print(s)</span><br><span class="line">    s = s.replace(<span class="string">'\''</span>,<span class="string">'\"'</span>)</span><br><span class="line">    js = json.loads(json.dumps(eval(s)))</span><br><span class="line">    print(js[<span class="string">'name'</span>])</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>2.在使用json.loads()前使用eval()和json.dumps()进行处理</p>
-</blockquote>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line"><span class="comment"># 创建字典</span></span><br><span class="line">dict = &#123;&#125;</span><br><span class="line">dict[<span class="string">'id'</span>] = <span class="string">'cc695906217'</span></span><br><span class="line">dict[<span class="string">'name'</span>] = <span class="string">'种冲'</span></span><br><span class="line"><span class="comment"># 打印字典</span></span><br><span class="line"><span class="builtin-name">print</span>(dict)</span><br><span class="line"><span class="comment"># 保存为json文件</span></span><br><span class="line">with open(<span class="string">'dict.json'</span>,<span class="string">'w'</span>,<span class="attribute">encoding</span>=<span class="string">'utf-8'</span>) as f:</span><br><span class="line">    f.write((str)(dict))</span><br><span class="line"><span class="comment"># 加载json文件</span></span><br><span class="line">with open(<span class="string">'dict.json'</span>,<span class="string">'r'</span>,<span class="attribute">encoding</span>=<span class="string">'utf-8'</span>) as f:</span><br><span class="line">    s = f.read()</span><br><span class="line">    <span class="builtin-name">print</span>(s)</span><br><span class="line">    js = json.loads(json.dumps(eval(s)))</span><br><span class="line">    <span class="builtin-name">print</span>(js[<span class="string">'name'</span>])</span><br></pre></td></tr></table></figure>
-
-<p><strong>22.在读取文件编码出问题时，可以加上errors=”ignore”，忽略错误</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#方法一</span></span><br><span class="line"><span class="keyword">with</span> <span class="keyword">open</span> (<span class="string">'11.txt'</span>,<span class="string">'r'</span>,<span class="keyword">encoding</span>=<span class="string">'utf-8'</span>,<span class="keyword">errors</span>=<span class="string">"ignore"</span>) <span class="keyword">as</span> fh:</span><br><span class="line">     <span class="keyword">data</span> = fh.readlines()</span><br><span class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">data</span>:</span><br><span class="line">         print(i.encode(<span class="string">'gbk'</span>,<span class="string">'ignore'</span>).decode(<span class="string">'gbk'</span>))</span><br><span class="line"><span class="comment">#方法二     </span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd    </span><br><span class="line"><span class="keyword">data</span> = pd.read_csv(<span class="string">'11.txt'</span>,<span class="keyword">encoding</span>=<span class="string">'utf-16-le'</span>,skiprows=<span class="number">1</span>)</span><br><span class="line">print(data.head(<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
-<p><strong>23.js加密</strong></p>
-<blockquote>
-<p>1.jsfuck加密时，把光标放到最后一个括号那里，找到前面匹配的另一个，然后抽出来，在浏览器的console打印就好了。<br>2.在找到xhr时，先别忙着点开，可以先把鼠标放到initiator上那里有对应的js<br>3.sha加密</p>
-</blockquote>
-<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">使用sha1加密算法，返回str加密后的字符串</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">sha = hashlib.sha<span class="number">1</span>(res.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">encrypts = sha.hexdigest()</span><br></pre></td></tr></table></figure>
-
-<p><strong>24.python 执行js时 遇到document/window属性 not find</strong></p>
-<blockquote>
-<p>使用jsdom<br>1全局安装npm i jsdom -g<br>2.在执行compile方法是加上cwd（npm的路径），可以通过npm root -g指令查看</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> execjs</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">r'要运行的.js'</span>,<span class="string">'r'</span>,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    js = f.read()</span><br><span class="line">ct = execjs.compile(js,cwd=<span class="string">r'C:\Users\w001\AppData\Roaming\npm\node_modules'</span>)</span><br><span class="line">print(ct.call(<span class="string">'Rohr_Opt.reload'</span>,<span class="string">'1'</span>))</span><br></pre></td></tr></table></figure>
-<p>3在js文件前加入这些语句就好了</p>
-<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">const jsdom = require("jsdom");</span></span><br><span class="line"><span class="xml">const </span><span class="template-variable">&#123; JSDOM &#125;</span><span class="xml"> = jsdom;</span></span><br><span class="line"><span class="xml">const dom = new JSDOM(`<span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">p</span>&gt;</span>`);</span></span><br><span class="line"><span class="xml">window = dom.window;</span></span><br><span class="line"><span class="xml">document = window.document;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>25python 使用execjs执行接js解密时报错execjs UnicodeDecodeError: ‘gbk’ codec can’t decode byte</strong></p>
-<blockquote>
-<p>参照博客<a href="https://blog.csdn.net/weixin_42081389/article/details/99984352" target="_blank" rel="noopener">https://blog.csdn.net/weixin_42081389/article/details/99984352</a></p>
-</blockquote>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">进去错误这个<span class="symbol">D:</span>\tools\Python3.<span class="number">6</span>\<span class="class"><span class="keyword">lib</span>\<span class="title">subprocess</span>.<span class="title">py</span>文件</span></span><br><span class="line">搜索：encoding=</span><br><span class="line">修改编码格式为utf-<span class="number">8</span></span><br><span class="line">注意事项：建议备份一行，毕竟修改的是模块的源码，万一弄错了好改回来。敲代码最忌不懂，乱改还不保留，这样很招人烦的，尤其团队合作时。</span><br></pre></td></tr></table></figure>
-
-<p><strong>26.js函数的两种声明方式</strong></p>
-<blockquote>
-<p>function fnA(){alert(‘msg‘);}//声明式定义函数<br>var fnB = function(){alert(‘msg‘);}//函数赋值表达式定义函数<br>通常，我们调用一个方法的方式就是 FunctionName()</p>
-</blockquote>
-<p>但是，如果我们尝试为一个“定义函数”末尾加上()，解析器是无法理解的。</p>
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">msg</span><span class="params">()</span><span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">  alert(‘message‘);</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span><span class="params">()</span>;</span><span class="comment">//解析器是无法理解的</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>定义函数的调用方式应该是 msg() ; 那为什么将函数体部分用()包裹起来就可以了呢？</p>
-</blockquote>
-<blockquote>
-<p>原来，使用括号包裹定义函数体，解析器将会以函数表达式的方式去调用定义函数。也就是说，任何能将函数变成一个函数表达式的作法，都可以使解析器正确的调用定义函数。而 ! 就是其中一个，而 ~ + - || 等都有这样的功能。</p>
-</blockquote>
-<blockquote>
-<p>另外，用 ! 可能更多的是一个习惯问题(比双括号省略一个字符)，不同的运算符，性能是不同的。</p>
-</blockquote>
-<p><strong>27.isdigit() 方法检测字符串是否只由数字组成。</strong></p>
-
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -555,16 +278,6 @@
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -620,29 +333,6 @@
     
 
     
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-      <!-- reward -->
-      
-    </div>
     
     
       <!-- copyright -->
@@ -959,6 +649,10 @@
 
 
 <!-- ClickLove -->
+
+
+<script src="/js/clickLove.js"></script>
+
 
 <!-- CodeCopy -->
 
