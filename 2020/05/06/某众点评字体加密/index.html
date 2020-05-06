@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="记录生活点滴" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    某众点评字体加密 |  我的博客
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-某众点评字体加密" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  某众点评字体加密
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/06/%E6%9F%90%E4%BC%97%E7%82%B9%E8%AF%84%E5%AD%97%E4%BD%93%E5%8A%A0%E5%AF%86/" class="article-date">
+  <time datetime="2020-05-06T12:00:04.671Z" itemprop="datePublished">2020-05-06</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">11 分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>#大众点评商家信息字体反爬<br>1.大众点评的字体是统一放在网页源码的’link rel=”stylesheet” type=”text/css” href=”(.*?)”‘标签的链接中。这个链接里面有多个woff字体，分别对应着不同部分的加密.address.woff(地址),hours.woff(时间),num.woff(数字),review.woff(评论),shopdesc.woff(店面详情)</p>
+<p><strong>2.字体对照部分</strong></p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">uni_tuple = (</span><br><span class="line"> <span class="string">'unif48b'</span>, <span class="string">'unie08d'</span>, <span class="string">'unif277'</span>, <span class="string">'uniecfb'</span>, <span class="string">'unief82'</span>, <span class="string">'uniec9e'</span>, <span class="string">'unief3b'</span>, <span class="string">'unied9c'</span>, <span class="string">'unif392'</span>, <span class="string">'unie3ce'</span>, <span class="string">'unif6f6'</span>, <span class="string">'unif898'</span>, <span class="string">'unied44'</span>, <span class="string">'unie210'</span>, <span class="string">'unif7f4'</span>, <span class="string">'unif3fa'</span>, <span class="string">'unie789'</span>, <span class="string">'unif7b1'</span>, <span class="string">'unie119'</span>, <span class="string">'uniec6a'</span>, <span class="string">'unie7f1'</span>, <span class="string">'unie25e'</span>, <span class="string">'unif28e'</span>, <span class="string">'unif808'</span>, <span class="string">'unie6c7'</span>, <span class="string">'unif223'</span>, <span class="string">'unie8a5'</span>, <span class="string">'unif85a'</span>, <span class="string">'unif56d'</span>, <span class="string">'unif42e'</span>, <span class="string">'unif5ef'</span>, <span class="string">'unie46d'</span>, <span class="string">'unif6aa'</span>, <span class="string">'unie7f7'</span>, <span class="string">'unie5fd'</span>, <span class="string">'uniec56'</span>, <span class="string">'unie9cd'</span>, <span class="string">'unie6a3'</span>, <span class="string">'unie2cc'</span>, <span class="string">'unie729'</span>, <span class="string">'unie5a6'</span>, <span class="string">'unif40b'</span>, <span class="string">'unie21e'</span>, <span class="string">'unif5ab'</span>, <span class="string">'unif7d9'</span>, <span class="string">'unied59'</span>, <span class="string">'unie72c'</span>, <span class="string">'unie85e'</span>, <span class="string">'unif5b5'</span>, <span class="string">'uniee54'</span>, <span class="string">'uniefd8'</span>, <span class="string">'uniedf2'</span>, <span class="string">'unie0c3'</span>, <span class="string">'unie6b5'</span>, <span class="string">'unieedd'</span>, <span class="string">'unif7d1'</span>, <span class="string">'unied19'</span>, <span class="string">'unie7bd'</span>, <span class="string">'unie648'</span>, <span class="string">'unif0d8'</span>, <span class="string">'unief12'</span>, <span class="string">'unif7aa'</span>, <span class="string">'unif551'</span>, <span class="string">'uniefa4'</span>, <span class="string">'unief4b'</span>, <span class="string">'unie628'</span>, <span class="string">'unif830'</span>, <span class="string">'unieb3a'</span>, <span class="string">'unie376'</span>, <span class="string">'uniea40'</span>, <span class="string">'unie60e'</span>, <span class="string">'unif848'</span>, <span class="string">'unie623'</span>, <span class="string">'unie3fb'</span>, <span class="string">'uniec41'</span>, <span class="string">'uniee00'</span>, <span class="string">'unie616'</span>, <span class="string">'uniee65'</span>, <span class="string">'unieb43'</span>, <span class="string">'unie694'</span>, <span class="string">'unie528'</span>, <span class="string">'unie931'</span>, <span class="string">'unif698'</span>, <span class="string">'unif254'</span>, <span class="string">'unieff6'</span>, <span class="string">'unie0a5'</span>, <span class="string">'uniec05'</span>, <span class="string">'unieb5c'</span>, <span class="string">'unie2b3'</span>, <span class="string">'unie479'</span>, <span class="string">'unied15'</span>, <span class="string">'unie34c'</span>, <span class="string">'unif112'</span>, <span class="string">'unie8f6'</span>, <span class="string">'unie1f4'</span>, <span class="string">'unie73c'</span>, <span class="string">'uniece7'</span>, <span class="string">'unif683'</span>, <span class="string">'unieb85'</span>, <span class="string">'unif24d'</span>, <span class="string">'uniebe1'</span>, <span class="string">'unie6d2'</span>, <span class="string">'unie3be'</span>, <span class="string">'unie5a9'</span>, <span class="string">'unif779'</span>, <span class="string">'unieb57'</span>, <span class="string">'unif5dc'</span>, <span class="string">'unie5ee'</span>, <span class="string">'unie669'</span>, <span class="string">'unif111'</span>, <span class="string">'unie76e'</span>, <span class="string">'uniec4e'</span>, <span class="string">'unif7c5'</span>, <span class="string">'unie3b3'</span>, <span class="string">'uniecd1'</span>, <span class="string">'unieb96'</span>, <span class="string">'unie154'</span>, <span class="string">'unif2a8'</span>, <span class="string">'unie94f'</span>, <span class="string">'unie387'</span>, <span class="string">'unie9c9'</span>, <span class="string">'unie4ce'</span>, <span class="string">'uniec6d'</span>, <span class="string">'unie297'</span>, <span class="string">'uniefee'</span>, <span class="string">'unif117'</span>, <span class="string">'uniebe7'</span>, <span class="string">'unif3a6'</span>, <span class="string">'unie2e3'</span>, <span class="string">'unie2db'</span>, <span class="string">'unie4f8'</span>, <span class="string">'unif050'</span>, <span class="string">'uniea8b'</span>, <span class="string">'unif35f'</span>, <span class="string">'unif579'</span>, <span class="string">'unif889'</span>, <span class="string">'uniea3a'</span>, <span class="string">'uniee8a'</span>, <span class="string">'unie2aa'</span>, <span class="string">'unie1a5'</span>, <span class="string">'unif22c'</span>, <span class="string">'unie190'</span>, <span class="string">'unie682'</span>, <span class="string">'unif844'</span>, <span class="string">'unie14b'</span>, <span class="string">'unie7aa'</span>, <span class="string">'unif685'</span>, <span class="string">'unif810'</span>, <span class="string">'unif062'</span>, <span class="string">'uniee2c'</span>, <span class="string">'unif313'</span>, <span class="string">'unie898'</span>, <span class="string">'uniebcb'</span>, <span class="string">'unif41a'</span>, <span class="string">'uniea2e'</span>, <span class="string">'uniedfe'</span>, <span class="string">'unie4e3'</span>, <span class="string">'unif40c'</span>, <span class="string">'uniebea'</span>, <span class="string">'unif657'</span>, <span class="string">'unif049'</span>, <span class="string">'unif1db'</span>, <span class="string">'unif74d'</span>, <span class="string">'unif00e'</span>, <span class="string">'unie7db'</span>, <span class="string">'unie10e'</span>, <span class="string">'unie61d'</span>, <span class="string">'uniea22'</span>, <span class="string">'unif4f2'</span>, <span class="string">'unie087'</span>, <span class="string">'uniead7'</span>, <span class="string">'unie6a9'</span>, <span class="string">'unif8b3'</span>, <span class="string">'unif576'</span>, <span class="string">'uniebc9'</span>, <span class="string">'unif1ee'</span>, <span class="string">'unie2e4'</span>, <span class="string">'unie8f9'</span>, <span class="string">'unie08a'</span>, <span class="string">'unie008'</span>, <span class="string">'unie971'</span>, <span class="string">'unie7a3'</span>, <span class="string">'uniede6'</span>, <span class="string">'unie3ca'</span>, <span class="string">'unie2dd'</span>, <span class="string">'unie40c'</span>, <span class="string">'unie50d'</span>, <span class="string">'unie8a9'</span>, <span class="string">'unie54c'</span>, <span class="string">'unief1f'</span>, <span class="string">'unieee1'</span>, <span class="string">'unif367'</span>, <span class="string">'uniea26'</span>, <span class="string">'unif15b'</span>, <span class="string">'unie935'</span>, <span class="string">'unieaff'</span>, <span class="string">'unieff3'</span>, <span class="string">'uniee08'</span>, <span class="string">'unie001'</span>, <span class="string">'unif815'</span>, <span class="string">'unif133'</span>, <span class="string">'uniecd0'</span>, <span class="string">'unif68f'</span>, <span class="string">'unie4e5'</span>, <span class="string">'unie2bd'</span>, <span class="string">'unif6da'</span>, <span class="string">'unie96c'</span>, <span class="string">'unie826'</span>, <span class="string">'unif1d7'</span>, <span class="string">'unif411'</span>, <span class="string">'unie8ac'</span>, <span class="string">'unif1be'</span>, <span class="string">'unief8f'</span>, <span class="string">'unie5b8'</span>, <span class="string">'unie757'</span>, <span class="string">'unie1e6'</span>, <span class="string">'unif5ae'</span>, <span class="string">'unif7e7'</span>, <span class="string">'unie7d5'</span>, <span class="string">'unif625'</span>, <span class="string">'unie400'</span>, <span class="string">'unie1d9'</span>, <span class="string">'unif18f'</span>, <span class="string">'unie7e7'</span>, <span class="string">'unie0b9'</span>, <span class="string">'uniecaf'</span>, <span class="string">'unieab1'</span>, <span class="string">'unif39a'</span>, <span class="string">'unieba1'</span>, <span class="string">'unif007'</span>, <span class="string">'unif760'</span>, <span class="string">'unie4cd'</span>, <span class="string">'unie9bb'</span>, <span class="string">'unif523'</span>, <span class="string">'unie9ca'</span>, <span class="string">'unie88a'</span>, <span class="string">'unif7d7'</span>, <span class="string">'unie390'</span>, <span class="string">'unie8fe'</span>, <span class="string">'unif0a1'</span>, <span class="string">'unie1cc'</span>, <span class="string">'unieab6'</span>, <span class="string">'unie204'</span>, <span class="string">'unie2da'</span>, <span class="string">'unied1c'</span>, <span class="string">'unif318'</span>, <span class="string">'unif7f5'</span>, <span class="string">'unie48d'</span>, <span class="string">'unie333'</span>, <span class="string">'uniee1a'</span>, <span class="string">'unif0a4'</span>, <span class="string">'unie9d7'</span>, <span class="string">'unif028'</span>, <span class="string">'unie2e8'</span>, <span class="string">'unie6cd'</span>, <span class="string">'unie7a1'</span>, <span class="string">'unied18'</span>, <span class="string">'uniec95'</span>, <span class="string">'unie28f'</span>, <span class="string">'unif018'</span>, <span class="string">'uniea01'</span>, <span class="string">'unie848'</span>, <span class="string">'unie169'</span>, <span class="string">'unief2c'</span>, <span class="string">'unie429'</span>, <span class="string">'unie8fd'</span>, <span class="string">'unie8bc'</span>, <span class="string">'unie5c6'</span>, <span class="string">'unif663'</span>, <span class="string">'unif157'</span>, <span class="string">'unif365'</span>, <span class="string">'uniee30'</span>, <span class="string">'unif1b3'</span>, <span class="string">'unie3c8'</span>, <span class="string">'unif12e'</span>, <span class="string">'unief02'</span>, <span class="string">'unif158'</span>, <span class="string">'uniea64'</span>, <span class="string">'unif066'</span>, <span class="string">'unie2e5'</span>, <span class="string">'uniec1f'</span>, <span class="string">'unif022'</span>, <span class="string">'unie42d'</span>, <span class="string">'unif85c'</span>, <span class="string">'unieb84'</span>, <span class="string">'unie9ff'</span>, <span class="string">'uniee9f'</span>, <span class="string">'unied66'</span>, <span class="string">'unif0af'</span>, <span class="string">'unif71c'</span>, <span class="string">'unie3f4'</span>, <span class="string">'unif72e'</span>, <span class="string">'unie9c4'</span>, <span class="string">'unie76d'</span>, <span class="string">'unie9bc'</span>, <span class="string">'uniec85'</span>, <span class="string">'uniec8e'</span>, <span class="string">'unif4a7'</span>, <span class="string">'unif369'</span>, <span class="string">'unif32c'</span>, <span class="string">'unie8ce'</span>, <span class="string">'unief04'</span>, <span class="string">'unif831'</span>, <span class="string">'unif6df'</span>, <span class="string">'unif083'</span>, <span class="string">'unie22b'</span>, <span class="string">'unie5e5'</span>, <span class="string">'uniefac'</span>, <span class="string">'unif0e9'</span>, <span class="string">'unie624'</span>, <span class="string">'unif1c2'</span>, <span class="string">'unif7b9'</span>, <span class="string">'unif749'</span>, <span class="string">'uniec98'</span>, <span class="string">'unif504'</span>, <span class="string">'unif66d'</span>, <span class="string">'unieccc'</span>, <span class="string">'unieafa'</span>, <span class="string">'unif1b8'</span>, <span class="string">'unie9b4'</span>, <span class="string">'unie9af'</span>, <span class="string">'unif3a8'</span>, <span class="string">'uniecb0'</span>, <span class="string">'uniebfd'</span>, <span class="string">'unie71f'</span>, <span class="string">'unie143'</span>, <span class="string">'unieb29'</span>, <span class="string">'unie004'</span>, <span class="string">'unie3df'</span>, <span class="string">'unie098'</span>, <span class="string">'unif3cf'</span>, <span class="string">'unie3ae'</span>, <span class="string">'unie1d3'</span>, <span class="string">'uniec03'</span>, <span class="string">'unif8a4'</span>, <span class="string">'unif072'</span>, <span class="string">'unief6f'</span>, <span class="string">'unif0f6'</span>, <span class="string">'uniee8f'</span>, <span class="string">'unif78b'</span>, <span class="string">'unie45b'</span>, <span class="string">'unie091'</span>, <span class="string">'unif343'</span>, <span class="string">'unif0c4'</span>, <span class="string">'unie3f1'</span>, <span class="string">'uniee22'</span>, <span class="string">'unif1f5'</span>, <span class="string">'unie9cf'</span>, <span class="string">'unieb8b'</span>, <span class="string">'unif02d'</span>, <span class="string">'unif503'</span>, <span class="string">'unieec0'</span>, <span class="string">'unie446'</span>, <span class="string">'unif6ac'</span>, <span class="string">'unif44a'</span>, <span class="string">'unie164'</span>, <span class="string">'unif58f'</span>, <span class="string">'unie3ee'</span>, <span class="string">'unie9f3'</span>, <span class="string">'unie831'</span>, <span class="string">'unieacd'</span>, <span class="string">'uniee13'</span>, <span class="string">'unif19d'</span>, <span class="string">'unieef8'</span>, <span class="string">'uniece2'</span>, <span class="string">'unie4b8'</span>, <span class="string">'uniee84'</span>, <span class="string">'unif4fa'</span>, <span class="string">'unie904'</span>, <span class="string">'uniede4'</span>, <span class="string">'unie6a2'</span>, <span class="string">'unif4e3'</span>, <span class="string">'unie1f8'</span>, <span class="string">'unief90'</span>, <span class="string">'unif00b'</span>, <span class="string">'unif775'</span>, <span class="string">'unied08'</span>, <span class="string">'unif1ce'</span>, <span class="string">'unif2c3'</span>, <span class="string">'unif031'</span>, <span class="string">'unie492'</span>, <span class="string">'uniec26'</span>, <span class="string">'unif370'</span>, <span class="string">'unif0b4'</span>, <span class="string">'uniea9c'</span>, <span class="string">'unieaee'</span>, <span class="string">'unie912'</span>, <span class="string">'unif739'</span>, <span class="string">'unif6d2'</span>, <span class="string">'uniecb8'</span>, <span class="string">'unif218'</span>, <span class="string">'unif31e'</span>, <span class="string">'unif061'</span>, <span class="string">'unif50e'</span>, <span class="string">'uniec7f'</span>, <span class="string">'unie8d3'</span>, <span class="string">'unie193'</span>, <span class="string">'unif29e'</span>, <span class="string">'uniee41'</span>, <span class="string">'uniea50'</span>, <span class="string">'unie9ac'</span>, <span class="string">'unie762'</span>, <span class="string">'uniee4e'</span>, <span class="string">'unif2fa'</span>, <span class="string">'unie920'</span>, <span class="string">'unie235'</span>, <span class="string">'uniec9c'</span>, <span class="string">'unieca7'</span>, <span class="string">'unif732'</span>, <span class="string">'unie223'</span>, <span class="string">'unie534'</span>, <span class="string">'uniecd5'</span>, <span class="string">'unif588'</span>, <span class="string">'unie8c8'</span>, <span class="string">'unie426'</span>, <span class="string">'unif26d'</span>, <span class="string">'uniec2e'</span>, <span class="string">'uniee46'</span>, <span class="string">'unie2c7'</span>, <span class="string">'unif69b'</span>, <span class="string">'unie57a'</span>, <span class="string">'unif390'</span>, <span class="string">'unieef0'</span>, <span class="string">'unif0eb'</span>, <span class="string">'unie272'</span>, <span class="string">'unie32e'</span>, <span class="string">'unie22f'</span>, <span class="string">'unie676'</span>, <span class="string">'unieef5'</span>, <span class="string">'unied4c'</span>, <span class="string">'unie90c'</span>, <span class="string">'unieb0b'</span>, <span class="string">'unif245'</span>, <span class="string">'uniea99'</span>, <span class="string">'unieac8'</span>, <span class="string">'unief79'</span>, <span class="string">'unie155'</span>, <span class="string">'unie5bf'</span>, <span class="string">'unie606'</span>, <span class="string">'unif514'</span>, <span class="string">'uniecd7'</span>, <span class="string">'unie20d'</span>, <span class="string">'unie386'</span>, <span class="string">'unif48d'</span>, <span class="string">'unie3c6'</span>, <span class="string">'unie42a'</span>, <span class="string">'unie10c'</span>, <span class="string">'uniee70'</span>, <span class="string">'unie7a6'</span>, <span class="string">'unief09'</span>, <span class="string">'unieb3f'</span>, <span class="string">'unie887'</span>, <span class="string">'unief9f'</span>, <span class="string">'uniec30'</span>, <span class="string">'unif8a9'</span>, <span class="string">'unif253'</span>, <span class="string">'unif2b6'</span>, <span class="string">'unif5f2'</span>, <span class="string">'uniefb1'</span>, <span class="string">'unieb35'</span>, <span class="string">'uniea1c'</span>, <span class="string">'uniea18'</span>, <span class="string">'unif493'</span>, <span class="string">'unie8c2'</span>, <span class="string">'unif8d5'</span>, <span class="string">'unie5bd'</span>, <span class="string">'unie592'</span>, <span class="string">'unie8e4'</span>, <span class="string">'unie06f'</span>, <span class="string">'unie139'</span>, <span class="string">'unie596'</span>, <span class="string">'unif1b1'</span>, <span class="string">'unie911'</span>, <span class="string">'unie45a'</span>, <span class="string">'unif73a'</span>, <span class="string">'unie8d5'</span>, <span class="string">'unif31b'</span>, <span class="string">'uniee97'</span>, <span class="string">'unif53d'</span>, <span class="string">'unif2e1'</span>, <span class="string">'unie62e'</span>, <span class="string">'unie7e6'</span>, <span class="string">'unif5df'</span>, <span class="string">'unif667'</span>, <span class="string">'unie87d'</span>, <span class="string">'unif3ee'</span>, <span class="string">'unie7dc'</span>, <span class="string">'unie00c'</span>, <span class="string">'unie3f2'</span>, <span class="string">'unie53f'</span>, <span class="string">'unif371'</span>, <span class="string">'unie772'</span>, <span class="string">'unie147'</span>, <span class="string">'unie54d'</span>, <span class="string">'uniedd2'</span>, <span class="string">'unied4d'</span>, <span class="string">'unif334'</span>, <span class="string">'unie48a'</span>, <span class="string">'uniecab'</span>, <span class="string">'unif042'</span>, <span class="string">'unie7b6'</span>, <span class="string">'unied4e'</span>, <span class="string">'unie18a'</span>, <span class="string">'unie2ad'</span>, <span class="string">'unieee5'</span>, <span class="string">'unie9d4'</span>, <span class="string">'unie544'</span>, <span class="string">'unif16f'</span>, <span class="string">'uniea20'</span>, <span class="string">'unie605'</span>, <span class="string">'uniede8'</span>, <span class="string">'unieb24'</span>, <span class="string">'unie175'</span>, <span class="string">'unie8b7'</span>, <span class="string">'unif04a'</span>, <span class="string">'unif458'</span>, <span class="string">'unif488'</span>, <span class="string">'unif32a'</span>, <span class="string">'unif608'</span>, <span class="string">'unie49d'</span>, <span class="string">'unif057'</span>, <span class="string">'uniefff'</span>, <span class="string">'uniecc4'</span>, <span class="string">'unie574'</span>, <span class="string">'uniefa9'</span>, <span class="string">'unif500'</span>, <span class="string">'unie55a'</span>, <span class="string">'unif3d5'</span>, <span class="string">'unieb28'</span>, <span class="string">'unif0a3'</span>, <span class="string">'unif35d'</span>, <span class="string">'unie346'</span>, <span class="string">'unif694'</span>, <span class="string">'unie179'</span>, <span class="string">'uniee17'</span>, <span class="string">'unie2cd'</span>, <span class="string">'unief46'</span>, <span class="string">'unie261'</span>, <span class="string">'uniec40'</span>, <span class="string">'unif376'</span>, <span class="string">'unif126'</span>, <span class="string">'unif23c'</span>, <span class="string">'unieb14'</span>, <span class="string">'uniec83'</span>, <span class="string">'unie5a4'</span>, <span class="string">'unieaf9'</span>, <span class="string">'uniedb9'</span>, <span class="string">'unie1df'</span>, <span class="string">'unif319'</span>, <span class="string">'uniec4c'</span>, <span class="string">'unif155'</span>, <span class="string">'unie22e'</span>, <span class="string">'unieca8'</span>, <span class="string">'unif0aa'</span>, <span class="string">'unie554'</span>, <span class="string">'unieeff'</span>, <span class="string">'unif6c5'</span>, <span class="string">'unif546'</span>, <span class="string">'unie37e'</span>, <span class="string">'unie1e2'</span>, <span class="string">'unie040'</span>, <span class="string">'unif79e'</span>, <span class="string">'uniedad'</span>, <span class="string">'unie7a7'</span>, <span class="string">'unif132'</span>, <span class="string">'uniebde'</span>, <span class="string">'uniefe0'</span>, <span class="string">'unif856'</span>, <span class="string">'unif849'</span>, <span class="string">'unie0f6'</span>, <span class="string">'uniebd9'</span>, <span class="string">'unif78e'</span>, <span class="string">'unieb0f'</span>, <span class="string">'unie90a'</span>, <span class="string">'unif5f1'</span>, <span class="string">'unif0f4'</span>, <span class="string">'unie355'</span>, <span class="string">'unief76'</span>, <span class="string">'unie0a3'</span>, <span class="string">'unieb5d'</span>, <span class="string">'unie5ae'</span>, <span class="string">'unie982'</span>, <span class="string">'unieefc'</span>, <span class="string">'unie1b3'</span>, <span class="string">'unie6f0'</span>, <span class="string">'unif6e2'</span>, <span class="string">'unif870'</span>, <span class="string">'unie7cf'</span>, <span class="string">'unif35c'</span>, <span class="string">'unie9cc'</span>, <span class="string">'uniea96'</span>, <span class="string">'unie854'</span>, <span class="string">'unie02e'</span>, <span class="string">'uniee58'</span>, <span class="string">'uniea17'</span>, <span class="string">'unif826'</span>, <span class="string">'unie4b3'</span>, <span class="string">'unie444'</span>, <span class="string">'unie91b'</span>, <span class="string">'unif64f'</span>, <span class="string">'uniec65'</span>)</span><br><span class="line"><span class="keyword">new</span><span class="type">_uni_tuple</span> =(<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span>,<span class="string">'5'</span>,<span class="string">'6'</span>,<span class="string">'7'</span>,<span class="string">'8'</span>,</span><br><span class="line">        <span class="string">'9'</span>,<span class="string">'0'</span>,<span class="string">'店'</span>,<span class="string">'中'</span>,<span class="string">'美'</span>,<span class="string">'家'</span>,<span class="string">'馆'</span>,<span class="string">'小'</span>,<span class="string">'车'</span>,<span class="string">'大'</span>,</span><br><span class="line">        <span class="string">'市'</span>,<span class="string">'公'</span>,<span class="string">'酒'</span>,<span class="string">'行'</span>,<span class="string">'国'</span>,<span class="string">'品'</span>,<span class="string">'发'</span>,<span class="string">'电'</span>,<span class="string">'金'</span>,<span class="string">'心'</span>,</span><br><span class="line">        <span class="string">'业'</span>,<span class="string">'商'</span>,<span class="string">'司'</span>,<span class="string">'超'</span>,<span class="string">'生'</span>,<span class="string">'装'</span>,<span class="string">'园'</span>,<span class="string">'场'</span>,<span class="string">'食'</span>,<span class="string">'有'</span>,</span><br><span class="line">        <span class="string">'新'</span>,<span class="string">'限'</span>,<span class="string">'天'</span>,<span class="string">'面'</span>,<span class="string">'工'</span>,<span class="string">'服'</span>,<span class="string">'海'</span>,<span class="string">'华'</span>,<span class="string">'水'</span>,<span class="string">'房'</span>,</span><br><span class="line">        <span class="string">'饰'</span>,<span class="string">'城'</span>,<span class="string">'乐'</span>,<span class="string">'汽'</span>,<span class="string">'香'</span>,<span class="string">'部'</span>,<span class="string">'利'</span>,<span class="string">'子'</span>,<span class="string">'老'</span>,<span class="string">'艺'</span>,</span><br><span class="line">        <span class="string">'花'</span>,<span class="string">'专'</span>,<span class="string">'东'</span>,<span class="string">'肉'</span>,<span class="string">'菜'</span>,<span class="string">'学'</span>,<span class="string">'福'</span>,<span class="string">'饭'</span>,<span class="string">'人'</span>,<span class="string">'百'</span>,</span><br><span class="line">        <span class="string">'餐'</span>,<span class="string">'茶'</span>,<span class="string">'务'</span>,<span class="string">'通'</span>,<span class="string">'味'</span>,<span class="string">'所'</span>,<span class="string">'山'</span>,<span class="string">'区'</span>,<span class="string">'门'</span>,<span class="string">'药'</span>,</span><br><span class="line">        <span class="string">'银'</span>,<span class="string">'农'</span>,<span class="string">'龙'</span>,<span class="string">'停'</span>,<span class="string">'尚'</span>,<span class="string">'安'</span>,<span class="string">'广'</span>,<span class="string">'鑫'</span>,<span class="string">'一'</span>,<span class="string">'容'</span>,</span><br><span class="line">        <span class="string">'动'</span>,<span class="string">'南'</span>,<span class="string">'具'</span>,<span class="string">'源'</span>,<span class="string">'兴'</span>,<span class="string">'鲜'</span>,<span class="string">'记'</span>,<span class="string">'时'</span>,<span class="string">'机'</span>,<span class="string">'烤'</span>,</span><br><span class="line">        <span class="string">'文'</span>,<span class="string">'康'</span>,<span class="string">'信'</span>,<span class="string">'果'</span>,<span class="string">'阳'</span>,<span class="string">'理'</span>,<span class="string">'锅'</span>,<span class="string">'宝'</span>,<span class="string">'达'</span>,<span class="string">'地'</span>,</span><br><span class="line">        <span class="string">'儿'</span>,<span class="string">'衣'</span>,<span class="string">'特'</span>,<span class="string">'产'</span>,<span class="string">'西'</span>,<span class="string">'批'</span>,<span class="string">'坊'</span>,<span class="string">'州'</span>,<span class="string">'牛'</span>,<span class="string">'佳'</span>,</span><br><span class="line">        <span class="string">'化'</span>,<span class="string">'五'</span>,<span class="string">'米'</span>,<span class="string">'修'</span>,<span class="string">'爱'</span>,<span class="string">'北'</span>,<span class="string">'养'</span>,<span class="string">'卖'</span>,<span class="string">'建'</span>,<span class="string">'材'</span>,</span><br><span class="line">        <span class="string">'三'</span>,<span class="string">'会'</span>,<span class="string">'鸡'</span>,<span class="string">'室'</span>,<span class="string">'红'</span>,<span class="string">'站'</span>,<span class="string">'德'</span>,<span class="string">'王'</span>,<span class="string">'光'</span>,<span class="string">'名'</span>,</span><br><span class="line">        <span class="string">'丽'</span>,<span class="string">'油'</span>,<span class="string">'院'</span>,<span class="string">'堂'</span>,<span class="string">'烧'</span>,<span class="string">'江'</span>,<span class="string">'社'</span>,<span class="string">'合'</span>,<span class="string">'星'</span>,<span class="string">'货'</span>,</span><br><span class="line">        <span class="string">'型'</span>,<span class="string">'村'</span>,<span class="string">'自'</span>,<span class="string">'科'</span>,<span class="string">'快'</span>,<span class="string">'便'</span>,<span class="string">'日'</span>,<span class="string">'民'</span>,<span class="string">'营'</span>,<span class="string">'和'</span>,</span><br><span class="line">        <span class="string">'活'</span>,<span class="string">'童'</span>,<span class="string">'明'</span>,<span class="string">'器'</span>,<span class="string">'烟'</span>,<span class="string">'育'</span>,<span class="string">'宾'</span>,<span class="string">'精'</span>,<span class="string">'屋'</span>,<span class="string">'经'</span>,</span><br><span class="line">        <span class="string">'居'</span>,<span class="string">'庄'</span>,<span class="string">'石'</span>,<span class="string">'顺'</span>,<span class="string">'林'</span>,<span class="string">'尔'</span>,<span class="string">'县'</span>,<span class="string">'手'</span>,<span class="string">'厅'</span>,<span class="string">'销'</span>,</span><br><span class="line">        <span class="string">'用'</span>,<span class="string">'好'</span>,<span class="string">'客'</span>,<span class="string">'火'</span>,<span class="string">'雅'</span>,<span class="string">'盛'</span>,<span class="string">'体'</span>,<span class="string">'旅'</span>,<span class="string">'之'</span>,<span class="string">'鞋'</span>,</span><br><span class="line">        <span class="string">'辣'</span>,<span class="string">'作'</span>,<span class="string">'粉'</span>,<span class="string">'包'</span>,<span class="string">'楼'</span>,<span class="string">'校'</span>,<span class="string">'鱼'</span>,<span class="string">'平'</span>,<span class="string">'彩'</span>,<span class="string">'上'</span>,</span><br><span class="line">        <span class="string">'吧'</span>,<span class="string">'保'</span>,<span class="string">'永'</span>,<span class="string">'万'</span>,<span class="string">'物'</span>,<span class="string">'教'</span>,<span class="string">'吃'</span>,<span class="string">'设'</span>,<span class="string">'医'</span>,<span class="string">'正'</span>,</span><br><span class="line">        <span class="string">'造'</span>,<span class="string">'丰'</span>,<span class="string">'健'</span>,<span class="string">'点'</span>,<span class="string">'汤'</span>,<span class="string">'网'</span>,<span class="string">'庆'</span>,<span class="string">'技'</span>,<span class="string">'斯'</span>,<span class="string">'洗'</span>,</span><br><span class="line">        <span class="string">'料'</span>,<span class="string">'配'</span>,<span class="string">'汇'</span>,<span class="string">'木'</span>,<span class="string">'缘'</span>,<span class="string">'加'</span>,<span class="string">'麻'</span>,<span class="string">'联'</span>,<span class="string">'卫'</span>,<span class="string">'川'</span>,</span><br><span class="line">        <span class="string">'泰'</span>,<span class="string">'色'</span>,<span class="string">'世'</span>,<span class="string">'方'</span>,<span class="string">'寓'</span>,<span class="string">'风'</span>,<span class="string">'幼'</span>,<span class="string">'羊'</span>,<span class="string">'烫'</span>,<span class="string">'来'</span>,</span><br><span class="line">        <span class="string">'高'</span>,<span class="string">'厂'</span>,<span class="string">'兰'</span>,<span class="string">'阿'</span>,<span class="string">'贝'</span>,<span class="string">'皮'</span>,<span class="string">'全'</span>,<span class="string">'女'</span>,<span class="string">'拉'</span>,<span class="string">'成'</span>,</span><br><span class="line">        <span class="string">'云'</span>,<span class="string">'维'</span>,<span class="string">'贸'</span>,<span class="string">'道'</span>,<span class="string">'术'</span>,<span class="string">'运'</span>,<span class="string">'都'</span>,<span class="string">'口'</span>,<span class="string">'博'</span>,<span class="string">'河'</span>,</span><br><span class="line">        <span class="string">'瑞'</span>,<span class="string">'宏'</span>,<span class="string">'京'</span>,<span class="string">'际'</span>,<span class="string">'路'</span>,<span class="string">'祥'</span>,<span class="string">'青'</span>,<span class="string">'镇'</span>,<span class="string">'厨'</span>,<span class="string">'培'</span>,</span><br><span class="line">        <span class="string">'力'</span>,<span class="string">'惠'</span>,<span class="string">'连'</span>,<span class="string">'马'</span>,<span class="string">'鸿'</span>,<span class="string">'钢'</span>,<span class="string">'训'</span>,<span class="string">'影'</span>,<span class="string">'甲'</span>,<span class="string">'助'</span>,</span><br><span class="line">        <span class="string">'窗'</span>,<span class="string">'布'</span>,<span class="string">'富'</span>,<span class="string">'牌'</span>,<span class="string">'头'</span>,<span class="string">'四'</span>,<span class="string">'多'</span>,<span class="string">'妆'</span>,<span class="string">'吉'</span>,<span class="string">'苑'</span>,</span><br><span class="line">        <span class="string">'沙'</span>,<span class="string">'恒'</span>,<span class="string">'隆'</span>,<span class="string">'春'</span>,<span class="string">'干'</span>,<span class="string">'饼'</span>,<span class="string">'氏'</span>,<span class="string">'里'</span>,<span class="string">'二'</span>,<span class="string">'管'</span>,</span><br><span class="line">        <span class="string">'诚'</span>,<span class="string">'制'</span>,<span class="string">'售'</span>,<span class="string">'嘉'</span>,<span class="string">'长'</span>,<span class="string">'轩'</span>,<span class="string">'杂'</span>,<span class="string">'副'</span>,<span class="string">'清'</span>,<span class="string">'计'</span>,</span><br><span class="line">        <span class="string">'黄'</span>,<span class="string">'讯'</span>,<span class="string">'太'</span>,<span class="string">'鸭'</span>,<span class="string">'号'</span>,<span class="string">'街'</span>,<span class="string">'交'</span>,<span class="string">'与'</span>,<span class="string">'叉'</span>,<span class="string">'附'</span>,</span><br><span class="line">        <span class="string">'近'</span>,<span class="string">'层'</span>,<span class="string">'旁'</span>,<span class="string">'对'</span>,<span class="string">'巷'</span>,<span class="string">'栋'</span>,<span class="string">'环'</span>,<span class="string">'省'</span>,<span class="string">'桥'</span>,<span class="string">'湖'</span>,</span><br><span class="line">        <span class="string">'段'</span>,<span class="string">'乡'</span>,<span class="string">'厦'</span>,<span class="string">'府'</span>,<span class="string">'铺'</span>,<span class="string">'内'</span>,<span class="string">'侧'</span>,<span class="string">'元'</span>,<span class="string">'购'</span>,<span class="string">'前'</span>,</span><br><span class="line">        <span class="string">'幢'</span>,<span class="string">'滨'</span>,<span class="string">'处'</span>,<span class="string">'向'</span>,<span class="string">'座'</span>,<span class="string">'下'</span>,<span class="string">'県'</span>,<span class="string">'凤'</span>,<span class="string">'港'</span>,<span class="string">'开'</span>,</span><br><span class="line">        <span class="string">'关'</span>,<span class="string">'景'</span>,<span class="string">'泉'</span>,<span class="string">'塘'</span>,<span class="string">'放'</span>,<span class="string">'昌'</span>,<span class="string">'线'</span>,<span class="string">'湾'</span>,<span class="string">'政'</span>,<span class="string">'步'</span>,</span><br><span class="line">        <span class="string">'宁'</span>,<span class="string">'解'</span>,<span class="string">'白'</span>,<span class="string">'田'</span>,<span class="string">'町'</span>,<span class="string">'溪'</span>,<span class="string">'十'</span>,<span class="string">'八'</span>,<span class="string">'古'</span>,<span class="string">'双'</span>,</span><br><span class="line">        <span class="string">'胜'</span>,<span class="string">'本'</span>,<span class="string">'单'</span>,<span class="string">'同'</span>,<span class="string">'九'</span>,<span class="string">'迎'</span>,<span class="string">'第'</span>,<span class="string">'台'</span>,<span class="string">'玉'</span>,<span class="string">'锦'</span>,</span><br><span class="line">        <span class="string">'底'</span>,<span class="string">'后'</span>,<span class="string">'七'</span>,<span class="string">'斜'</span>,<span class="string">'期'</span>,<span class="string">'武'</span>,<span class="string">'岭'</span>,<span class="string">'松'</span>,<span class="string">'角'</span>,<span class="string">'纪'</span>,</span><br><span class="line">        <span class="string">'朝'</span>,<span class="string">'峰'</span>,<span class="string">'六'</span>,<span class="string">'振'</span>,<span class="string">'珠'</span>,<span class="string">'局'</span>,<span class="string">'岗'</span>,<span class="string">'洲'</span>,<span class="string">'横'</span>,<span class="string">'边'</span>,</span><br><span class="line">        <span class="string">'济'</span>,<span class="string">'井'</span>,<span class="string">'办'</span>,<span class="string">'汉'</span>,<span class="string">'代'</span>,<span class="string">'临'</span>,<span class="string">'弄'</span>,<span class="string">'团'</span>,<span class="string">'外'</span>,<span class="string">'塔'</span>,</span><br><span class="line">        <span class="string">'杨'</span>,<span class="string">'铁'</span>,<span class="string">'浦'</span>,<span class="string">'字'</span>,<span class="string">'年'</span>,<span class="string">'岛'</span>,<span class="string">'陵'</span>,<span class="string">'原'</span>,<span class="string">'梅'</span>,<span class="string">'进'</span>,</span><br><span class="line">        <span class="string">'荣'</span>,<span class="string">'友'</span>,<span class="string">'虹'</span>,<span class="string">'央'</span>,<span class="string">'桂'</span>,<span class="string">'沿'</span>,<span class="string">'事'</span>,<span class="string">'津'</span>,<span class="string">'凯'</span>,<span class="string">'莲'</span>,</span><br><span class="line">        <span class="string">'丁'</span>,<span class="string">'秀'</span>,<span class="string">'柳'</span>,<span class="string">'集'</span>,<span class="string">'紫'</span>,<span class="string">'旗'</span>,<span class="string">'张'</span>,<span class="string">'谷'</span>,<span class="string">'的'</span>,<span class="string">'是'</span>,</span><br><span class="line">        <span class="string">'不'</span>,<span class="string">'了'</span>,<span class="string">'很'</span>,<span class="string">'还'</span>,<span class="string">'个'</span>,<span class="string">'也'</span>,<span class="string">'这'</span>,<span class="string">'我'</span>,<span class="string">'就'</span>,<span class="string">'在'</span>,</span><br><span class="line">        <span class="string">'以'</span>,<span class="string">'可'</span>,<span class="string">'到'</span>,<span class="string">'错'</span>,<span class="string">'没'</span>,<span class="string">'去'</span>,<span class="string">'过'</span>,<span class="string">'感'</span>,<span class="string">'次'</span>,<span class="string">'要'</span>,</span><br><span class="line">        <span class="string">'比'</span>,<span class="string">'觉'</span>,<span class="string">'看'</span>,<span class="string">'得'</span>,<span class="string">'说'</span>,<span class="string">'常'</span>,<span class="string">'真'</span>,<span class="string">'们'</span>,<span class="string">'但'</span>,<span class="string">'最'</span>,</span><br><span class="line">        <span class="string">'喜'</span>,<span class="string">'哈'</span>,<span class="string">'么'</span>,<span class="string">'别'</span>,<span class="string">'位'</span>,<span class="string">'能'</span>,<span class="string">'较'</span>,<span class="string">'境'</span>,<span class="string">'非'</span>,<span class="string">'为'</span>,</span><br><span class="line">        <span class="string">'欢'</span>,<span class="string">'然'</span>,<span class="string">'他'</span>,<span class="string">'挺'</span>,<span class="string">'着'</span>,<span class="string">'价'</span>,<span class="string">'那'</span>,<span class="string">'意'</span>,<span class="string">'种'</span>,<span class="string">'想'</span>,</span><br><span class="line">        <span class="string">'出'</span>,<span class="string">'员'</span>,<span class="string">'两'</span>,<span class="string">'推'</span>,<span class="string">'做'</span>,<span class="string">'排'</span>,<span class="string">'实'</span>,<span class="string">'分'</span>,<span class="string">'间'</span>,<span class="string">'甜'</span>,</span><br><span class="line">        <span class="string">'度'</span>,<span class="string">'起'</span>,<span class="string">'满'</span>,<span class="string">'给'</span>,<span class="string">'热'</span>,<span class="string">'完'</span>,<span class="string">'格'</span>,<span class="string">'荐'</span>,<span class="string">'喝'</span>,<span class="string">'等'</span>,</span><br><span class="line">        <span class="string">'其'</span>,<span class="string">'再'</span>,<span class="string">'几'</span>,<span class="string">'只'</span>,<span class="string">'现'</span>,<span class="string">'朋'</span>,<span class="string">'候'</span>,<span class="string">'样'</span>,<span class="string">'直'</span>,<span class="string">'而'</span>,</span><br><span class="line">        <span class="string">'买'</span>,<span class="string">'于'</span>,<span class="string">'般'</span>,<span class="string">'豆'</span>,<span class="string">'量'</span>,<span class="string">'选'</span>,<span class="string">'奶'</span>,<span class="string">'打'</span>,<span class="string">'每'</span>,<span class="string">'评'</span>,</span><br><span class="line">        <span class="string">'少'</span>,<span class="string">'算'</span>,<span class="string">'又'</span>,<span class="string">'因'</span>,<span class="string">'情'</span>,<span class="string">'找'</span>,<span class="string">'些'</span>,<span class="string">'份'</span>,<span class="string">'置'</span>,<span class="string">'适'</span>,</span><br><span class="line">        <span class="string">'什'</span>,<span class="string">'蛋'</span>,<span class="string">'师'</span>,<span class="string">'气'</span>,<span class="string">'你'</span>,<span class="string">'姐'</span>,<span class="string">'棒'</span>,<span class="string">'试'</span>,<span class="string">'总'</span>,<span class="string">'定'</span>,</span><br><span class="line">        <span class="string">'啊'</span>,<span class="string">'足'</span>,<span class="string">'级'</span>,<span class="string">'整'</span>,<span class="string">'带'</span>,<span class="string">'虾'</span>,<span class="string">'如'</span>,<span class="string">'态'</span>,<span class="string">'且'</span>,<span class="string">'尝'</span>,</span><br><span class="line">        <span class="string">'主'</span>,<span class="string">'话'</span>,<span class="string">'强'</span>,<span class="string">'当'</span>,<span class="string">'更'</span>,<span class="string">'板'</span>,<span class="string">'知'</span>,<span class="string">'己'</span>,<span class="string">'无'</span>,<span class="string">'酸'</span>,</span><br><span class="line">        <span class="string">'让'</span>,<span class="string">'入'</span>,<span class="string">'啦'</span>,<span class="string">'式'</span>,<span class="string">'笑'</span>,<span class="string">'赞'</span>,<span class="string">'片'</span>,<span class="string">'酱'</span>,<span class="string">'差'</span>,<span class="string">'像'</span>,</span><br><span class="line">        <span class="string">'提'</span>,<span class="string">'队'</span>,<span class="string">'走'</span>,<span class="string">'嫩'</span>,<span class="string">'才'</span>,<span class="string">'刚'</span>,<span class="string">'午'</span>,<span class="string">'接'</span>,<span class="string">'重'</span>,<span class="string">'串'</span>,</span><br><span class="line">        <span class="string">'回'</span>,<span class="string">'晚'</span>,<span class="string">'微'</span>,<span class="string">'周'</span>,<span class="string">'值'</span>,<span class="string">'费'</span>,<span class="string">'性'</span>,<span class="string">'桌'</span>,<span class="string">'拍'</span>,<span class="string">'跟'</span>,</span><br><span class="line">        <span class="string">'块'</span>,<span class="string">'调'</span>,<span class="string">'糕'</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">comparison()方法中</span><br><span class="line"><span class="meta"># 对比坐标元组是否相等 改为下面这个就好了,因为两个字体库都是一模一样的。</span></span><br><span class="line"><span class="keyword">if</span> coordinate1[i] == coordinate2[i]:<span class="type"></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>3.页面解析部分</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="keyword">from</span> Font <span class="keyword">import</span> get_new_font_dict</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HandleDianpingCssFont</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.url = <span class="string">"http://www.dianping.com/shop/103986366"</span></span><br><span class="line">        self.header = &#123;</span><br><span class="line">            <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'</span></span><br><span class="line"><span class="comment">#            ,'Cookie': '_lxsdk_cuid=16c0443055fc8-04dc136db4289c-3d644509-100200-16c0443055fc8; _lxsdk=16c0443055fc8-04dc136db4289c-3d644509-100200-16c0443055fc8; _hc.v=7d0a826a-a52a-350a-4ab6-bfce62c21b7c.1563439597; s_ViewType=10; uamo=15115414764; ll=7fd06e815b796be3df069dec7836c3df; ua=%E6%97%A0%E5%BD%B1%E6%97%A0%E8%B8%AA_844; ctu=f7ab7a341de9345bb1ea6dd96a089efa29c6c5a059b8ad719c9fc3eb0a7d7d2e; cy=4; cye=guangzhou; thirdtoken=a202bca7-6512-457b-bd59-5a4e91f24420; JSESSIONID=53787C07F47295367A47E81C5017871B; _dp.ac.v=f04c9f39-50d0-4578-ae43-ecbdcb10cd91; lgtoken=088765ba9-3d5c-42c6-ad85-9e0c1b85b46a; dper=b1f586bcb4b182243d5f2e16fe733ecebbe84864ca46f1c9797da9b0d77395ec29ed05e7362b1b3f37cd5744bb58a13a76dde6326e0cd187460297396431b98a77b63c59105d50ba4cfe1d3f0e408ce23a99a3f6df902f4e76e308f7241ce304; _lxsdk_s=16cd5b1db5e-2e3-d9-699%7C%7C301'</span></span><br><span class="line"><span class="comment">#            ,'Cookie': '_lxsdk_cuid=16c0443055fc8-04dc136db4289c-3d644509-100200-16c0443055fc8; _lxsdk=16c0443055fc8-04dc136db4289c-3d644509-100200-16c0443055fc8; _hc.v=7d0a826a-a52a-350a-4ab6-bfce62c21b7c.1563439597; s_ViewType=10; ua=%E6%97%A0%E5%BD%B1%E6%97%A0%E8%B8%AA_844; ctu=f7ab7a341de9345bb1ea6dd96a089efa29c6c5a059b8ad719c9fc3eb0a7d7d2e; _dp.ac.v=f04c9f39-50d0-4578-ae43-ecbdcb10cd91; Hm_lvt_aa076da68e2ddb2148db40db27ed13e7=1577934693; cy=4; cye=guangzhou; fspop=test; _lx_utm=utm_source%3DBaidu%26utm_medium%3Dorganic; lgtoken=0d1deb945-8f4c-44cb-849d-bda9a81554a8; dper=04efeea0b9e16a776891b29201444e896a26de7a5ee8b8b5118a3022230fa369104c22b1c97e65f847f3108e7e6cb68f9c998ab087d13012a92004e4b0c302c209fd40d71cdc9f2aaec96f9b0efb6a2ba785bd5959b810a03e45faa1fb3ff1ff; ll=7fd06e815b796be3df069dec7836c3df; uamo=15115414764; dplet=96be0b457620ec6cd7d8d34665e7a6b5; _lxsdk_s=1717b65382b-5e8-d78-4f2%7C%7C78'</span></span><br><span class="line">            ,<span class="string">'Host'</span>: <span class="string">'www.dianping.com'</span></span><br><span class="line">            ,<span class="string">'Connection'</span>: <span class="string">'keep-alive'</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        self.proxies= &#123;</span><br><span class="line">            <span class="string">"http"</span>:<span class="string">"106.14.81.179:16819"</span></span><br><span class="line">        &#125;</span><br><span class="line">        self.header1 = &#123;</span><br><span class="line">            <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'</span></span><br><span class="line">        &#125;       </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_css</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        解析css文件，获取字体文件和css对应关系</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        css_url_search = re.compile(<span class="string">r'\&lt;link rel="stylesheet" type="text/css" href="(.*?)"\&gt;'</span>)</span><br><span class="line">        response = requests.get(url=self.url,headers=self.header)</span><br><span class="line">        css_url = css_url_search.findall(response.text)[<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        font_url_search = re.compile(<span class="string">r'font-family: "(.*?)".*?,url\("//(s3plus\.meituan\.net/v1/.*?\.woff)"\)'</span>)</span><br><span class="line">        css_font_response = requests.get(url=<span class="string">'http:'</span>+css_url,headers=self.header1)</span><br><span class="line">        <span class="comment">#获取css名称和字体URL文件对应关系</span></span><br><span class="line">        font_url_list = font_url_search.findall(css_font_response.text)</span><br><span class="line">        <span class="keyword">for</span> font_name,font_url <span class="keyword">in</span> font_url_list:</span><br><span class="line">            font_response = requests.get(url=<span class="string">"http://"</span>+font_url,headers=self.header1)</span><br><span class="line">            <span class="comment">#将字体文件写入本地</span></span><br><span class="line">            font_name = font_name.split(<span class="string">"-"</span>)[<span class="number">-1</span>]+<span class="string">".woff"</span></span><br><span class="line">            <span class="keyword">with</span> open(font_name,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">                f.write(font_response.content)</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">handle_business_detail</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        营业时间解析   里面的时间用的hours,周几用的是shopdesc，还需要调整</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        business_detail_url = <span class="string">"http://www.dianping.com/shop/103986366"</span></span><br><span class="line">        response = requests.get(url=business_detail_url,headers=self.header)</span><br><span class="line">        soup = BeautifulSoup(response.text, <span class="string">'html.parser'</span>)</span><br><span class="line">        time = soup.find(<span class="string">'div'</span>, &#123;<span class="string">'class'</span>: <span class="string">'other J-other Hide'</span>&#125;)</span><br><span class="line">        content=time.get_text().encode(<span class="string">'unicode_escape'</span>)</span><br><span class="line">        standardFontPath = <span class="string">'old.woff'</span></span><br><span class="line">        newFontPath = <span class="string">'hours.woff'</span>    </span><br><span class="line">        font_dict = get_new_font_dict(standardFontPath, newFontPath)</span><br><span class="line">        content = content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">        s = eval(repr(content).replace(<span class="string">'\\\\'</span>, <span class="string">'\\'</span>))</span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> font_dict.items():</span><br><span class="line">            new_key = <span class="string">u"\\u"</span> + key[<span class="number">3</span>:].lower()</span><br><span class="line">            s = eval(repr(s).replace(new_key, value))</span><br><span class="line">        newFontPath1 = <span class="string">'shopdesc.woff'</span>    </span><br><span class="line">        font_dict1 = get_new_font_dict(standardFontPath, newFontPath1)</span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> font_dict1.items():</span><br><span class="line">            new_key = <span class="string">u"\\u"</span> + key[<span class="number">3</span>:].lower()</span><br><span class="line">            s = eval(repr(s).replace(new_key, value))</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#s = "".join(s.split())</span></span><br><span class="line">        print(s)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        电话号码</span></span><br><span class="line"><span class="string">        """</span>     </span><br><span class="line">        tel = soup.find(<span class="string">'p'</span>, &#123;<span class="string">'class'</span>: <span class="string">'expand-info tel'</span>&#125;)</span><br><span class="line">        content=tel.get_text().encode(<span class="string">'unicode_escape'</span>)</span><br><span class="line">        standardFontPath = <span class="string">'old.woff'</span></span><br><span class="line">        newFontPath = <span class="string">'num.woff'</span></span><br><span class="line">        font_dict = get_new_font_dict(standardFontPath, newFontPath)</span><br><span class="line">        content = content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">        s = eval(repr(content).replace(<span class="string">'\\\\'</span>, <span class="string">'\\'</span>))</span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> font_dict.items():</span><br><span class="line">            new_key = <span class="string">u"\\u"</span> + key[<span class="number">3</span>:].lower()</span><br><span class="line">            s = eval(repr(s).replace(new_key, value))</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#s = "".join(s.split())</span></span><br><span class="line">        print(s)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        地址</span></span><br><span class="line"><span class="string">        """</span>     </span><br><span class="line">        address = soup.find(<span class="string">'div'</span>, &#123;<span class="string">'class'</span>: <span class="string">'expand-info address'</span>&#125;)</span><br><span class="line">        content=address.get_text().encode(<span class="string">'unicode_escape'</span>)</span><br><span class="line">        standardFontPath = <span class="string">'old.woff'</span></span><br><span class="line">        newFontPath = <span class="string">'address.woff'</span></span><br><span class="line">        font_dict = get_new_font_dict(standardFontPath, newFontPath)</span><br><span class="line">        content = content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">        s = eval(repr(content).replace(<span class="string">'\\\\'</span>, <span class="string">'\\'</span>))</span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> font_dict.items():</span><br><span class="line">            new_key = <span class="string">u"\\u"</span> + key[<span class="number">3</span>:].lower()</span><br><span class="line">            s = eval(repr(s).replace(new_key, value))</span><br><span class="line">        newFontPath1 = <span class="string">'num.woff'</span>    </span><br><span class="line">        font_dict1 = get_new_font_dict(standardFontPath, newFontPath1)</span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> font_dict1.items():</span><br><span class="line">            new_key = <span class="string">u"\\u"</span> + key[<span class="number">3</span>:].lower()</span><br><span class="line">            s = eval(repr(s).replace(new_key, value))</span><br><span class="line">        print(s)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        评分</span></span><br><span class="line"><span class="string">        """</span>     </span><br><span class="line">        address = soup.find(<span class="string">'div'</span>, &#123;<span class="string">'class'</span>: <span class="string">'brief-info'</span>&#125;)</span><br><span class="line">        content=address.get_text().encode(<span class="string">'unicode_escape'</span>)</span><br><span class="line">        standardFontPath = <span class="string">'old.woff'</span></span><br><span class="line">        newFontPath = <span class="string">'num.woff'</span></span><br><span class="line">        font_dict = get_new_font_dict(standardFontPath, newFontPath)</span><br><span class="line">        content = content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">        s = eval(repr(content).replace(<span class="string">'\\\\'</span>, <span class="string">'\\'</span>))</span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> font_dict.items():</span><br><span class="line">            new_key = <span class="string">u"\\u"</span> + key[<span class="number">3</span>:].lower()</span><br><span class="line">            s = eval(repr(s).replace(new_key, value))</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#s = "".join(s.split())</span></span><br><span class="line">        print(s)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        评论解析</span></span><br><span class="line"><span class="string">        """</span>   </span><br><span class="line"><span class="comment">#        time_all = soup.find_all('div', &#123;'class': 'info J-info-short clearfix'&#125;)</span></span><br><span class="line">        time_all = soup.find_all(<span class="string">'p'</span>, &#123;<span class="string">'class'</span>: <span class="string">'desc J-desc'</span>&#125;)</span><br><span class="line">        <span class="keyword">for</span> time1 <span class="keyword">in</span> time_all:</span><br><span class="line">            content=time1.get_text().encode(<span class="string">'unicode_escape'</span>)</span><br><span class="line">            standardFontPath = <span class="string">'old.woff'</span></span><br><span class="line">            newFontPath = <span class="string">'review.woff'</span></span><br><span class="line">            font_dict = get_new_font_dict(standardFontPath, newFontPath)</span><br><span class="line">            content = content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">            s = eval(repr(content).replace(<span class="string">'\\\\'</span>, <span class="string">'\\'</span>))</span><br><span class="line">            <span class="keyword">for</span> key, value <span class="keyword">in</span> font_dict.items():</span><br><span class="line">                new_key = <span class="string">u"\\u"</span> + key[<span class="number">3</span>:].lower()</span><br><span class="line">                s = eval(repr(s).replace(new_key, value))</span><br><span class="line">            </span><br><span class="line">            s = <span class="string">""</span>.join(s.split())</span><br><span class="line">            print(s)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    dianping = HandleDianpingCssFont()</span><br><span class="line">    dianping.parse_css()</span><br><span class="line">    dianping.handle_business_detail()</span><br></pre></td></tr></table></figure>
+<p><strong>补充</strong></p>
+<blockquote>
+<p>电话号码后两位被加密，可以直接从这个url中获取<br><a href="http://www.dianping.com/ajax/json/shopDynamic/basicHideInfo?shopId=103986366" target="_blank" rel="noopener">http://www.dianping.com/ajax/json/shopDynamic/basicHideInfo?shopId=103986366</a></p>
+</blockquote>
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版权声明： </strong>
+              本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/1046517444/2020/05/06/%E6%9F%90%E4%BC%97%E7%82%B9%E8%AF%84%E5%AD%97%E4%BD%93%E5%8A%A0%E5%AF%86/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/05/06/%E5%AD%97%E4%BD%93%E5%8A%A0%E5%AF%86%E6%80%BB%E7%BB%93/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">字体加密总结</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2020
+        <i class="ri-heart-fill heart_icon"></i> Joke chen
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="我的博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Subtitle -->
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+    console.log(err)
+  }
+</script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+
+<script src="/js/clickLove.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+    
+  </div>
+</body>
+
+</html>
