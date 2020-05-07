@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="记录生活点滴" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    某哪儿机票字体偏移 |  我的博客
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-某哪儿机票字体偏移" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  某哪儿机票字体偏移
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/07/%E6%9F%90%E5%93%AA%E5%84%BF%E6%9C%BA%E7%A5%A8%E5%AD%97%E4%BD%93%E5%81%8F%E7%A7%BB/" class="article-date">
+  <time datetime="2020-05-07T03:52:12.683Z" itemprop="datePublished">2020-05-07</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">6 分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>#去哪儿机票字体偏移</p>
+<p><strong>1.字体偏移部分</strong><br>1.1机票的价格都是放在b标签的i标签里面，里面的位数(即实际价格位数)是确定的</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class-</span>"<span class="attr">prc_wp</span>"  <span class="attr">style</span>=<span class="string">"width:48px"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">em</span> <span class="attr">class</span>=<span class="string">"rel"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">b</span> <span class="attr">style</span>=<span class="string">"width:48px;left: -48px"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">i</span> <span class="attr">style</span>= <span class="string">"width:16px;"</span>&gt;</span>6<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">i</span> <span class="attr">style</span>=<span class="string">"width:16px;"</span>&gt;</span>0<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">i</span> <span class="attr">style</span>=<span class="string">"width:16px;"</span>&gt;</span>5<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">b</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">b</span> <span class="attr">style-</span>"<span class="attr">width:16px</span>;<span class="attr">left:-16px</span>"&gt;</span>8<span class="tag">&lt;/<span class="name">b</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">b</span> <span class="attr">style</span>=<span class="string">"width:16px;left:-32px"</span> &gt;</span>0<span class="tag">&lt;/<span class="name">b</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>1.2首先获取获取b下面的i标签，得到一个列表fakePrice=[6,0,5],然后正则匹配出其他的b标签里面的width,left(不带符号),text()，接着获取这些b标签的正确位置：将left值/width值,得到它偏离原来位置几个数字的间隔，再用len(fakePrice)-(left值/width值)得到正确位置，最后替换掉fakePrice里面对应位置的值，就能得到正确的价格608</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">PATTERN_PRICE_WIDTH = <span class="string">r'&lt;b style="width: (\d+)px;left:-(\d+)px"&gt;(\d+)&lt;/b&gt;'</span></span><br><span class="line">priceNode = node.xpath(<span class="string">".//span[@class='prc_wp']"</span>)[<span class="number">0</span>]</span><br><span class="line">priceString = etree.tostring(priceNode).decode()</span><br><span class="line">fakePrice = priceNode.xpath(<span class="string">".//b/i/text()"</span>)</span><br><span class="line"><span class="comment"># 得到总宽度</span></span><br><span class="line">PriceWidth = len(fakePrice)</span><br><span class="line"><span class="comment"># 得到字宽和偏移、真实值</span></span><br><span class="line">real_price = re.findall(PATTERN_PRICE_WIDTH, priceString)</span><br><span class="line"><span class="comment"># 构造位移字典</span></span><br><span class="line">real_price_dict = &#123;int(PriceWidth - int(item[<span class="number">1</span>]) / int(item[<span class="number">0</span>])): item[<span class="number">2</span>] <span class="keyword">for</span> item <span class="keyword">in</span> real_price&#125;</span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> real_price_dict.items():</span><br><span class="line">fakePrice[k] = v</span><br><span class="line">item[<span class="string">'Price'</span>] = <span class="string">''</span>.join(fakePrice)</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.页面解析</strong><br>2.1因为页面是ajax异步加载的，所以采用selenium获取页面信息。在diver添加参数的时候带上<br>options.add_experimental_option(‘excludeSwitches’, [‘enable-automation’])<br>就不会被后台检测到Chromedriver访问。即不会弹出”停止以开发者模式运行”这个弹窗了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> codecs</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment">#import pymongo</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver <span class="keyword">import</span> ChromeOptions</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support.wait <span class="keyword">import</span> WebDriverWait</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support <span class="keyword">import</span> expected_conditions <span class="keyword">as</span> EC</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.keys <span class="keyword">import</span> Keys</span><br><span class="line"></span><br><span class="line"><span class="comment"># left 属性设置定位元素左外边距边界与其包含块左边界之间的偏移。</span></span><br><span class="line"><span class="comment"># data-reactid属性是一个自定义属性，因此React可以唯一标识其中的组件。</span></span><br><span class="line">PATTERN_PRICE_WIDTH = <span class="string">r'&lt;b style="width: (\d+)px;left:-(\d+)px"&gt;(\d+)&lt;/b&gt;'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QnrFlight</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, proxy=None)</span>:</span></span><br><span class="line">        self.url = <span class="string">"https://flight.qunar.com/"</span></span><br><span class="line">        <span class="comment">#self.client = pymongo.MongoClient(host='localhost', port=27017)</span></span><br><span class="line">        <span class="comment">#self.collection = self.client.qunaer.flights</span></span><br><span class="line">        chrome_options = ChromeOptions()</span><br><span class="line">        chrome_options.add_argument(<span class="string">'blink-settings=imagesEnabled=false'</span>)  <span class="comment"># 不加载图片, 提升速度</span></span><br><span class="line">        chrome_options.add_argument(<span class="string">'--disable-gpu'</span>)</span><br><span class="line">        chrome_options.add_argument(<span class="string">'--no-sandbox'</span>)</span><br><span class="line">        <span class="comment"># chrome_options.add_argument('--headless')</span></span><br><span class="line">        <span class="comment"># 设置浏览器为开发者模式</span></span><br><span class="line">        chrome_options.add_experimental_option(<span class="string">'excludeSwitches'</span>, [<span class="string">'enable-automation'</span>])</span><br><span class="line">        <span class="comment"># if proxy:</span></span><br><span class="line">        <span class="comment">#     chrome_options.add_argument('--proxy-server=http://127.0.0.1:8888')</span></span><br><span class="line"></span><br><span class="line">        self.browser = webdriver.Chrome(executable_path=<span class="string">'E:/chromedriver.exe'</span>,options=chrome_options)</span><br><span class="line">        self.browser.maximize_window()</span><br><span class="line">        self.browser.implicitly_wait(<span class="number">5</span>)  <span class="comment"># seconds</span></span><br><span class="line">        self.wait = WebDriverWait(self.browser, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self, FromAddr, ToAddr, Sdate)</span>:</span></span><br><span class="line">        self.browser.get(self.url)</span><br><span class="line">        <span class="comment"># 判断所需元素是否加载出来</span></span><br><span class="line">        Dinput = self.wait.until(</span><br><span class="line">            EC.presence_of_element_located((By.XPATH, <span class="string">"//*[@id='dfsForm']/div[2]/div[1]/div/input"</span>)))</span><br><span class="line">        Dinput.clear()</span><br><span class="line">        Dinput.send_keys(FromAddr)</span><br><span class="line">        <span class="comment"># 进行搜索</span></span><br><span class="line">        SearchBtn = self.browser.find_element_by_xpath(<span class="string">"//*[@id='dfsForm']/div[4]/button"</span>)</span><br><span class="line">        time.sleep(self.random_time())</span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        Ainput = self.browser.find_element_by_xpath(<span class="string">"//*[@id='dfsForm']/div[2]/div[2]/div/input"</span>)</span><br><span class="line">        Ainput.clear()</span><br><span class="line">        Ainput.send_keys(ToAddr)</span><br><span class="line"></span><br><span class="line">        time.sleep(self.random_time())</span><br><span class="line">        <span class="comment"># //*[@id="fromDate"]</span></span><br><span class="line">        DateInput = self.wait.until(</span><br><span class="line">            EC.presence_of_element_located((By.XPATH, <span class="string">"//*[@id='fromDate']"</span>)))</span><br><span class="line">        <span class="comment"># DateInput = self.browser.find_element_by_xpath("//*[@id='fromDate']").clear()</span></span><br><span class="line">        DateInput.send_keys(Keys.CONTROL + <span class="string">'a'</span>)</span><br><span class="line">        DateInput.send_keys(Sdate)</span><br><span class="line">        time.sleep(self.random_time())</span><br><span class="line"></span><br><span class="line">        SearchBtn.click()</span><br><span class="line">        time.sleep(self.random_time())</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.wait.until(</span><br><span class="line">                EC.presence_of_element_located((By.XPATH, <span class="string">"//div[@class='mb-10']"</span>)))</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            self.browser.refresh()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="comment"># 滚动条滑到底部</span></span><br><span class="line">            scrollJs = <span class="string">"window.scrollTo(0,document.body.scrollHeight)"</span></span><br><span class="line">            self.browser.execute_script(scrollJs)</span><br><span class="line">            time.sleep(<span class="number">0.5</span>)</span><br><span class="line">            source = self.browser.page_source</span><br><span class="line">            <span class="comment"># 获取机票信息</span></span><br><span class="line">            <span class="keyword">for</span> item <span class="keyword">in</span> self.parse_item(source):</span><br><span class="line">                <span class="comment">#self.save_to_mongodb(item)</span></span><br><span class="line">                print(item)</span><br><span class="line">            <span class="comment"># 判断单页还是多页若多页则翻页</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                isNextPage = self.browser.find_element_by_xpath(<span class="string">"//a[text()='下一页']"</span>)</span><br><span class="line">                isNextPage.click()</span><br><span class="line">                self.wait.until(</span><br><span class="line">                    EC.presence_of_element_located((By.XPATH, <span class="string">"//div[@class='mb-10']"</span>)))</span><br><span class="line">            <span class="keyword">except</span> Exception:</span><br><span class="line">                print(<span class="string">"已经到尾页"</span>)</span><br><span class="line">                self.browser.quit()</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="comment">#self.get_low_price()</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_item</span><span class="params">(self, source)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        解析获取数据</span></span><br><span class="line"><span class="string">        :param source:</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        root = etree.HTML(source)</span><br><span class="line">        <span class="comment"># 定位各航班的节点</span></span><br><span class="line">        flightNodes = root.xpath(<span class="string">"//div[@class='m-airfly-lst']/div[@class='b-airfly']"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> flightNodes:</span><br><span class="line">            item = &#123;&#125;</span><br><span class="line">            <span class="comment"># 判断是否需要转机</span></span><br><span class="line">            trans = node.xpath(<span class="string">".//div[@class='trans']//text()"</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> trans:</span><br><span class="line">                item[<span class="string">'FlightNameOne'</span>] = \</span><br><span class="line">                    node.xpath(<span class="string">".//div[@class='col-airline']/div[@class='d-air'][1]/div[@class='air']/span/text()"</span>)[<span class="number">0</span>]</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    item[<span class="string">'FlightNameTwo'</span>] = \</span><br><span class="line">                        node.xpath(<span class="string">".//div[@class='col-airline']/div[@class='d-air'][2]/div[@class='air']/span/text()"</span>)[</span><br><span class="line">                            <span class="number">0</span>]</span><br><span class="line">                <span class="keyword">except</span> Exception <span class="keyword">as</span> error:</span><br><span class="line">                    print(<span class="string">f"同一家航空公司-<span class="subst">&#123;item[<span class="string">'FlightNameOne'</span>]&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">                item[<span class="string">'FlightTypeOne'</span>] = <span class="string">' '</span>.join(</span><br><span class="line">                    node.xpath(<span class="string">".//div[@class='col-airline']/div[@class='d-air'][1]/div[@class='num']//text()"</span>))</span><br><span class="line">                item[<span class="string">'FlightTypeTwo'</span>] = <span class="string">' '</span>.join(</span><br><span class="line">                    node.xpath(<span class="string">".//div[@class='col-airline']/div[@class='d-air'][2]/div[@class='num']//text()"</span>))</span><br><span class="line">                item[<span class="string">'Trans'</span>] = <span class="string">''</span>.join(node.xpath(<span class="string">".//div[@class='trans']//span[@class='t']//text()"</span>))</span><br><span class="line">                <span class="comment"># print(f"需要转机:&#123;item['Trans']&#125;")</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                item[<span class="string">'FlightName'</span>] = node.xpath(<span class="string">".//div[@class='air']/span/text()"</span>)[<span class="number">0</span>]</span><br><span class="line">                item[<span class="string">'FlightType'</span>] = <span class="string">''</span>.join(node.xpath(<span class="string">".//div[@class='num']//text()"</span>))</span><br><span class="line"></span><br><span class="line">            item[<span class="string">'LeaveTime'</span>] = node.xpath(<span class="string">".//div[@class='sep-lf']/h2/text()"</span>)[<span class="number">0</span>]</span><br><span class="line">            item[<span class="string">'ArriveTime'</span>] = node.xpath(<span class="string">".//div[@class='sep-rt']/h2/text()"</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">            priceNode = node.xpath(<span class="string">".//span[@class='prc_wp']"</span>)[<span class="number">0</span>]</span><br><span class="line">            priceString = etree.tostring(priceNode).decode()</span><br><span class="line">            fakePrice = priceNode.xpath(<span class="string">".//b/i/text()"</span>)</span><br><span class="line">            <span class="comment"># 得到总宽度</span></span><br><span class="line">            PriceWidth = len(fakePrice)</span><br><span class="line">            <span class="comment"># 得到字宽和偏移、真实值</span></span><br><span class="line">            real_price = re.findall(PATTERN_PRICE_WIDTH, priceString)</span><br><span class="line">            <span class="comment"># 构造位移字典</span></span><br><span class="line">            real_price_dict = &#123;int(PriceWidth - int(item[<span class="number">1</span>]) / int(item[<span class="number">0</span>])): item[<span class="number">2</span>] <span class="keyword">for</span> item <span class="keyword">in</span> real_price&#125;</span><br><span class="line">            <span class="keyword">for</span> k, v <span class="keyword">in</span> real_price_dict.items():</span><br><span class="line">                fakePrice[k] = v</span><br><span class="line">            item[<span class="string">'Price'</span>] = <span class="string">''</span>.join(fakePrice)</span><br><span class="line">            <span class="keyword">yield</span> item</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">next_page</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        进行翻页操作</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    def save_to_mongodb(self, item):</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line"><span class="string">        存到数据库</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line"><span class="string">        result = self.collection.insert_one(item)</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_low_price</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 查询总量</span></span><br><span class="line">        count = self.collection.find().count()</span><br><span class="line">        print(<span class="string">f"总机票数为<span class="subst">&#123;count&#125;</span>"</span>)</span><br><span class="line">        results = self.collection.find(&#123;&#125;, &#123;<span class="string">'Price'</span>: <span class="number">1</span>, <span class="string">'FlightType'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"></span><br><span class="line">        price_list = [result <span class="keyword">for</span> result <span class="keyword">in</span> results]</span><br><span class="line">        price_list.sort(key=<span class="keyword">lambda</span> item: int(item[<span class="string">'Price'</span>]))</span><br><span class="line">        print(<span class="string">f"最低价<span class="subst">&#123;price_list[<span class="number">0</span>][<span class="string">'FlightType'</span>]&#125;</span>--<span class="subst">&#123;price_list[<span class="number">0</span>][<span class="string">'Price'</span>]&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">random_time</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        进行随机延时1-3S</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> random.uniform(<span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    dcity = input(<span class="string">'请输入起点： '</span>)</span><br><span class="line">    acity = input(<span class="string">'请输入终点： '</span>)</span><br><span class="line">    date = input(<span class="string">'请输入出行日期如"2020-06-06"： '</span>)</span><br><span class="line">    start = time.time()</span><br><span class="line">    air = QnrFlight(proxy=<span class="number">1</span>)</span><br><span class="line">    air.run(dcity, acity, date)</span><br><span class="line">    end = time.time()</span><br><span class="line">    print(<span class="string">f"总耗时<span class="subst">&#123;end - start&#125;</span>"</span>)</span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版权声明： </strong>
+              本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/1046517444/2020/05/07/%E6%9F%90%E5%93%AA%E5%84%BF%E6%9C%BA%E7%A5%A8%E5%AD%97%E4%BD%93%E5%81%8F%E7%A7%BB/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/05/07/%E6%9F%90%E8%BD%A6%E4%B9%8B%E5%AE%B6%E8%AE%BA%E5%9D%9B%E5%AD%97%E4%BD%93%E5%8F%8D%E7%88%AC/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">某车之家论坛字体反爬</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2020
+        <i class="ri-heart-fill heart_icon"></i> Joke chen
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="我的博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Subtitle -->
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+    console.log(err)
+  }
+</script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+
+<script src="/js/clickLove.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+    
+  </div>
+</body>
+
+</html>
