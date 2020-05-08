@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="记录生活点滴" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    某团美食数据爬取 |  我的博客
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-某团美食数据爬取" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  某团美食数据爬取
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/08/%E6%9F%90%E5%9B%A2%E7%BE%8E%E9%A3%9F%E6%95%B0%E6%8D%AE%E7%88%AC%E5%8F%96/" class="article-date">
+  <time datetime="2020-05-08T08:02:25.708Z" itemprop="datePublished">2020-05-08</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7 分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>美团美食数据爬取</p>
+<p>1.获取美团全国的城市和城市简写，通过城市名和房天下关联，获取到城市对应的省份。将数据保存成json，格式类型为[‘省份’,’城市’,’城市简写’]</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#获取美团全国的城市和城市简写</span></span><br><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line">import re</span><br><span class="line">import json</span><br><span class="line">from lxml import etree</span><br><span class="line"></span><br><span class="line">city_name_eng_dict=&#123;&#125;</span><br><span class="line">url='https://www.meituan.com/changecity/'</span><br><span class="line">headers=&#123;</span><br><span class="line">        'Cookie':'_lxsdk_cuid=16c28f622bec8-04df02c8d4e8d1-3d<span class="number">644509-100200-16</span>c28f622bec8; _hc.v=8d4ff6d2-726f-5e75-<span class="number">2758-59</span>7d6d214ecd.<span class="number">1564055401</span>; _ga=GA1.2.<span class="number">71019934</span>5.<span class="number">1564743523</span>; Hm_lvt_f66b<span class="number">3772</span>2f586a240d<span class="number">462131</span>8a5a6ebe=<span class="number">1573277582</span>; __utma=<span class="number">21155937</span>0.<span class="number">71019934</span>5.<span class="number">1564743523.1573</span><span class="number">277583.15732775</span>83.1; __utmz=<span class="number">21155937</span>0.<span class="number">1573277583</span>.1.1.utmcsr=baidu|utmccn=baidu|utmcmd=organic|utmcct=zt_search; iuuid=73F0D81FCF500A753ADA40FD4B7E08B<span class="number">1159</span>F273C0FD<span class="number">564570094384</span>EB9AAB3D1; cityname=%E6%AD%A6%E6%B1%89; _lxsdk=73F0D81FCF500A753ADA40FD4B7E08B<span class="number">1159</span>F273C0FD<span class="number">564570094384</span>EB9AAB3D1; uuid=d48f66b30afa47d1a09d.<span class="number">1586748807</span>.1.0.0; client-id=db39e34b-380e-<span class="number">4826</span>-aa39-e<span class="number">692082</span>ab46e; mtcdn=K; userTicket=NkYVmfEEpixvAXHKrGcgNkxYArmlIQnLyyvyiQRJ; lsu=; firstTime=<span class="number">158683663798</span>3; _lx_utm=utm_source%3DBaidu%26utm_medium%3Dorganic; ci=20; rvct=20%2C286%2C278%2C1%2C10%2C45%2C30%2C57; __mta=<span class="number">24562578</span>7.<span class="number">158581617510</span>0.<span class="number">158683481876</span>5.<span class="number">158691122851</span>0.10; _lxsdk_s=<span class="number">1717</span>b47a713-03d-b02-d1e%7C%7C11'</span><br><span class="line">        ,'Host': 'www.meituan.com'</span><br><span class="line">        ,'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.<span class="number">3626.12</span>1 Safari/537.36'&#125;</span><br><span class="line">response = requests.get(url=url,headers=headers).text</span><br><span class="line">city_json=re.search('&lt;script&gt;window.AppData =(.*?);&lt;/script&gt;', response, re.S).group(<span class="number">1</span>).strip()</span><br><span class="line">city_json=json.loads(city_json)</span><br><span class="line">for city_one in city_json['openCityList']:</span><br><span class="line">    for city in city_one[<span class="number">1</span>:][<span class="number">0</span>]:</span><br><span class="line">        city_name=city['name']</span><br><span class="line">        city_eng=city['acronym']</span><br><span class="line">        city_name_eng_dict[city_name]=city_eng</span><br><span class="line"><span class="meta">#        print(city_name,city_eng)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#通过城市和房天下关联，获取到城市对应的省份</span></span><br><span class="line">list2=[]</span><br><span class="line">url='https://esf.fang.com/newsecond/esfcities.aspx'</span><br><span class="line">headers=&#123;'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1'&#125; </span><br><span class="line">res = requests.get(url=url, headers=headers)</span><br><span class="line">response=etree.HTML(res.text)</span><br><span class="line">lis = response.xpath('//div[@id="c02"]//li')</span><br><span class="line"><span class="meta"># 遍历省</span></span><br><span class="line">for li in lis[:-<span class="number">1</span>]:        </span><br><span class="line">    provinces_text = li.xpath('.//strong/text()')[<span class="number">0</span>]</span><br><span class="line"><span class="meta">#    print(provinces_text)</span></span><br><span class="line">    city_texts = li.xpath('.//a')</span><br><span class="line">    <span class="meta"># 遍历市</span></span><br><span class="line">    for city_text in city_texts:</span><br><span class="line">        city = city_text.xpath('./text()')[<span class="number">0</span>]</span><br><span class="line">        try:</span><br><span class="line">            if provinces_text=='直辖市':</span><br><span class="line">                list2.append([city,city,city_name_eng_dict[city]])</span><br><span class="line">            else:  </span><br><span class="line">                list2.append([provinces_text,city,city_name_eng_dict[city]])</span><br><span class="line">            print('["'+provinces_text+'",','"'+city+'"',',"'+city_name_eng_dict[city]+'"]')</span><br><span class="line"></span><br><span class="line">        except:</span><br><span class="line">            print(city)</span><br><span class="line">                </span><br><span class="line"></span><br><span class="line">def write_json(item_list,name):</span><br><span class="line">    for item in item_list:</span><br><span class="line">        with open(name+'.json','a',encoding='utf8') as f:</span><br><span class="line">            json.dump(item,f,ensure_ascii=False)</span><br><span class="line">            f.write('\n')     </span><br><span class="line">                </span><br><span class="line">write_json(list2,'111')</span><br></pre></td></tr></table></figure>
+
+<p>2.页面解析</p>
+<blockquote>
+<p>其实数据可以从接口<a href="https://bj.meituan.com/meishi/api/poi/getPoiList" target="_blank" rel="noopener">https://bj.meituan.com/meishi/api/poi/getPoiList</a> 这个接口获取，不过请求几次后就出现403了。可参考这篇文章 <a href="https://www.v2ex.com/t/452201" target="_blank" rel="noopener">https://www.v2ex.com/t/452201</a></p>
+</blockquote>
+<blockquote>
+<p>美团感觉不封你ip，但是封cookie所以获取数据的速度要放慢一点，每爬一页休息2s,全国数据爬下来大概两天的样子。</p>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line"><span class="keyword">from</span> bs4 import BeautifulSoup</span><br><span class="line">import json</span><br><span class="line">import random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">false_list=[]</span><br><span class="line">ua_list = [</span><br><span class="line">    <span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1'</span>,</span><br><span class="line">    <span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0'</span>,</span><br><span class="line">    <span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50'</span>,</span><br><span class="line">    <span class="string">'Opera/9.80 (Windows NT 6.1; U; zh-cn) Presto/2.9.168 Version/11.50'</span>,</span><br><span class="line">    <span class="string">'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 2.0.50727; SLCC2; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.3; .NET4.0C; Tablet PC 2.0; .NET4.0E)'</span>,</span><br><span class="line">    <span class="string">'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; InfoPath.3)'</span>,</span><br><span class="line">    <span class="string">'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; GTB7.0)'</span>,</span><br><span class="line">    <span class="string">'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'</span>,</span><br><span class="line">    <span class="string">'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)'</span>,</span><br><span class="line">    <span class="string">'Mozilla/5.0 (Windows; U; Windows NT 6.1; ) AppleWebKit/534.12 (KHTML, like Gecko) Maxthon/3.0 Safari/534.12'</span>,</span><br><span class="line">    <span class="string">'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.3; .NET4.0C; .NET4.0E)'</span>,</span><br><span class="line">    <span class="string">'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.3; .NET4.0C; .NET4.0E; SE 2.X MetaSr 1.0)'</span>,</span><br><span class="line">    <span class="string">'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.472.33 Safari/534.3 SE 2.X MetaSr 1.0'</span>,</span><br><span class="line">    <span class="string">'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.3; .NET4.0C; .NET4.0E)'</span>,</span><br><span class="line">    <span class="string">'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1 QQBrowser/6.9.11079.201'</span>,</span><br><span class="line">    <span class="string">'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.3; .NET4.0C; .NET4.0E) QQBrowser/6.9.11079.201'</span>,</span><br><span class="line">    <span class="string">'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)'</span>,</span><br><span class="line">]</span><br><span class="line"><span class="comment">#city_list可以从保存的那个111.json文件复制过来</span></span><br><span class="line">city_list=[[<span class="string">'北京'</span>, <span class="string">'北京'</span>, <span class="string">'bj'</span>], [<span class="string">'上海'</span>, <span class="string">'上海'</span>, <span class="string">'sh'</span>]]</span><br><span class="line"><span class="keyword">for</span> city <span class="keyword">in</span> city_list:</span><br><span class="line">    target = <span class="string">'http://'</span>+city[2]+<span class="string">'.meituan.com/meishi/'</span></span><br><span class="line">    headers=&#123;</span><br><span class="line">            <span class="string">'Cookie'</span>:<span class="string">'_lxsdk_cuid=16c28f622bec8-04df02c8d4e8d1-3d644509-100200-16c28f622bec8; _hc.v=8d4ff6d2-726f-5e75-2758-597d6d214ecd.1564055401; _ga=GA1.2.710199345.1564743523; Hm_lvt_f66b37722f586a240d4621318a5a6ebe=1573277582; __utma=211559370.710199345.1564743523.1573277583.1573277583.1; __utmz=211559370.1573277583.1.1.utmcsr=baidu|utmccn=baidu|utmcmd=organic|utmcct=zt_search; iuuid=73F0D81FCF500A753ADA40FD4B7E08B1159F273C0FD564570094384EB9AAB3D1; cityname=%E6%AD%A6%E6%B1%89; _lxsdk=73F0D81FCF500A753ADA40FD4B7E08B1159F273C0FD564570094384EB9AAB3D1; uuid=d48f66b30afa47d1a09d.1586748807.1.0.0; client-id=db39e34b-380e-4826-aa39-e692082ab46e; mtcdn=K; userTicket=NkYVmfEEpixvAXHKrGcgNkxYArmlIQnLyyvyiQRJ; lsu=; firstTime=1586836637983; _lx_utm=utm_source%3DBaidu%26utm_medium%3Dorganic; ci=20; rvct=20%2C286%2C278%2C1%2C10%2C45%2C30%2C57; __mta=245625787.1585816175100.1586834818765.1586911228510.10; _lxsdk_s=1717b47a713-03d-b02-d1e%7C%7C11'</span></span><br><span class="line">            ,<span class="string">'Host'</span>: city[2]+<span class="string">'.meituan.com'</span></span><br><span class="line">            ,<span class="string">'User-Agent'</span>: random.choice(ua_list)&#125;</span><br><span class="line">    req = requests.<span class="builtin-name">get</span>(<span class="attribute">url</span>=target,headers=headers)</span><br><span class="line">    <span class="attribute">html</span>=req.text</span><br><span class="line">    <span class="attribute">bf</span>=BeautifulSoup(html,'lxml')</span><br><span class="line">    <span class="attribute">texts</span>=bf.find_all('script')</span><br><span class="line">    <span class="attribute">text</span>=texts[14].get_text().strip()</span><br><span class="line">    <span class="attribute">text</span>=text[19:-1]</span><br><span class="line">    <span class="attribute">result</span>=json.loads(text)</span><br><span class="line">    <span class="attribute">result</span>=result[<span class="string">'filters'</span>]</span><br><span class="line">    <span class="attribute">result</span>=result[<span class="string">'areas'</span>]</span><br><span class="line">    list=[]</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> result:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> item[<span class="string">'subAreas'</span>]:</span><br><span class="line">            <span class="keyword">if</span> i[<span class="string">'name'</span>]==<span class="string">'全部'</span>:</span><br><span class="line">                continue</span><br><span class="line">            list.append(i[<span class="string">'id'</span>])</span><br><span class="line">    <span class="builtin-name">print</span>(list)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> list:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(50):</span><br><span class="line">            <span class="keyword">if</span> <span class="attribute">i</span>==0:</span><br><span class="line">                continue</span><br><span class="line">            <span class="attribute">target</span>=<span class="string">'http://'</span>+city[2]+<span class="string">'.meituan.com/meishi/'</span>+<span class="string">'b'</span>+str(item)+<span class="string">'/'</span>+<span class="string">'pn'</span>+str(i)+<span class="string">'/'</span></span><br><span class="line">            req = requests.<span class="builtin-name">get</span>(<span class="attribute">url</span>=target,headers=headers)</span><br><span class="line">            <span class="attribute">html</span>=req.text</span><br><span class="line">            try:</span><br><span class="line">                <span class="attribute">bf</span>=BeautifulSoup(html,'lxml')</span><br><span class="line">                <span class="attribute">texts</span>=bf.find_all('script')</span><br><span class="line">                <span class="attribute">text</span>=texts[14].get_text().strip()</span><br><span class="line">                <span class="attribute">text</span>=text[19:-1]</span><br><span class="line">                <span class="attribute">result</span>=json.loads(text)</span><br><span class="line">                <span class="attribute">result</span>=result[<span class="string">'poiLists'</span>]</span><br><span class="line">                <span class="attribute">result</span>=result[<span class="string">'poiInfos'</span>]</span><br><span class="line">                <span class="keyword">if</span> result:</span><br><span class="line">                    <span class="builtin-name">print</span>(target)</span><br><span class="line">                    <span class="keyword">for</span> it <span class="keyword">in</span> result:</span><br><span class="line">                        Info_list=&#123;&#125;</span><br><span class="line">                        Info_list[<span class="string">'province'</span>]=city[0]</span><br><span class="line">                        Info_list[<span class="string">'city'</span>]=city[1]</span><br><span class="line">                        Info_list[<span class="string">'title'</span>]=it[<span class="string">'title'</span>]</span><br><span class="line">                        Info_list[<span class="string">'address'</span>]=it[<span class="string">'address'</span>]</span><br><span class="line">                        Info_list[<span class="string">'avgPrice'</span>]=it[<span class="string">'avgPrice'</span>]</span><br><span class="line">                        Info_list[<span class="string">'avgScore'</span>]=it[<span class="string">'avgScore'</span>]</span><br><span class="line">                        Info_list[<span class="string">'allCommentNum'</span>]=it[<span class="string">'allCommentNum'</span>]</span><br><span class="line">                        <span class="builtin-name">print</span>(Info_list)</span><br><span class="line">                        with open(city[1]+<span class="string">'food.json'</span>,<span class="string">'a'</span>,<span class="attribute">encoding</span>=<span class="string">'utf8'</span>) as f:</span><br><span class="line">                            json.dump(Info_list,f,<span class="attribute">ensure_ascii</span>=<span class="literal">False</span>)</span><br><span class="line">                            f.write(<span class="string">'\n'</span>)</span><br><span class="line">                    time.sleep(2)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    break</span><br><span class="line">            except:</span><br><span class="line">                false_list.append(target)</span><br><span class="line">    <span class="builtin-name">print</span>(<span class="string">'Done'</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版权声明： </strong>
+              本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/1046517444/2020/05/08/%E6%9F%90%E5%9B%A2%E7%BE%8E%E9%A3%9F%E6%95%B0%E6%8D%AE%E7%88%AC%E5%8F%96/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/05/08/%E8%BD%AC%E8%BD%BD-%E7%88%AC%E8%99%AB%E7%BB%8F%E9%AA%8C/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">转载-爬虫经验</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2020
+        <i class="ri-heart-fill heart_icon"></i> Joke chen
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="我的博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Subtitle -->
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+    console.log(err)
+  }
+</script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+
+<script src="/js/clickLove.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+    
+  </div>
+</body>
+
+</html>
