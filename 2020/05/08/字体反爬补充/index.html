@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="记录生活点滴" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    字体反爬补充 |  我的博客
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-字体反爬补充" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  字体反爬补充
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/08/%E5%AD%97%E4%BD%93%E5%8F%8D%E7%88%AC%E8%A1%A5%E5%85%85/" class="article-date">
+  <time datetime="2020-05-08T02:47:11.033Z" itemprop="datePublished">2020-05-08</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">9 分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>#字体反爬补充</p>
+<p>1.页面源码加密的字体部分一般都是&#xed3a;&#xf709;&#xf709;&#xf3c7;这种形式。&#xxx; 的格式其实是unicode,&amp;#后面跟的是unicode字符的十六进制值。</p>
+<p>2.font.getBestCmap()获取到的是字体的{十进制编码:unicode编码}这样的形式</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attribute">120</span>: <span class="string">'x'</span>,</span><br><span class="line"> <span class="number">57472</span>: <span class="string">'uniE080'</span>,</span><br><span class="line"> <span class="number">57543</span>: <span class="string">'uniE0C7'</span>,</span><br><span class="line"> <span class="number">57560</span>: <span class="string">'uniE0D8'</span>,</span><br><span class="line"> <span class="number">57562</span>: <span class="string">'uniE0DA'</span>,</span><br><span class="line"> <span class="number">57611</span>: <span class="string">'uniE10B'</span>,</span><br><span class="line"> <span class="number">57620</span>: <span class="string">'uniE114'</span>,</span><br><span class="line"> <span class="number">57631</span>: <span class="string">'uniE11F'</span>,</span><br><span class="line"> <span class="number">57717</span>: <span class="string">'uniE175'</span>,</span><br><span class="line"> <span class="number">57726</span>: <span class="string">'uniE17E'</span>,</span><br><span class="line"> <span class="number">57902</span>: <span class="string">'uniE22E'</span>,</span><br><span class="line"> <span class="number">57912</span>: <span class="string">'uniE238'</span>,</span><br><span class="line"> <span class="number">58010</span>: <span class="string">'uniE29A'</span>,</span><br><span class="line"> <span class="number">58096</span>: <span class="string">'uniE2F0'</span>,</span><br><span class="line"> <span class="number">58277</span>: <span class="string">'uniE3A5'</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.这里我们还需要将十进制编码转化为十六进制的编码，将0x替换成&amp;#x以供我们使用。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">font_map=font.getBestCmap()</span><br><span class="line">newmap= &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> <span class="keyword">index</span>, key <span class="keyword">in</span> enumerate(font_map):</span><br><span class="line">    <span class="keyword">value</span> = font_map[key]</span><br><span class="line"># hex() 函数用于将<span class="number">10</span>进制整数转换成<span class="number">16</span>进制，以字符串形式表示</span><br><span class="line">#     key = hex(key)</span><br><span class="line">	key = hex(key).replace(<span class="string">'0x'</span>, <span class="string">'&amp;#x'</span>)</span><br><span class="line">    newmap[key] = <span class="keyword">value</span></span><br><span class="line">print(newmap)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">&#123;'</span><span class="number">0x78</span><span class="string">': '</span>x<span class="string">', '</span><span class="number">0xe080</span><span class="string">': '</span>uniE080<span class="string">', '</span><span class="number">0xe0c7</span><span class="string">': '</span>uniE0C7<span class="string">', '</span><span class="number">0xe0d8</span><span class="string">': '</span>uniE0D8<span class="string">', '</span><span class="number">0xe0da</span><span class="string">': '</span>uniE0DA<span class="string">', '</span><span class="number">0xe10b</span><span class="string">': '</span>uniE10B<span class="string">', '</span><span class="number">0xe114</span><span class="string">': '</span>uniE114<span class="string">', '</span><span class="number">0xe11f</span><span class="string">': '</span>uniE11F<span class="string">', '</span><span class="number">0xe175</span><span class="string">': '</span>uniE175<span class="string">', '</span><span class="number">0xe17e</span><span class="string">': '</span>uniE17<span class="string">E', '</span><span class="number">0xe22e</span><span class="string">': '</span>uniE22<span class="string">E', '</span><span class="number">0xe238</span><span class="string">': '</span>uniE238<span class="string">', '</span><span class="number">0xe29a</span><span class="string">': '</span>uniE29A<span class="string">', '</span><span class="number">0xe2f0</span><span class="string">': '</span>uniE2F0<span class="string">', '</span><span class="number">0xe3a5</span><span class="string">': '</span>uniE3A5<span class="string">'&#125;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">&#123;'</span>&amp;#x78<span class="string">': '</span>x<span class="string">', '</span>&amp;#xe080<span class="string">': '</span>uniE080<span class="string">', '</span>&amp;#xe0c7<span class="string">': '</span>uniE0C7<span class="string">', '</span>&amp;#xe0d8<span class="string">': '</span>uniE0D8<span class="string">', '</span>&amp;#xe0da<span class="string">': '</span>uniE0DA<span class="string">', '</span>&amp;#xe10b<span class="string">': '</span>uniE10B<span class="string">', '</span>&amp;#xe114<span class="string">': '</span>uniE114<span class="string">', '</span>&amp;#xe11f<span class="string">': '</span>uniE11F<span class="string">', '</span>&amp;#xe175<span class="string">': '</span>uniE175<span class="string">', '</span>&amp;#xe17<span class="string">e': '</span>uniE17<span class="string">E', '</span>&amp;#xe22<span class="string">e': '</span>uniE22<span class="string">E', '</span>&amp;#xe238<span class="string">': '</span>uniE238<span class="string">', '</span>&amp;#xe29a<span class="string">': '</span>uniE29A<span class="string">', '</span>&amp;#xe2f0<span class="string">': '</span>uniE2F0<span class="string">', '</span>&amp;#xe3a5<span class="string">': '</span>uniE3A5<span class="string">'&#125;</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>4.将Unicode的值替换成汉字。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#自动动将从FontCreator中获取的映射关系对应起来</span></span><br><span class="line">wordGlyph = font.getGlyphOrder()[<span class="number">2</span>:]</span><br><span class="line">list_num=[<span class="string">'0'</span>,<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span>,<span class="string">'5'</span>,<span class="string">'6'</span>,<span class="string">'7'</span>,<span class="string">'8'</span>,<span class="string">'9'</span>,<span class="string">'硕'</span>,<span class="string">'王'</span>,<span class="string">'刘'</span>,<span class="string">'李'</span>,<span class="string">'校'</span>]</span><br><span class="line">relation_table=&#123;&#125;  </span><br><span class="line"><span class="keyword">for</span> x,<span class="function">y <span class="keyword">in</span> <span class="title">zip</span>(<span class="params">wordGlyph,list_num</span>):</span></span><br><span class="line"><span class="function">	relation_table[x]</span>=y</span><br><span class="line"></span><br><span class="line"><span class="meta"># 从font_map中将不需要的映射关系删除</span></span><br><span class="line">newmap = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> index, <span class="function">key <span class="keyword">in</span> <span class="title">enumerate</span>(<span class="params">font_map</span>):</span></span><br><span class="line"><span class="function">    <span class="keyword">value</span></span> = font_map[key]</span><br><span class="line">    <span class="meta"># hex() 函数用于将10进制整数转换成16进制，以字符串形式表示</span></span><br><span class="line">    key = hex(key).replace(<span class="string">'0x'</span>, <span class="string">'&amp;#x'</span>)</span><br><span class="line">    <span class="meta"># 为防止对关系中没有相应的value导致报错，这里捕捉下异常</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="meta"># 这里用</span></span><br><span class="line">        get_real_data = relation_table[<span class="keyword">value</span>]</span><br><span class="line">    except:</span><br><span class="line">        get_real_data = <span class="string">''</span></span><br><span class="line">    <span class="keyword">if</span> get_real_data != <span class="string">''</span>:</span><br><span class="line">        <span class="meta"># 这里我们将字体文件中得到的编码字符和真是结果对应起来</span></span><br><span class="line">        newmap[key] = get_real_data</span><br><span class="line">print(newmap)</span><br><span class="line"><span class="meta"># 打印结果：(这个也就是网页中编码与真实结果对应的关系)</span></span><br><span class="line">&#123;<span class="string">'&amp;#xe080'</span>: <span class="string">'0'</span>, <span class="string">'&amp;#xe0c7'</span>: <span class="string">'1'</span>, <span class="string">'&amp;#xe0d8'</span>: <span class="string">'2'</span>, <span class="string">'&amp;#xe0da'</span>: <span class="string">'3'</span>, <span class="string">'&amp;#xe10b'</span>: <span class="string">'4'</span>, <span class="string">'&amp;#xe114'</span>: <span class="string">'5'</span>, <span class="string">'&amp;#xe11f'</span>: <span class="string">'6'</span>, <span class="string">'&amp;#xe175'</span>: <span class="string">'7'</span>, <span class="string">'&amp;#xe17e'</span>: <span class="string">'8'</span>, <span class="string">'&amp;#xe22e'</span>: <span class="string">'9'</span>, <span class="string">'&amp;#xe238'</span>: <span class="string">'硕'</span>, <span class="string">'&amp;#xe29a'</span>: <span class="string">'王'</span>, <span class="string">'&amp;#xe2f0'</span>: <span class="string">'刘'</span>, <span class="string">'&amp;#xe3a5'</span>: <span class="string">'李'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.最后只要在把网页返回的内容全部替换一下就好了。</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">''</span></span><br><span class="line">reponse_html = requests.<span class="keyword">get</span>(url, headers=headers).text</span><br><span class="line"><span class="meta"># 这里直接在html页面使用正确数据将这些乱码或者编码替换掉</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">new</span><span class="type">map</span>:</span><br><span class="line">    check_html = re.search(i, reponse_html)</span><br><span class="line">    <span class="keyword">if</span> check_html != None:<span class="type"></span></span><br><span class="line"><span class="type">        reponse_html </span>= re.sub(i, <span class="keyword">new</span><span class="type">map</span>[i], reponse_html)</span><br></pre></td></tr></table></figure>
+
+
+<p>1.这个就是文件中字符到字形映射表 &lt; cmap &gt; 的内容</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">cmap</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">tableVersion</span> <span class="attr">version</span>=<span class="string">"0"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">cmap_format_4</span> <span class="attr">platformID</span>=<span class="string">"0"</span> <span class="attr">platEncID</span>=<span class="string">"3"</span> <span class="attr">language</span>=<span class="string">"0"</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">map</span> <span class="attr">code</span>=<span class="string">"0x78"</span> <span class="attr">name</span>=<span class="string">"x"</span>/&gt;</span><span class="comment">&lt;!-- LATIN SMALL LETTER X --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">map</span> <span class="attr">code</span>=<span class="string">"0xe080"</span> <span class="attr">name</span>=<span class="string">"uniE080"</span>/&gt;</span><span class="comment">&lt;!-- ???? --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">map</span> <span class="attr">code</span>=<span class="string">"0xe0c7"</span> <span class="attr">name</span>=<span class="string">"uniE0C7"</span>/&gt;</span><span class="comment">&lt;!-- ???? --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">map</span> <span class="attr">code</span>=<span class="string">"0xe0d8"</span> <span class="attr">name</span>=<span class="string">"uniE0D8"</span>/&gt;</span><span class="comment">&lt;!-- ???? --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">map</span> <span class="attr">code</span>=<span class="string">"0xe0da"</span> <span class="attr">name</span>=<span class="string">"uniE0DA"</span>/&gt;</span><span class="comment">&lt;!-- ???? --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">map</span> <span class="attr">code</span>=<span class="string">"0xe10b"</span> <span class="attr">name</span>=<span class="string">"uniE10B"</span>/&gt;</span><span class="comment">&lt;!-- ???? --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">map</span> <span class="attr">code</span>=<span class="string">"0xe114"</span> <span class="attr">name</span>=<span class="string">"uniE114"</span>/&gt;</span><span class="comment">&lt;!-- ???? --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">map</span> <span class="attr">code</span>=<span class="string">"0xe11f"</span> <span class="attr">name</span>=<span class="string">"uniE11F"</span>/&gt;</span><span class="comment">&lt;!-- ???? --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">map</span> <span class="attr">code</span>=<span class="string">"0xe175"</span> <span class="attr">name</span>=<span class="string">"uniE175"</span>/&gt;</span><span class="comment">&lt;!-- ???? --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">map</span> <span class="attr">code</span>=<span class="string">"0xe17e"</span> <span class="attr">name</span>=<span class="string">"uniE17E"</span>/&gt;</span><span class="comment">&lt;!-- ???? --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">map</span> <span class="attr">code</span>=<span class="string">"0xe22e"</span> <span class="attr">name</span>=<span class="string">"uniE22E"</span>/&gt;</span><span class="comment">&lt;!-- ???? --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">cmap_format_4</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">cmap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.这个就是文件中字符到字形映射表 &lt; glyf &gt; 的内容，font[‘glyf’][“uniE080”].coordinates获取的就是里面的坐标值，返回的是GlyphCoordinates对象。直接用list强转一下就可以得到字体坐标的一个二维列表。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">&lt;glyf&gt;</span></span><br><span class="line">    &lt;!-- The xMin, yMin, xMax <span class="built_in">and</span> yMax <span class="built_in">values</span></span><br><span class="line">         will <span class="keyword">be</span> recalculated by the <span class="keyword">compiler</span>. --&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TTGlyph name=<span class="string">"glyph00000"</span>/&gt;&lt;!-- contains <span class="keyword">no</span> outline data --&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TTGlyph name=<span class="string">"uniE080"</span> xMin=<span class="string">"0"</span> yMin=<span class="string">"-258"</span> xMax=<span class="string">"1907"</span> yMax=<span class="string">"1726"</span>&gt;</span><br><span class="line">      <span class="symbol">&lt;contour&gt;</span></span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"187"</span> <span class="keyword">y</span>=<span class="string">"1290"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"957"</span> <span class="keyword">y</span>=<span class="string">"1290"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"957"</span> <span class="keyword">y</span>=<span class="string">"1726"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1129"</span> <span class="keyword">y</span>=<span class="string">"1726"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1129"</span> <span class="keyword">y</span>=<span class="string">"1290"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1388"</span> <span class="keyword">y</span>=<span class="string">"1293"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1907"</span> <span class="keyword">y</span>=<span class="string">"1290"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1907"</span> <span class="keyword">y</span>=<span class="string">"378"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1886"</span> <span class="keyword">y</span>=<span class="string">"384"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1743"</span> <span class="keyword">y</span>=<span class="string">"378"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1746"</span> <span class="keyword">y</span>=<span class="string">"468"</span> <span class="keyword">on</span>=<span class="string">"0"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1746"</span> <span class="keyword">y</span>=<span class="string">"479"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1743"</span> <span class="keyword">y</span>=<span class="string">"486"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1129"</span> <span class="keyword">y</span>=<span class="string">"486"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1134"</span> <span class="keyword">y</span>=<span class="string">"224"</span> <span class="keyword">on</span>=<span class="string">"0"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1134"</span> <span class="keyword">y</span>=<span class="string">"72"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1129"</span> <span class="keyword">y</span>=<span class="string">"-258"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"957"</span> <span class="keyword">y</span>=<span class="string">"-258"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"957"</span> <span class="keyword">y</span>=<span class="string">"486"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"371"</span> <span class="keyword">y</span>=<span class="string">"492"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"351"</span> <span class="keyword">y</span>=<span class="string">"486"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"353"</span> <span class="keyword">y</span>=<span class="string">"432"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"351"</span> <span class="keyword">y</span>=<span class="string">"378"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"187"</span> <span class="keyword">y</span>=<span class="string">"378"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"189"</span> <span class="keyword">y</span>=<span class="string">"1289"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">      &lt;/contour&gt;</span><br><span class="line">      <span class="symbol">&lt;contour&gt;</span></span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1743"</span> <span class="keyword">y</span>=<span class="string">"1142"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1129"</span> <span class="keyword">y</span>=<span class="string">"1142"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1129"</span> <span class="keyword">y</span>=<span class="string">"634"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"1743"</span> <span class="keyword">y</span>=<span class="string">"634"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">      &lt;/contour&gt;</span><br><span class="line">      <span class="symbol">&lt;contour&gt;</span></span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"351"</span> <span class="keyword">y</span>=<span class="string">"634"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"957"</span> <span class="keyword">y</span>=<span class="string">"634"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"963"</span> <span class="keyword">y</span>=<span class="string">"659"</span> <span class="keyword">on</span>=<span class="string">"0"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"961"</span> <span class="keyword">y</span>=<span class="string">"1076"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"957"</span> <span class="keyword">y</span>=<span class="string">"1142"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"827"</span> <span class="keyword">y</span>=<span class="string">"1148"</span> <span class="keyword">on</span>=<span class="string">"0"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"587"</span> <span class="keyword">y</span>=<span class="string">"1148"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"351"</span> <span class="keyword">y</span>=<span class="string">"1142"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"355"</span> <span class="keyword">y</span>=<span class="string">"913"</span> <span class="keyword">on</span>=<span class="string">"0"</span>/&gt;</span><br><span class="line">        &lt;<span class="keyword">pt</span> <span class="keyword">x</span>=<span class="string">"355"</span> <span class="keyword">y</span>=<span class="string">"803"</span> <span class="keyword">on</span>=<span class="string">"1"</span>/&gt;</span><br><span class="line">      &lt;/contour&gt;</span><br><span class="line">      &lt;instructions/&gt;</span><br><span class="line">    &lt;/TTGlyph&gt;</span><br><span class="line">&lt;/glyf&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GlyphCoordinates([(<span class="number">187</span>, <span class="number">1290</span>),(<span class="number">957</span>, <span class="number">1290</span>),(<span class="number">957</span>, <span class="number">1726</span>),(<span class="number">1129</span>, <span class="number">1726</span>),(<span class="number">1129</span>, <span class="number">1290</span>),(<span class="number">1388</span>, <span class="number">1293</span>),(<span class="number">1907</span>, <span class="number">1290</span>),(<span class="number">1907</span>, <span class="number">378</span>),(<span class="number">1886</span>, <span class="number">384</span>),(<span class="number">1743</span>, <span class="number">378</span>),(<span class="number">1746</span>, <span class="number">468</span>),(<span class="number">1746</span>, <span class="number">479</span>),(<span class="number">1743</span>, <span class="number">486</span>),(<span class="number">1129</span>, <span class="number">486</span>),(<span class="number">1134</span>, <span class="number">224</span>),(<span class="number">1134</span>, <span class="number">72</span>),(<span class="number">1129</span>, <span class="number">-258</span>),(<span class="number">957</span>, <span class="number">-258</span>),(<span class="number">957</span>, <span class="number">486</span>),(<span class="number">371</span>, <span class="number">492</span>),(<span class="number">351</span>, <span class="number">486</span>),(<span class="number">353</span>, <span class="number">432</span>),(<span class="number">351</span>, <span class="number">378</span>),(<span class="number">187</span>, <span class="number">378</span>),(<span class="number">189</span>, <span class="number">1289</span>),(<span class="number">1743</span>, <span class="number">1142</span>),(<span class="number">1129</span>, <span class="number">1142</span>),(<span class="number">1129</span>, <span class="number">634</span>),(<span class="number">1743</span>, <span class="number">634</span>),(<span class="number">351</span>, <span class="number">634</span>),(<span class="number">957</span>, <span class="number">634</span>),(<span class="number">963</span>, <span class="number">659</span>),(<span class="number">961</span>, <span class="number">1076</span>),(<span class="number">957</span>, <span class="number">1142</span>),(<span class="number">827</span>, <span class="number">1148</span>),(<span class="number">587</span>, <span class="number">1148</span>),(<span class="number">351</span>, <span class="number">1142</span>),(<span class="number">355</span>, <span class="number">913</span>),(<span class="number">355</span>, <span class="number">803</span>)])</span><br></pre></td></tr></table></figure>
+
+<p>3.font.getGlyphOrder()，获取到的是GlyphOrder标签里面的name值。一般前面的一个，或者两个并不是汉字的映射， 而是表示字体家族名称。可以剔除掉</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&lt;GlyphOrder&gt;</span><br><span class="line">  &lt;!<span class="comment">-- The 'id' attribute is only for humans; it is ignored when parsed. --&gt;</span></span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"0"</span> <span class="built_in">name</span>=<span class="string">"glyph00000"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"1"</span> <span class="built_in">name</span>=<span class="string">"x"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"2"</span> <span class="built_in">name</span>=<span class="string">"uniE080"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"3"</span> <span class="built_in">name</span>=<span class="string">"uniE0C7"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"4"</span> <span class="built_in">name</span>=<span class="string">"uniE0D8"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"5"</span> <span class="built_in">name</span>=<span class="string">"uniE0DA"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"6"</span> <span class="built_in">name</span>=<span class="string">"uniE10B"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"7"</span> <span class="built_in">name</span>=<span class="string">"uniE114"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"8"</span> <span class="built_in">name</span>=<span class="string">"uniE11F"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"9"</span> <span class="built_in">name</span>=<span class="string">"uniE175"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"10"</span> <span class="built_in">name</span>=<span class="string">"uniE17E"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"11"</span> <span class="built_in">name</span>=<span class="string">"uniE22E"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"12"</span> <span class="built_in">name</span>=<span class="string">"uniE238"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"13"</span> <span class="built_in">name</span>=<span class="string">"uniE29A"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"14"</span> <span class="built_in">name</span>=<span class="string">"uniE2F0"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"15"</span> <span class="built_in">name</span>=<span class="string">"uniE3A5"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"16"</span> <span class="built_in">name</span>=<span class="string">"uniE557"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"17"</span> <span class="built_in">name</span>=<span class="string">"uniE6F6"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"18"</span> <span class="built_in">name</span>=<span class="string">"uniE714"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"19"</span> <span class="built_in">name</span>=<span class="string">"uniE734"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"20"</span> <span class="built_in">name</span>=<span class="string">"uniE79A"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"21"</span> <span class="built_in">name</span>=<span class="string">"uniE81B"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"22"</span> <span class="built_in">name</span>=<span class="string">"uniE8F7"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"23"</span> <span class="built_in">name</span>=<span class="string">"uniE904"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"24"</span> <span class="built_in">name</span>=<span class="string">"uniEA85"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"25"</span> <span class="built_in">name</span>=<span class="string">"uniEB21"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"26"</span> <span class="built_in">name</span>=<span class="string">"uniEB79"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"27"</span> <span class="built_in">name</span>=<span class="string">"uniECEB"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"28"</span> <span class="built_in">name</span>=<span class="string">"uniED4F"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"29"</span> <span class="built_in">name</span>=<span class="string">"uniED9B"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"30"</span> <span class="built_in">name</span>=<span class="string">"uniEF41"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"31"</span> <span class="built_in">name</span>=<span class="string">"uniEFA0"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"32"</span> <span class="built_in">name</span>=<span class="string">"uniEFB7"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"33"</span> <span class="built_in">name</span>=<span class="string">"uniF156"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"34"</span> <span class="built_in">name</span>=<span class="string">"uniF19B"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"35"</span> <span class="built_in">name</span>=<span class="string">"uniF208"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"36"</span> <span class="built_in">name</span>=<span class="string">"uniF273"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"37"</span> <span class="built_in">name</span>=<span class="string">"uniF2AE"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"38"</span> <span class="built_in">name</span>=<span class="string">"uniF309"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"39"</span> <span class="built_in">name</span>=<span class="string">"uniF46E"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"40"</span> <span class="built_in">name</span>=<span class="string">"uniF4F2"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"41"</span> <span class="built_in">name</span>=<span class="string">"uniF4FF"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"42"</span> <span class="built_in">name</span>=<span class="string">"uniF648"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"43"</span> <span class="built_in">name</span>=<span class="string">"uniF6F7"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"44"</span> <span class="built_in">name</span>=<span class="string">"uniF7E3"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"45"</span> <span class="built_in">name</span>=<span class="string">"uniF894"</span>/&gt;</span><br><span class="line">  &lt;GlyphID <span class="built_in">id</span>=<span class="string">"46"</span> <span class="built_in">name</span>=<span class="string">"uniF8EB"</span>/&gt;</span><br><span class="line">&lt;/GlyphOrder&gt;</span><br></pre></td></tr></table></figure>
+
+<p>总结<br>这种方法一般适用于，字体集位置不变的情况，还有就是fontcreator打开字体头部对应的字体是zero,one这种英文的情况。</p>
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版权声明： </strong>
+              本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/1046517444/2020/05/08/%E5%AD%97%E4%BD%93%E5%8F%8D%E7%88%AC%E8%A1%A5%E5%85%85/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/05/07/%E6%9F%90%E5%90%8C%E5%9F%8E%E6%8B%9B%E8%81%98%E5%AD%97%E4%BD%93%E5%8F%8D%E7%88%AC/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">某同城招聘字体反爬</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2020
+        <i class="ri-heart-fill heart_icon"></i> Joke chen
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="我的博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Subtitle -->
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+    console.log(err)
+  }
+</script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+
+<script src="/js/clickLove.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+    
+  </div>
+</body>
+
+</html>
