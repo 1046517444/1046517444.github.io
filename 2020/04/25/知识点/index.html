@@ -71,7 +71,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.9k</span>
+            <span class="post-count">3k</span>
         </span>
     </span>
 
@@ -269,8 +269,14 @@
 <p>另外，用 ! 可能更多的是一个习惯问题(比双括号省略一个字符)，不同的运算符，性能是不同的。</p>
 </blockquote>
 <p><strong>27.isdigit() 方法检测字符串是否只由数字组成。</strong></p>
-<p><strong>28.Python 字符串类型列表转换成真正列表类型过程解析</strong><br>ast 的literal函数 会判断需要计算的内容计算后是不是合法的python类型，如果是则进行运算，否则就不进行运算</p>
+<p><strong>28.Python 字符串类型列表转换成真正列表类型过程解析</strong><br>方法一</p>
+<blockquote>
+<p>ast 的literal函数 会判断需要计算的内容计算后是不是合法的python类型，如果是则进行运算，否则就不进行运算</p>
+</blockquote>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ast <span class="keyword">import</span> literal_eval</span><br><span class="line"># 假设拿到了一个str类型的列表</span><br><span class="line">str_list = str([<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>])</span><br><span class="line">print(type(str_list)) # &lt;<span class="keyword">class</span> '<span class="symbol">str</span>'&gt;</span><br><span class="line"># 通过 <span class="symbol">literal_eval</span> 这个函数，将<span class="symbol">str</span>类型的列表转换成类型为<span class="symbol">list</span>的真正的列表类型</span><br><span class="line"><span class="symbol">new_list</span> = <span class="symbol">literal_eval</span>(<span class="symbol">str_list</span>)</span><br><span class="line"><span class="symbol">print</span>(<span class="symbol">type</span>(<span class="symbol">new_list</span>)) # &lt;<span class="symbol">class</span> '<span class="symbol">list</span>'&gt;</span><br><span class="line"># 然后就可以通过<span class="symbol">for</span>循环获取到列表中的每一个值</span><br><span class="line"><span class="symbol">for</span> <span class="symbol">row</span> <span class="symbol">in</span> <span class="symbol">new_list:</span></span><br><span class="line">   <span class="symbol">print</span>(<span class="symbol">row</span>)</span><br><span class="line"># 执行结果</span><br><span class="line">'''</span><br><span class="line"><span class="symbol">a</span></span><br><span class="line"><span class="symbol">b</span></span><br><span class="line"><span class="symbol">c</span></span><br><span class="line">'''</span><br></pre></td></tr></table></figure>
+
+<p>方法二</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">str<span class="emphasis">_1 = ‘[1,2,3,4,5,6]’ </span></span><br><span class="line"><span class="emphasis">list_</span>1 = eval(str<span class="emphasis">_1) </span></span><br><span class="line"><span class="emphasis">list_</span>1 </span><br><span class="line">#执行结果</span><br><span class="line">'''</span><br><span class="line">[1, 2, 3, 4, 5, 6] </span><br><span class="line">'''</span><br></pre></td></tr></table></figure>
       
       <!-- reward -->
       
