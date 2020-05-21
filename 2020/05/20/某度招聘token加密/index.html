@@ -71,7 +71,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">145</span>
+            <span class="post-count">166</span>
         </span>
     </span>
 
@@ -105,10 +105,10 @@
       
       <p>#百度招聘token加密</p>
 <p>百度招聘的数据可以从接口中获取到，但请求的参数token是实时变化的<br><img src="/images/%E7%99%BE%E5%BA%A6%E6%8B%9B%E8%81%981.jpg" alt=""></p>
-<p>全局搜索token找到如下图的位置，打印一下a.token为undefined,可以看出来n的值为window.zp_pc_nekot取反，然后再赋给a.token<br><img src="/images/%E7%99%BE%E5%BA%A6%E6%8B%9B%E8%81%982.jpg" alt=""></p>
+<p>全局搜索token找到如下图的位置，下个断点，重新刷新一下页面，打印一下a.token为undefined,可以看出来n的值为window.zp_pc_nekot取反，然后再把n的值赋给a.token<br><img src="/images/%E7%99%BE%E5%BA%A6%E6%8B%9B%E8%81%982.jpg" alt=""></p>
 <p>接着全局搜索window.zp_pc_nekot在<a href="http://zhaopin.baidu.com/" target="_blank" rel="noopener">http://zhaopin.baidu.com/</a> 的网页源码里面可以获取到。<br><img src="/images/%E7%99%BE%E5%BA%A6%E6%8B%9B%E8%81%983.jpg" alt=""></p>
 <p>所以整个过程很明朗了，先从首页中获取window.zp_pc_nekot，然后对其取反，得到token，最后作为接口的请求参数带入，获取到数据。</p>
-
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"==AZjNpbu1mceiZlZZ4YqxmaaimZpp2Z"</span>[<span class="symbol">:</span><span class="symbol">:-</span><span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;</span><span class="string">'Z2ppZmiaamxqY4ZZlZiecm1ubpNjZA=='</span></span><br></pre></td></tr></table></figure>
       
       <!-- reward -->
       
@@ -191,6 +191,15 @@
   
   
   <nav class="article-nav">
+    
+      <a href="/2020/05/21/%E6%9F%90%E7%AB%99%E6%BB%91%E5%9D%97%E9%AA%8C%E8%AF%81%E7%A0%81%E7%99%BB%E5%BD%95/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            某站滑块验证码登录
+          
+        </div>
+      </a>
     
     
       <a href="/2020/05/19/%E6%9F%90%E5%BA%A6%E6%8C%87%E6%95%B0js%E5%8A%A0%E5%AF%86/" class="article-nav-link">
