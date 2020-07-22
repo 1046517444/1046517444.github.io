@@ -71,7 +71,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">377</span>
+            <span class="post-count">578</span>
         </span>
     </span>
 
@@ -80,7 +80,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -104,6 +104,14 @@
 
       
       <p>#Python 函数装饰器</p>
+<p><strong>闭包</strong><br>闭包实际上就是一个函数，但是这个函数要具有 1.定义在另外一个函数里面(嵌套函数)；2.引用其所在环境的自由变量。</p>
+<p>案例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">()</span>:</span></span><br><span class="line"><span class="meta">... </span>   a = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>   <span class="function"><span class="keyword">def</span> <span class="title">fun1</span><span class="params">()</span>:</span></span><br><span class="line"><span class="meta">... </span>           <span class="keyword">return</span> a</span><br><span class="line"><span class="meta">... </span>   <span class="keyword">return</span> fun1</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = fun()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(f())</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这里的fun1()就是一个闭包，它在fun()函数内，且引用了a变量。</p>
+<p>应用:二元一次方程</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(a,b,c)</span>:</span></span><br><span class="line"><span class="meta">... </span>   <span class="function"><span class="keyword">def</span> <span class="title">para</span><span class="params">(x)</span>:</span></span><br><span class="line"><span class="meta">... </span>           <span class="keyword">return</span> a*x**<span class="number">2</span> + b*x + c</span><br><span class="line"><span class="meta">... </span>   <span class="keyword">return</span> para</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = fun(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(f(<span class="number">2</span>))</span><br><span class="line"><span class="number">11</span></span><br></pre></td></tr></table></figure>
+
+<p>#装饰器<br>本质上就是一个函数，这个函数的特点是可以接受其它的函数当作它的参数，并将其替换成一个新的函数（即返回给另一个函数）。</p>
 <p><strong>1.python的函数中可以定义其它函数，但在外部无法直接访问这些函数。</strong></p>
 <p><strong>2.因为将函数名作为参数传入到另一个函数时，无法获取到此函数的函数名，所以需要在另一个函数中使用functools.wraps方法对函数参数进行修饰。</strong></p>
 <p><strong>3.@符号是python的语法糖</strong></p>
