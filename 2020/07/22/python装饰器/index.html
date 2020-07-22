@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    python多进程,多线程,协程的理解 |  我的博客
+    python装饰器 |  我的博客
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -43,7 +43,7 @@
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-python多进程,多线程,协程的理解" class="article article-type-post" itemscope
+  <article id="post-python装饰器" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -51,7 +51,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  python多进程,多线程,协程的理解
+  python装饰器
 </h1>
  
 
@@ -60,8 +60,8 @@
 
     
     <div class="article-meta">
-      <a href="/2020/07/20/python%E5%A4%9A%E8%BF%9B%E7%A8%8B,%E5%A4%9A%E7%BA%BF%E7%A8%8B,%E5%8D%8F%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3/" class="article-date">
-  <time datetime="2020-07-20T09:25:36.324Z" itemprop="datePublished">2020-07-20</time>
+      <a href="/2020/07/22/python%E8%A3%85%E9%A5%B0%E5%99%A8/" class="article-date">
+  <time datetime="2020-07-22T01:37:47.345Z" itemprop="datePublished">2020-07-22</time>
 </a>
       
       
@@ -71,7 +71,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">377</span>
         </span>
     </span>
 
@@ -80,7 +80,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3 分钟</span>
+            <span class="post-count">1 分钟</span>
         </span>
     </span>
 </div>
@@ -103,15 +103,21 @@
       
 
       
-      <p>#python的多进程，多线程，协程的理解</p>
-<p><strong>CUP密集型和IO密集型的概念</strong><br>CUP密集型(计算):CPU计算占主要的任务，如：各种循环处理、计数等等 ,采用多进程效率更高<br>IO密集型(读写)：磁盘IO或者网络IO占主要的任务，计算量很小。如：请求网页(网络爬虫))，读写文件等,采用多线程效率更高。</p>
-<p><strong>GIL</strong><br>全局解释器锁是在实现Python解析器(CPython)时所引入的一个概念。<br>每个线程在执行的过程都需要先获取GIL，保证同一时刻只有一个线程可以执行代码。<br>相当于一个时刻只允许一个车间的一个人进入，执行操作。</p>
-<p><strong>多进程和多线程的关系</strong><br>多进程:一个工厂的很多个车间,每个车间拥有自己独立的空间(内存),操作系统分配资源的最小单元。<br>多线程：一个车间的多个员工,这些员工共享这个车间的设备(内存),操作系统调度的最小单元。<br>协程：基于单线程的，CPU不用去考虑怎么调度，切换上下文，这就省去了CPU的切换开销，用户自己来编写调度逻辑，在执行A函数的时候，可以随时中断，去执行B函数，然后中断继续执行A函数</p>
-<blockquote>
-<p>计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。<br>假定工厂的电力有限，一次只能供给一个车间使用。也就是说，一个车间开工的时候，其他车间都必须停工。背后的含义就是，单个CPU一次只能运行一个任务。编者注: 多核的CPU就像有了多个发电厂，使多工厂(多进程)实现可能。<br>进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程，其他进程处于非运行状态。<br>一个车间里，可以有很多工人。他们协同完成一个任务。<br>线程就好比车间里的工人。一个进程可以包括多个线程。<br>车间的空间是工人们共享的，比如许多房间是每个工人都可以进出的。这象征一个进程的内存空间是共享的，每个线程都可以使用这些共享内存。<br>可是，每间房间的大小不同，有些房间最多只能容纳一个人，比如厕所。里面有人的时候，其他人就不能进去了。这代表一个线程使用某些共享内存时，其他线程必须等它结束，才能使用这一块内存。<br>一个防止他人进入的简单方法，就是门口加一把锁。先到的人锁上门，后到的人看到上锁，就在门口排队，等锁打开再进去。这就叫”互斥锁”（Mutual exclusion，缩写 Mutex），防止多个线程同时读写某一块内存区域。<br>还有些房间，可以同时容纳n个人，比如厨房。也就是说，如果人数大于n，多出来的人只能在外面等着。这好比某些内存区域，只能供给固定数目的线程使用。<br>这时的解决方法，就是在门口挂n把钥匙。进去的人就取一把钥匙，出来时再把钥匙挂回原处。后到的人发现钥匙架空了，就知道必须在门口排队等着了。这种做法叫做”信号量”（Semaphore），用来保证多个线程不会互相冲突。<br>不难看出，mutex是semaphore的一种特殊情况（n=1时）。也就是说，完全可以用后者替代前者。但是，因为mutex较为简单，且效率高，所以在必须保证资源独占的情况下，还是采用这种设计。</p>
-</blockquote>
-<p>tips:一个应用程序至少包括1个进程，而1个进程包括1个或多个线程，线程的尺度更小。</p>
-<p>引用:<br><a href="https://zhuanlan.zhihu.com/p/46368084" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/46368084</a></p>
+      <p>#Python 函数装饰器</p>
+<p><strong>1.python的函数中可以定义其它函数，但在外部无法直接访问这些函数。</strong></p>
+<p><strong>2.因为将函数名作为参数传入到另一个函数时，无法获取到此函数的函数名，所以需要在另一个函数中使用functools.wraps方法对函数参数进行修饰。</strong></p>
+<p><strong>3.@符号是python的语法糖</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def use_logging(func):</span><br><span class="line"></span><br><span class="line">    def <span class="keyword">wrapper</span>():</span><br><span class="line">        logging.warn("%s is running" % func.__name__)</span><br><span class="line">        <span class="keyword">return</span> func()</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">wrapper</span></span><br><span class="line"></span><br><span class="line">@use_logging</span><br><span class="line">def foo():</span><br><span class="line">    print("i am foo")</span><br><span class="line"></span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
+<p>这里的@use_logging省去了foo=use_logging(foo)的赋值，直接调用foo()即可。</p>
+<p><strong>4.装饰器不带参数的写法：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logit</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">with_logging</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        print(func.__name__ + <span class="string">" was called"</span>)</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> with_logging</span><br><span class="line"> </span><br><span class="line"><span class="meta">@logit</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addition_func</span><span class="params">(x)</span>:</span></span><br><span class="line">   <span class="string">"""Do some math."""</span></span><br><span class="line">   <span class="keyword">return</span> x + x</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">result = addition_func(<span class="number">4</span>)</span><br><span class="line"><span class="comment"># Output: addition_func was called</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>5.装饰器带参数的写法:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logit</span><span class="params">(logfile=<span class="string">'out.log'</span>)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">logging_decorator</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">        @wraps(func)</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapped_function</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">            log_string = func.__name__ + <span class="string">" was called"</span></span><br><span class="line">            print(log_string)</span><br><span class="line">            <span class="comment"># 打开logfile，并写入内容</span></span><br><span class="line">            <span class="keyword">with</span> open(logfile, <span class="string">'a'</span>) <span class="keyword">as</span> opened_file:</span><br><span class="line">                <span class="comment"># 现在将日志打到指定的logfile</span></span><br><span class="line">                opened_file.write(log_string + <span class="string">'\n'</span>)</span><br><span class="line">            <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> wrapped_function</span><br><span class="line">    <span class="keyword">return</span> logging_decorator</span><br><span class="line"> </span><br><span class="line"><span class="meta">@logit()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myfunc1</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"> </span><br><span class="line">myfunc1()</span><br><span class="line"><span class="comment"># Output: myfunc1 was called</span></span><br><span class="line"><span class="comment"># 现在一个叫做 out.log 的文件出现了，里面的内容就是上面的字符串</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">@logit(logfile='func2.log')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myfunc2</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"> </span><br><span class="line">myfunc2()</span><br><span class="line"><span class="comment"># Output: myfunc2 was called</span></span><br><span class="line"><span class="comment"># 现在一个叫做 func2.log 的文件出现了，里面的内容就是上面的字符串</span></span><br></pre></td></tr></table></figure>
+
+<p>其实传参的时候，只需要在外层多定义一个传参的函数即可。</p>
+<p>引用：<a href="https://www.runoob.com/w3cnote/python-func-decorators.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/python-func-decorators.html</a></p>
 
       
       <!-- reward -->
@@ -180,7 +186,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/1046517444/2020/07/20/python%E5%A4%9A%E8%BF%9B%E7%A8%8B,%E5%A4%9A%E7%BA%BF%E7%A8%8B,%E5%8D%8F%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/1046517444/2020/07/22/python%E8%A3%85%E9%A5%B0%E5%99%A8/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -196,19 +202,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/07/22/python%E8%A3%85%E9%A5%B0%E5%99%A8/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            python装饰器
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/06/04/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/" class="article-nav-link">
+      <a href="/2020/07/20/python%E5%A4%9A%E8%BF%9B%E7%A8%8B,%E5%A4%9A%E7%BA%BF%E7%A8%8B,%E5%8D%8F%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">爬虫基础</div>
+        <div class="article-nav-title">python多进程,多线程,协程的理解</div>
       </a>
     
   </nav>
